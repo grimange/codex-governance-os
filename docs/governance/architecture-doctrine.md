@@ -10,7 +10,9 @@ This doctrine governs the repository's current architecture as evidenced in vers
 
 - the repository constitution in `AGENTS.md`
 - the repository-local Codex operating surface in `.codex/AGENTS.md`
-- governance doctrine under `docs/governance/`
+- governance doctrine under `docs/governance/`, including the doctrine foundation documents for lifecycle, artifact, naming, contract-writing, and terminology rules
+- universal skills under `skills/`
+- repository-local skill extensions under `.codex/skills/`
 - pipeline specifications under `docs/pipelines/`
 - generated pipeline execution artifacts under `docs/pipelines/<category>/<pipeline-name>/`
 
@@ -37,7 +39,9 @@ Its primary architectural layers are:
 
 - constitutional authority: `AGENTS.md`
 - agent operating surface: `.codex/AGENTS.md`
-- doctrinal authority: `docs/governance/architecture-doctrine.md`
+- doctrinal authority: `docs/governance/architecture-doctrine.md` and the doctrine foundation documents under `docs/governance/`
+- reusable skill authority: universal skills under `skills/`, interpreted through governance doctrine and skill invocation rules
+- local skill specialization: `.codex/skills/`
 - procedural authority: pipeline definitions in `docs/pipelines/governance/`
 - execution evidence: per-pipeline artifacts under `docs/pipelines/governance/<pipeline-name>/`
 - registry surface: `docs/pipelines/registry/pipeline-registry.md`
@@ -62,6 +66,10 @@ No generated artifact, cache, mirrored note, or future convenience summary may b
 - `AGENTS.md` defines mission, routing, and governance authority ordering.
 - `.codex/AGENTS.md` defines repository-local operating behavior for Codex agents.
 - `docs/governance/architecture-doctrine.md` defines the canonical architecture model and interpretation rules for repository structure.
+- `docs/governance/governance-lifecycle.md`, `docs/governance/pipeline-artifact-standard.md`, `docs/governance/pipeline-naming-standard.md`, `docs/governance/contract-writing-standard.md`, and `docs/governance/governance-terminology.md` define reusable governance law that future pipelines and contracts should reference instead of duplicating.
+- `docs/governance/skill-authoring-standard.md`, `docs/governance/skill-invocation-standard.md`, and `docs/governance/universal-skills-index.md` define how governed skills are authored, selected, and discovered.
+- `skills/` contains reusable universal skill packages for template inheritance.
+- `.codex/skills/` contains project-local skill extensions or overrides when repository-specific specialization is required.
 - `docs/pipelines/<category>/<id--name>.md` defines the authoritative workflow for a pipeline.
 - `docs/pipelines/<category>/<pipeline-name>/NN-*.md` records execution evidence for a specific pipeline run and must remain inspectable and reproducible from repository state.
 - `docs/pipelines/registry/pipeline-registry.md` records which pipelines are recognized as active governance surfaces.

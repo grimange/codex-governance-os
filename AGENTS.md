@@ -10,7 +10,7 @@ Authority precedence is:
 
 1. Repository source of truth in version control
 2. This repository constitution
-3. [`docs/governance/architecture-doctrine.md`](docs/governance/architecture-doctrine.md)
+3. Governance doctrine under [`docs/governance/`](docs/governance/), including [`docs/governance/architecture-doctrine.md`](docs/governance/architecture-doctrine.md)
 4. Registered pipeline definitions in [`docs/pipelines/`](docs/pipelines/)
 5. Generated pipeline artifacts that record execution evidence
 
@@ -29,6 +29,7 @@ If authorities conflict, the higher-precedence artifact governs until the confli
 - Artifacts must be named predictably and stored in canonical folders.
 - Verification and promotion decisions must be explicit, not implied.
 - Generated records should be concise, inspectable, and reproducible from repository state.
+- Pipeline lifecycle, artifact, naming, contract-writing, and terminology doctrine should be sourced from canonical governance documents under `docs/governance/` rather than redefined ad hoc.
 
 ## Routing Rules
 
@@ -36,4 +37,6 @@ If authorities conflict, the higher-precedence artifact governs until the confli
 - Contracts belong in `docs/contracts/`.
 - Pipelines belong in `docs/pipelines/` grouped by category.
 - Registry state belongs in `docs/pipelines/registry/pipeline-registry.md`.
+- Universal repository skills belong in `skills/`.
+- Project-local skill extensions or overrides belong in `.codex/skills/`.
 - Repository-local Codex operating instructions belong in `.codex/AGENTS.md`.
