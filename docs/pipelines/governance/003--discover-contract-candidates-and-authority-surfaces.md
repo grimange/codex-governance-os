@@ -32,6 +32,13 @@ This pipeline identifies where explicit contracts are needed and what authority 
 
 ---
 
+## Universal Skill References
+
+- `repository-discovery`
+  Use for surface inventory and evidence separation.
+- `contract-candidate-discovery`
+  Use for taxonomy definition, subsystem boundary analysis, candidate ranking, and recommendation design.
+
 # Phase 00 — Pipeline Summary
 
 ## Output Artifact
@@ -123,7 +130,7 @@ The taxonomy may be tailored to the repository but must be explicit.
 
 ## Required Work
 
-Produce a structured inventory of repository surfaces relevant to contract discovery.
+Use the `repository-discovery` skill to produce a structured inventory of repository surfaces relevant to contract discovery.
 
 The inventory must include, where present:
 
@@ -163,7 +170,7 @@ The inventory must separate code evidence from document claims.
 
 ## Required Work
 
-Identify the major subsystems that likely require explicit contracts.
+Use the `contract-candidate-discovery` skill to identify the major subsystems that likely require explicit contracts.
 
 For each subsystem candidate, record:
 
@@ -249,7 +256,7 @@ This phase must remain evidence-based and must not promote surfaces to canonical
 
 ## Required Work
 
-Create the central matrix of candidate contracts.
+Use the `contract-candidate-discovery` skill to create the central matrix of candidate contracts.
 
 Each candidate row should include:
 
@@ -364,7 +371,7 @@ Severity levels:
 
 ## Required Work
 
-Translate the discovery results into explicit next-step governance recommendations.
+Use the `contract-candidate-discovery` skill to translate the discovery results into explicit next-step governance recommendations.
 
 Recommendations should include:
 

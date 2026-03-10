@@ -13,6 +13,7 @@ This file defines repository-local operating instructions for Codex agents worki
 - Treat `docs/governance/architecture-doctrine.md` as the canonical interpretation layer for repository structure, authority, and pipeline artifact meaning.
 - Use the doctrine foundation under `docs/governance/` as the canonical source for lifecycle, artifact, naming, contract-writing, and terminology rules.
 - Use `docs/governance/universal-skills-index.md` and `docs/governance/skill-invocation-standard.md` to decide when universal or project-local skills apply.
+- When following a normalized pipeline, prefer the pipeline's referenced universal skills for reusable operational behavior and keep pipeline-specific artifact and verdict requirements explicit.
 - Treat `docs/contracts/pipeline-registry-integrity-contract.md` as the governing contract for registry completeness and active-pipeline discoverability.
 
 ## Repository Expectations

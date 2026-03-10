@@ -12,3 +12,4 @@
 | 007 | Verify Contract Alignment | ACTIVE | governance | docs/pipelines/governance/007--verify-contract-alignment.md |
 | 008 | Establish Governance Doctrine Foundation | ACTIVE | governance | docs/pipelines/governance/008--establish-governance-doctrine-foundation.md |
 | 009 | Establish Universal Codex Skills Foundation | ACTIVE | governance | docs/pipelines/governance/009--establish-universal-codex-skills-foundation.md |
+| 010 | Normalize Template Pipelines To Reference Universal Skills | ACTIVE | governance | docs/pipelines/governance/010--normalize-template-pipelines-to-reference-universal-skills.md |

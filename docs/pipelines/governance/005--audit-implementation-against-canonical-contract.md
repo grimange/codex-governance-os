@@ -59,6 +59,11 @@ Optional inputs:
 
 ---
 
+## Universal Skill References
+
+- `implementation-contract-audit`
+  Use for contract-scope extraction, implementation surface discovery, compliance analysis, drift classification, and audit-summary generation.
+
 # Phase 00 — Pipeline Summary
 
 Output artifact:
@@ -82,7 +87,7 @@ Output artifact:
 
 docs/pipelines/governance/audit-implementation-against-canonical-contract/01-contract-scope-extraction.md
 
-Extract from the canonical contract:
+Use the `implementation-contract-audit` skill to extract from the canonical contract:
 
 - subsystem scope
 - lifecycle rules
@@ -104,7 +109,7 @@ Output artifact:
 
 docs/pipelines/governance/audit-implementation-against-canonical-contract/02-implementation-surface-discovery.md
 
-Discover implementation surfaces relevant to the contract.
+Use the `implementation-contract-audit` skill to discover implementation surfaces relevant to the contract.
 
 Possible surfaces include:
 
@@ -135,7 +140,7 @@ Output artifact:
 
 docs/pipelines/governance/audit-implementation-against-canonical-contract/03-authority-model-audit.md
 
-Evaluate whether implementation obeys the contract authority model.
+Use the `implementation-contract-audit` skill to evaluate whether implementation obeys the contract authority model.
 
 The audit must determine:
 
@@ -236,7 +241,7 @@ Output artifact:
 
 docs/pipelines/governance/audit-implementation-against-canonical-contract/07-contract-compliance-matrix.md
 
-Produce a structured matrix mapping contract rules to implementation evidence.
+Use the `implementation-contract-audit` skill to produce a structured matrix mapping contract rules to implementation evidence.
 
 Example structure:
 
@@ -261,7 +266,7 @@ Output artifact:
 
 docs/pipelines/governance/audit-implementation-against-canonical-contract/08-implementation-drift-assessment.md
 
-Identify implementation drift relative to the contract.
+Use the `implementation-contract-audit` skill to identify implementation drift relative to the contract.
 
 Drift categories include:
 

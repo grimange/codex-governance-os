@@ -48,6 +48,11 @@ Optional inputs:
 
 ---
 
+## Universal Skill References
+
+- `contract-alignment-verification`
+  Use for verification-criteria extraction, reinspection, behavioral verification, residual-risk assessment, and promotion-readiness analysis.
+
 # Phase 00 — Pipeline Summary
 
 Output artifact:
@@ -69,7 +74,7 @@ Output artifact:
 
 docs/pipelines/governance/verify-contract-alignment/01-verification-criteria.md
 
-Extract contract rules that must be verified.
+Use the `contract-alignment-verification` skill to extract contract rules that must be verified.
 
 Examples:
 
@@ -89,7 +94,7 @@ Output artifact:
 
 docs/pipelines/governance/verify-contract-alignment/02-implementation-reinspection.md
 
-Re-inspect implementation surfaces relevant to the contract.
+Use the `contract-alignment-verification` skill to re-inspect implementation surfaces relevant to the contract.
 
 Confirm that:
 
@@ -106,7 +111,7 @@ Output artifact:
 
 docs/pipelines/governance/verify-contract-alignment/03-behavioral-verification.md
 
-Verify subsystem behavior.
+Use the `contract-alignment-verification` skill to verify subsystem behavior.
 
 Possible evidence:
 
@@ -126,7 +131,7 @@ Output artifact:
 
 docs/pipelines/governance/verify-contract-alignment/04-contract-compliance-matrix.md
 
-Update the contract compliance matrix.
+Use the `contract-alignment-verification` skill to update the contract compliance matrix.
 
 Each contract rule must be classified:
 

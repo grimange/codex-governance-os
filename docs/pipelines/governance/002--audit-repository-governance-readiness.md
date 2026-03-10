@@ -42,6 +42,13 @@ This pipeline identifies those issues before large-scale audits and remediation 
 
 ---
 
+## Universal Skill References
+
+- `governance-readiness-audit`
+  Use for governance-surface inventory, doctrine consistency review, sequencing checks, and readiness evaluation.
+- `pipeline-registry-reconciliation`
+  Use when validating registry identity, completeness, and active-pipeline discoverability.
+
 # Phase 00 — Pipeline Summary
 
 Output artifact:
@@ -64,7 +71,7 @@ Output artifact:
 
 docs/pipelines/governance/audit-repository-governance-readiness/01-governance-surface-inventory.md
 
-Audit the presence of key governance surfaces.
+Use the `governance-readiness-audit` skill to audit the presence of key governance surfaces.
 
 | Surface | Expected Location |
 |------|------|
@@ -110,7 +117,7 @@ Output artifact:
 
 docs/pipelines/governance/audit-repository-governance-readiness/03-pipeline-catalog-integrity.md
 
-Confirm:
+Use the `governance-readiness-audit` skill, with `pipeline-registry-reconciliation` where registry identity is involved, to confirm:
 
 - pipeline naming conventions
 - coherent numbering system
@@ -133,7 +140,7 @@ Output artifact:
 
 docs/pipelines/governance/audit-repository-governance-readiness/04-pipeline-registry-integrity.md
 
-Confirm:
+Use the `pipeline-registry-reconciliation` skill to confirm:
 
 - registry exists
 - registry structure is valid
@@ -155,7 +162,7 @@ Output artifact:
 
 docs/pipelines/governance/audit-repository-governance-readiness/05-governance-artifact-compliance.md
 
-Evaluate whether pipelines follow governance artifact standards.
+Use the `governance-readiness-audit` skill to evaluate whether pipelines follow governance artifact standards.
 
 Expected artifacts include:
 
@@ -177,7 +184,7 @@ Output artifact:
 
 docs/pipelines/governance/audit-repository-governance-readiness/06-governance-sequencing-audit.md
 
-Evaluate pipeline lifecycle sequencing.
+Use the `governance-readiness-audit` skill to evaluate pipeline lifecycle sequencing against the governance lifecycle doctrine.
 
 Typical lifecycle:
 

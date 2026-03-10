@@ -17,6 +17,13 @@ This pipeline converts the top-priority contract candidate into a real authority
 
 ---
 
+## Universal Skill References
+
+- `canonical-contract-authoring`
+  Use for scope definition, authority expression, contract drafting, and installation-ready contract structure.
+- `contract-candidate-discovery`
+  Use when candidate ranking context must be rechecked during selection justification.
+
 # Phase 00 — Pipeline Summary
 
 ## Output Artifact
@@ -39,7 +46,7 @@ Document:
 
 `docs/pipelines/governance/author-canonical-contract-for-highest-priority-subsystem/01-candidate-selection-justification.md`
 
-Record:
+Use the `contract-candidate-discovery` skill when candidate ranking context needs to be rechecked, then record:
 
 - source discovery artifacts consulted
 - candidate ranking basis
@@ -101,7 +108,7 @@ Define:
 
 `docs/contracts/<contract-name>.md`
 
-The authored contract must include:
+Use the `canonical-contract-authoring` skill. The authored contract must include:
 
 - purpose
 - scope

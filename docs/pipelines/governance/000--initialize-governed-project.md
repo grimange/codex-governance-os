@@ -21,6 +21,15 @@ After execution, the repository becomes **governance-capable**.
 
 ---
 
+## Universal Skill References
+
+- `governed-project-bootstrap`
+  Use for baseline governance-surface installation, bootstrap planning, and initialization execution.
+- `repository-discovery`
+  Use for repository discovery and current-state inventory before installation.
+- `pipeline-registry-reconciliation`
+  Use when registering active pipelines and checking registry identity.
+
 # Phase 00 — Pipeline Summary
 
 Output artifact:
@@ -73,7 +82,7 @@ Output artifact:
 
 `02-repository-discovery.md`
 
-Identify existing repository structure.
+Use the `repository-discovery` skill to inventory existing repository structure.
 
 Example discovery matrix:
 
@@ -158,70 +167,7 @@ Output artifact:
 
 `05-initialization-execution.md`
 
-Actions:
-
-### Create repository constitution
-
-`AGENTS.md`
-
-Minimal constitution template:
-
-- Repository Governance Constitution
-- Mission
-- Canonical authorities
-- Pipeline governance model
-- Artifact standards
-- Routing rules
-
----
-
-### Install Codex local governance surface
-
-`.codex/AGENTS.md`
-
-Purpose:
-
-Codex-specific instructions for the repository.
-
----
-
-### Install architecture doctrine
-
-`docs/governance/architecture-doctrine.md`
-
-Contains:
-
-- authority precedence
-- architectural principles
-- system boundaries
-- lifecycle authority model
-
----
-
-### Install pipeline catalog
-
-`docs/pipelines/`
-
-Create folders:
-
-- governance
-- remediation
-- verification
-- promotion
-- registry
-
----
-
-### Install pipeline registry
-
-Create:
-
-`docs/pipelines/registry/pipeline-registry.md`
-
-Registry columns:
-
-| pipeline id | pipeline name | status | category | path |
-|-------------|--------------|--------|---------|------|
+Use the `governed-project-bootstrap` skill to install the repository constitution, local Codex operating surface, architecture doctrine, pipeline roots, and pipeline registry while preserving the canonical governed-project baseline.
 
 ---
 
@@ -231,13 +177,7 @@ Output artifact:
 
 `06-registry-integration.md`
 
-Register the initialization pipeline itself.
-
-Example entry:
-
-| pipeline id | pipeline name | status | category | path |
-|-------------|--------------|--------|---------|------|
-| 000 | Initialize Governed Project | ACTIVE | governance | docs/pipelines/governance/000--initialize-governed-project.md |
+Use the `pipeline-registry-reconciliation` skill to register the initialization pipeline itself and verify that registry identity matches the pipeline filename and path.
 
 ---
 

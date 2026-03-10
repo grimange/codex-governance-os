@@ -56,6 +56,11 @@ Optional inputs:
 
 ---
 
+## Universal Skill References
+
+- `implementation-drift-remediation`
+  Use for drift consolidation, remediation strategy design, impact analysis, execution planning, and residual-drift recording.
+
 # Phase 00 — Pipeline Summary
 
 Output artifact:
@@ -78,7 +83,7 @@ Output artifact:
 
 docs/pipelines/governance/remediate-implementation-drift-against-contract/01-drift-item-consolidation.md
 
-Consolidate drift items discovered during the audit.
+Use the `implementation-drift-remediation` skill to consolidate drift items discovered during the audit.
 
 Each drift item must include:
 
@@ -104,7 +109,7 @@ Output artifact:
 
 docs/pipelines/governance/remediate-implementation-drift-against-contract/02-remediation-strategy-design.md
 
-Design the remediation strategy for each drift item.
+Use the `implementation-drift-remediation` skill to design the remediation strategy for each drift item.
 
 Possible remediation strategies:
 
@@ -148,7 +153,7 @@ Output artifact:
 
 docs/pipelines/governance/remediate-implementation-drift-against-contract/04-remediation-implementation-plan.md
 
-Define specific implementation changes.
+Use the `implementation-drift-remediation` skill to define specific implementation changes.
 
 The plan must identify:
 
@@ -168,7 +173,7 @@ Output artifact:
 
 docs/pipelines/governance/remediate-implementation-drift-against-contract/05-remediation-execution.md
 
-Execute the remediation plan.
+Use the `implementation-drift-remediation` skill to execute the remediation plan.
 
 Changes may include:
 
@@ -193,7 +198,7 @@ Output artifact:
 
 docs/pipelines/governance/remediate-implementation-drift-against-contract/06-post-remediation-evidence.md
 
-Collect evidence demonstrating that remediation has been implemented.
+Use the `implementation-drift-remediation` skill to collect evidence demonstrating that remediation has been implemented.
 
 Evidence may include:
 

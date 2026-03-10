@@ -22,6 +22,7 @@ If authorities conflict, the higher-precedence artifact governs until the confli
 - Pipelines must produce durable artifacts under the repository documentation tree.
 - Pipeline registration is mandatory for active pipelines.
 - Deterministic sequencing is required: inputs, outputs, and promotion decisions must be recorded.
+- When reusable universal skills exist for a pipeline's operational behavior, pipelines should reference those skills instead of restating the behavior inline.
 
 ## Artifact Standards
 

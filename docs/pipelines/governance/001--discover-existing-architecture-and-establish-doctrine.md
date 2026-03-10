@@ -33,6 +33,13 @@ This pipeline establishes that doctrine.
 
 ---
 
+## Universal Skill References
+
+- `repository-discovery`
+  Use for evidence inventory, boundary discovery, and authority-surface identification.
+- `architecture-doctrine-authoring`
+  Use for doctrine design, authoring, and installation guidance once evidence is collected.
+
 # Phase 00 — Pipeline Summary
 
 ## Output Artifact
@@ -105,7 +112,7 @@ This pipeline may identify contract candidates, but it does not author full subs
 
 ## Required Work
 
-Perform a structured inventory of repository evidence relevant to architecture.
+Use the `repository-discovery` skill to perform a structured inventory of repository evidence relevant to architecture.
 
 The inventory should cover, where present:
 
@@ -155,7 +162,7 @@ The inventory must distinguish between:
 
 ## Required Work
 
-Produce a repository architecture map from the discovered evidence.
+Use the `repository-discovery` skill to produce a repository architecture map from the discovered evidence.
 
 The mapping should identify:
 
@@ -280,7 +287,7 @@ Each drift item should be classified by severity:
 
 ## Required Work
 
-Based on the prior evidence, define the architecture doctrine that should become canonical for this repository.
+Use the `architecture-doctrine-authoring` skill to define the architecture doctrine that should become canonical for this repository based on the prior evidence.
 
 This is the central design decision phase.
 
@@ -319,7 +326,7 @@ If uncertainty remains, it must be recorded explicitly rather than hidden.
 
 ## Required Work
 
-Author or replace the canonical architecture doctrine document using the results of discovery and doctrine design.
+Use the `architecture-doctrine-authoring` skill to author or replace the canonical architecture doctrine document using the results of discovery and doctrine design.
 
 The doctrine must include, at minimum:
 

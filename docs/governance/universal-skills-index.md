@@ -58,3 +58,8 @@ This index is the canonical discovery surface for the repository's universal Cod
 - Add a project-local skill instead of editing a universal skill when the new behavior depends on one repository's domain or file layout.
 - Override a universal skill only through the precedence rules in `docs/governance/skill-invocation-standard.md`.
 - Keep future skills bounded and class-aligned so the library remains discoverable.
+
+## Current Pipeline Adoption
+
+- Governance pipelines `000` through `007` now reference the universal skill library directly for their main reusable procedures.
+- Pipelines `008` and `009` remain only partially normalized because their remaining reusable behavior does not yet justify or require additional universal skills.
