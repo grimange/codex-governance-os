@@ -66,7 +66,7 @@ No generated artifact, cache, mirrored note, or future convenience summary may b
 - `AGENTS.md` defines mission, routing, and governance authority ordering.
 - `.codex/AGENTS.md` defines repository-local operating behavior for Codex agents.
 - `docs/governance/architecture-doctrine.md` defines the canonical architecture model and interpretation rules for repository structure.
-- `docs/governance/governance-lifecycle.md`, `docs/governance/pipeline-artifact-standard.md`, `docs/governance/pipeline-naming-standard.md`, `docs/governance/contract-writing-standard.md`, and `docs/governance/governance-terminology.md` define reusable governance law that future pipelines and contracts should reference instead of duplicating.
+- `docs/governance/governance-lifecycle.md`, `docs/governance/pipeline-artifact-standard.md`, `docs/governance/pipeline-naming-standard.md`, `docs/governance/contract-writing-standard.md`, `docs/governance/governance-terminology.md`, `docs/governance/governance-evolution-model.md`, and `docs/governance/templates/README.md` define reusable governance law and template control surfaces that future pipelines and contracts should reference instead of duplicating.
 - `docs/governance/skill-authoring-standard.md`, `docs/governance/skill-invocation-standard.md`, and `docs/governance/universal-skills-index.md` define how governed skills are authored, selected, and discovered.
 - `skills/` contains reusable universal skill packages for template inheritance.
 - `.codex/skills/` contains project-local skill extensions or overrides when repository-specific specialization is required.
@@ -74,6 +74,8 @@ No generated artifact, cache, mirrored note, or future convenience summary may b
 - `docs/pipelines/<category>/<pipeline-name>/NN-*.md` records execution evidence for a specific pipeline run and must remain inspectable and reproducible from repository state.
 - `docs/pipelines/registry/pipeline-registry.md` records which pipelines are recognized as active governance surfaces.
 - `docs/contracts/` and `docs/modernization/` are reserved canonical roots for future work but are not yet architecture-authoring surfaces in practice.
+- `docs/governance/templates/` contains canonical cross-family template definitions and the template registry for machine-checkable governed artifacts.
+- `tools/governance/` contains governance tooling such as template registry loading, linting, and scaffold generation.
 
 ## State and Projection Rules
 
@@ -107,6 +109,7 @@ Because the repository currently has no application runtime, terms such as backe
 
 - Future architecture, contract, and audit pipelines must treat this repository as a governance-surface system first, not as an implied software product with hidden runtime layers.
 - New authoritative architecture claims must be grounded in repository evidence and installed through version-controlled governance work.
+- Governance-framework mutations must follow the governance evolution doctrine so meta-governance changes remain versioned, compatible, and auditable.
 - When future implementation code appears, downstream pipelines must explicitly determine whether this doctrine remains sufficient or requires replacement.
 - Verification work must distinguish between authoritative documents, execution evidence, and placeholder surfaces.
 - Promotion decisions must not treat empty folders or descriptive stubs as completed architecture.

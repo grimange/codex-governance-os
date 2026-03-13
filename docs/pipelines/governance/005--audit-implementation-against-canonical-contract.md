@@ -15,6 +15,8 @@ This pipeline evaluates contract compliance and identifies implementation drift.
 
 It produces an evidence-based audit report but does not modify code or contracts.
 
+This pipeline is conditional on a repository already having a canonical contract that is materially important to enforce.
+
 ---
 
 # Why This Pipeline Exists

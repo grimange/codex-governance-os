@@ -59,6 +59,12 @@ This index is the canonical discovery surface for the repository's universal Cod
 - Override a universal skill only through the precedence rules in `docs/governance/skill-invocation-standard.md`.
 - Keep future skills bounded and class-aligned so the library remains discoverable.
 
+## Adoption Proportionality
+
+- Small repositories may rely mostly on `repository-discovery`, `governed-project-bootstrap`, `governance-readiness-audit`, and `architecture-doctrine-authoring` during early adoption.
+- Contract-oriented and remediation-oriented skills become relevant when a repository has stable bounded surfaces worth governing explicitly.
+- Repositories should add local skills only when repository-specific constraints materially change a universal workflow.
+
 ## Current Pipeline Adoption
 
 - Governance pipelines `000` through `007` now reference the universal skill library directly for their main reusable procedures.

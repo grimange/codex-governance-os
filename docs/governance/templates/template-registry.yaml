@@ -1,0 +1,324 @@
+{
+  "schema_version": "1.0.0",
+  "governance_mode": "fail-closed",
+  "execution_mode": "advisory-then-enforcing",
+  "universal_core": {
+    "required_frontmatter": [
+      "title",
+      "status",
+      "category",
+      "stage",
+      "objective",
+      "depends_on",
+      "outputs",
+      "success_criteria",
+      "governance_mode",
+      "execution_mode",
+      "restrictions",
+      "non_claims"
+    ],
+    "id_fields": ["id", "pipeline_id"],
+    "required_sections": [
+      "Purpose",
+      "Problem Statement",
+      "Objectives",
+      "Scope",
+      "Preconditions",
+      "Execution Steps",
+      "Expected Outputs",
+      "Verification Method",
+      "Restrictions",
+      "Non-Claims",
+      "Final Verdict"
+    ]
+  },
+  "overlays": [
+    {
+      "name": "laravel",
+      "layer": "stack",
+      "compatible_families": ["pipeline", "verification", "evidence-pack", "remediation", "decision"],
+      "additional_sections": ["Laravel Overlay Notes"],
+      "weakens_core": false
+    },
+    {
+      "name": "django",
+      "layer": "stack",
+      "compatible_families": ["pipeline", "verification", "evidence-pack", "remediation", "decision"],
+      "additional_sections": ["Django Overlay Notes"],
+      "weakens_core": false
+    },
+    {
+      "name": "python-package",
+      "layer": "stack",
+      "compatible_families": ["pipeline", "verification", "rule", "skill", "evidence-pack", "decision", "remediation"],
+      "additional_sections": ["Python Package Overlay Notes"],
+      "weakens_core": false
+    },
+    {
+      "name": "php-package",
+      "layer": "stack",
+      "compatible_families": ["pipeline", "verification", "rule", "skill", "evidence-pack", "decision", "remediation"],
+      "additional_sections": ["PHP Package Overlay Notes"],
+      "weakens_core": false
+    },
+    {
+      "name": "mcp-tools",
+      "layer": "stack",
+      "compatible_families": ["pipeline", "verification", "skill", "evidence-pack", "decision", "remediation"],
+      "additional_sections": ["MCP Tools Overlay Notes"],
+      "weakens_core": false
+    },
+    {
+      "name": "infrastructure",
+      "layer": "stack",
+      "compatible_families": ["pipeline", "verification", "rule", "evidence-pack", "decision", "remediation"],
+      "additional_sections": ["Infrastructure Overlay Notes"],
+      "weakens_core": false
+    }
+  ],
+  "templates": [
+    {
+      "family": "pipeline",
+      "version": "1.0.0",
+      "required_sections": [
+        "Purpose",
+        "Problem Statement",
+        "Objectives",
+        "Scope",
+        "Preconditions",
+        "Execution Steps",
+        "Expected Outputs",
+        "Verification Method",
+        "Restrictions",
+        "Non-Claims",
+        "Final Verdict"
+      ],
+      "optional_sections": ["Dependencies", "Follow-Up Pipelines", "Notes"],
+      "required_frontmatter": [
+        "pipeline_id",
+        "title",
+        "status",
+        "category",
+        "stage",
+        "objective",
+        "depends_on",
+        "outputs",
+        "success_criteria",
+        "governance_mode",
+        "execution_mode",
+        "restrictions",
+        "non_claims"
+      ],
+      "normalization_aliases": {
+        "pipeline_id": ["id"],
+        "title": ["pipeline_name"]
+      },
+      "output_path_pattern": "generated/pipelines/{id}.md",
+      "validator": "template_lint.py",
+      "scaffold": "template_scaffold.py",
+      "compatible_overlays": ["laravel", "django", "python-package", "php-package", "mcp-tools", "infrastructure"]
+    },
+    {
+      "family": "verification",
+      "version": "1.0.0",
+      "required_sections": [
+        "Claim Under Test",
+        "Evidence Sources",
+        "Verification Commands",
+        "Pass Conditions",
+        "Fail Conditions",
+        "Residual Risk",
+        "Final Verdict"
+      ],
+      "optional_sections": ["Notes"],
+      "required_frontmatter": [
+        "id",
+        "title",
+        "status",
+        "category",
+        "stage",
+        "objective",
+        "depends_on",
+        "outputs",
+        "success_criteria",
+        "governance_mode",
+        "execution_mode",
+        "restrictions",
+        "non_claims"
+      ],
+      "normalization_aliases": {},
+      "output_path_pattern": "generated/verification/{id}.md",
+      "validator": "template_lint.py",
+      "scaffold": "template_scaffold.py",
+      "compatible_overlays": ["laravel", "django", "python-package", "php-package", "mcp-tools", "infrastructure"]
+    },
+    {
+      "family": "rule",
+      "version": "1.0.0",
+      "required_sections": [
+        "Policy Intent",
+        "Rationale",
+        "Enforcement Level",
+        "Allowed Behavior",
+        "Blocked Behavior",
+        "Escalation Path",
+        "Examples"
+      ],
+      "optional_sections": ["Notes"],
+      "required_frontmatter": [
+        "id",
+        "title",
+        "status",
+        "category",
+        "stage",
+        "objective",
+        "depends_on",
+        "outputs",
+        "success_criteria",
+        "governance_mode",
+        "execution_mode",
+        "restrictions",
+        "non_claims"
+      ],
+      "normalization_aliases": {},
+      "output_path_pattern": "generated/rules/{id}.md",
+      "validator": "template_lint.py",
+      "scaffold": "template_scaffold.py",
+      "compatible_overlays": ["python-package", "php-package", "infrastructure"]
+    },
+    {
+      "family": "skill",
+      "version": "1.0.0",
+      "required_sections": [
+        "Purpose",
+        "Invocation Conditions",
+        "Inputs",
+        "Outputs",
+        "Authority Boundaries",
+        "Safety Limits",
+        "Examples"
+      ],
+      "optional_sections": ["Notes"],
+      "required_frontmatter": [
+        "id",
+        "title",
+        "status",
+        "category",
+        "stage",
+        "objective",
+        "depends_on",
+        "outputs",
+        "success_criteria",
+        "governance_mode",
+        "execution_mode",
+        "restrictions",
+        "non_claims"
+      ],
+      "normalization_aliases": {},
+      "output_path_pattern": "generated/skills/{id}.md",
+      "validator": "template_lint.py",
+      "scaffold": "template_scaffold.py",
+      "compatible_overlays": ["python-package", "php-package", "mcp-tools"]
+    },
+    {
+      "family": "evidence-pack",
+      "version": "1.0.0",
+      "required_sections": [
+        "Problem Statement",
+        "Observed State",
+        "Analysis",
+        "Decision",
+        "Remediation Or Recommendation",
+        "Verification",
+        "Final Verdict"
+      ],
+      "optional_sections": ["Notes"],
+      "required_frontmatter": [
+        "id",
+        "title",
+        "status",
+        "category",
+        "stage",
+        "objective",
+        "depends_on",
+        "outputs",
+        "success_criteria",
+        "governance_mode",
+        "execution_mode",
+        "restrictions",
+        "non_claims"
+      ],
+      "normalization_aliases": {},
+      "output_path_pattern": "generated/evidence-packs/{id}.md",
+      "validator": "template_lint.py",
+      "scaffold": "template_scaffold.py",
+      "compatible_overlays": ["laravel", "django", "python-package", "php-package", "mcp-tools", "infrastructure"]
+    },
+    {
+      "family": "decision",
+      "version": "1.0.0",
+      "required_sections": [
+        "Context",
+        "Options Considered",
+        "Chosen Decision",
+        "Rationale",
+        "Implications",
+        "Rollback Or Reversal Conditions"
+      ],
+      "optional_sections": ["Notes"],
+      "required_frontmatter": [
+        "id",
+        "title",
+        "status",
+        "category",
+        "stage",
+        "objective",
+        "depends_on",
+        "outputs",
+        "success_criteria",
+        "governance_mode",
+        "execution_mode",
+        "restrictions",
+        "non_claims"
+      ],
+      "normalization_aliases": {},
+      "output_path_pattern": "generated/decisions/{id}.md",
+      "validator": "template_lint.py",
+      "scaffold": "template_scaffold.py",
+      "compatible_overlays": ["laravel", "django", "python-package", "php-package", "mcp-tools", "infrastructure"]
+    },
+    {
+      "family": "remediation",
+      "version": "1.0.0",
+      "required_sections": [
+        "Defect Statement",
+        "Impact",
+        "Bounded Remediation",
+        "Safety Constraints",
+        "Validation Plan",
+        "Completion Conditions"
+      ],
+      "optional_sections": ["Notes"],
+      "required_frontmatter": [
+        "id",
+        "title",
+        "status",
+        "category",
+        "stage",
+        "objective",
+        "depends_on",
+        "outputs",
+        "success_criteria",
+        "governance_mode",
+        "execution_mode",
+        "restrictions",
+        "non_claims"
+      ],
+      "normalization_aliases": {},
+      "output_path_pattern": "generated/remediation/{id}.md",
+      "validator": "template_lint.py",
+      "scaffold": "template_scaffold.py",
+      "compatible_overlays": ["laravel", "django", "python-package", "php-package", "mcp-tools", "infrastructure"]
+    }
+  ]
+}

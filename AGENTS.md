@@ -31,10 +31,13 @@ If authorities conflict, the higher-precedence artifact governs until the confli
 - Verification and promotion decisions must be explicit, not implied.
 - Generated records should be concise, inspectable, and reproducible from repository state.
 - Pipeline lifecycle, artifact, naming, contract-writing, and terminology doctrine should be sourced from canonical governance documents under `docs/governance/` rather than redefined ad hoc.
+- Governance mutations to doctrine, pipelines, registry policy, and adoption surfaces should follow the governance evolution model under `docs/governance/`.
 
 ## Routing Rules
 
 - Governance doctrine belongs in `docs/governance/`.
+- Canonical governance templates belong in `docs/governance/templates/`.
+- Bootstrap guidance for future governed repositories belongs in `docs/bootstrap/`.
 - Contracts belong in `docs/contracts/`.
 - Pipelines belong in `docs/pipelines/` grouped by category.
 - Registry state belongs in `docs/pipelines/registry/pipeline-registry.md`.

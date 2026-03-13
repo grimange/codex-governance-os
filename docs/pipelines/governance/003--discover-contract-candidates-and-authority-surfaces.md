@@ -13,6 +13,8 @@ This pipeline identifies where explicit subsystem contracts should exist, what t
 
 It transforms a repository with architecture doctrine into a repository with a structured contract discovery map suitable for contract authoring, audit, remediation, and verification pipelines.
 
+For small repositories, this pipeline is conditional rather than mandatory. Use it once bounded subsystem or authority-surface ambiguity is significant enough to justify explicit contract discovery.
+
 ---
 
 ## Why This Pipeline Exists

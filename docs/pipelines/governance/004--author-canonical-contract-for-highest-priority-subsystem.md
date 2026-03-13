@@ -15,6 +15,8 @@ Contract discovery identifies missing or fragmented contract candidates, but dow
 
 This pipeline converts the top-priority contract candidate into a real authority surface.
 
+For smaller repositories, this pipeline remains optional until a bounded subsystem, public surface, or authority boundary is important enough to govern with a canonical contract.
+
 ---
 
 ## Universal Skill References

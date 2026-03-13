@@ -37,6 +37,8 @@ Without structured remediation:
 
 This pipeline transforms audit findings into concrete remediation actions.
 
+This pipeline is conditional on documented contract drift already existing; it is not part of the minimum bootstrap path for every repository.
+
 ---
 
 # Inputs

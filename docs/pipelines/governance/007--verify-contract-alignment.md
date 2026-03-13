@@ -15,6 +15,8 @@ This pipeline confirms contract compliance using implementation inspection, test
 
 Verification establishes closure of the remediation cycle.
 
+This pipeline is conditional on a repository having both a governing contract and completed remediation work that now needs explicit verification.
+
 ---
 
 # Why This Pipeline Exists
