@@ -1,0 +1,21 @@
+{
+  "template_id": "skill.universal.discovery",
+  "template_name": "Universal Discovery Skill Template",
+  "template_family": "skill",
+  "template_kind": "discovery",
+  "version": "1.0.0",
+  "status": "active",
+  "authority_level": "canonical",
+  "description": "Canonical agnostic discovery skill template.",
+  "inputs_contract": {"family": "skill", "expected_id_field": "id"},
+  "outputs_contract": {"artifact_type": "skill-template-body"},
+  "compatible_stacks": ["agnostic"],
+  "compatible_modes": ["analysis", "implementation"],
+  "constraints": ["fail-closed", "no-authority-invention"],
+  "resolution_tags": ["skill", "discovery", "universal"],
+  "file_path": "docs/codex/templates/skills/discovery.md",
+  "checksum_sha256": "4911ddb268e145d5d6a992c3812ef75b083c498bf6c2462eeb7936b0c7de4d1c",
+  "admitted_at": "2026-03-14",
+  "admitted_by": "codex",
+  "supersedes": []
+}

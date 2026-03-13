@@ -1,196 +1,92 @@
-# Codex Pipeline — Author Canonical Contract For Highest-Priority Subsystem
+---
+pipeline_id: "004"
+title: "Author Canonical Contract For Highest-Priority Subsystem"
+status: active
+category: governance
+stage: contract-authoring
+objective: "Author and install the canonical contract for the highest-priority subsystem identified by contract discovery."
+depends_on: ["003"]
+outputs: ["docs/pipelines/governance/author-canonical-contract-for-highest-priority-subsystem/"]
+success_criteria: ["A bounded canonical contract is authored.", "Supporting surfaces are updated.", "Installation verification is recorded."]
+governance_mode: fail-closed
+execution_mode: advisory-then-enforcing
+restrictions: ["Keep this lane optional for smaller repositories until a bounded subsystem requires explicit governance.", "Do not silently broaden the selected subsystem beyond the discovered scope."]
+non_claims: ["Does not audit implementation conformance by itself.", "Does not contract every subsystem in one pass."]
+classification: governance.contracts
+authority: repo-governance
+autonomy: advisory-only
+problem_statement: "Contract discovery identifies priorities, but governance still needs at least one installed canonical contract to reduce ambiguity and enable downstream audit and remediation."
+scope: "Select the highest-priority subsystem, define scope and evidence, author the canonical contract, install it, and verify publication."
+inputs: ["Contract discovery artifacts", "Architecture doctrine", "Repository evidence for the selected subsystem"]
+entry_conditions: ["A highest-priority candidate exists and is important enough to govern explicitly."]
+exit_conditions: ["The canonical contract is installed and supporting governance surfaces reference it."]
+validation: ["Inspect the authored contract and installation verification.", "Confirm supporting-surface updates and final verdict."]
+rollback: "Restore the prior lane and contract changes from version control if migration or contract authoring introduces semantic drift."
+---
 
-**Pipeline ID**: 004  
-**Category**: governance  
-**Stage**: contract-authoring  
-**Status**: PROPOSED
+# Author Canonical Contract For Highest-Priority Subsystem
 
 ## Purpose
 
-Author the canonical contract for the highest-priority subsystem identified by contract discovery, install it as a durable authority surface, and update supporting governance materials so downstream audits and remediations can rely on it.
+Convert the highest-priority contract candidate into a durable canonical contract that downstream audits and remediations can treat as an authoritative governance surface.
 
-## Why This Pipeline Exists
+## Problem Statement
 
-Contract discovery identifies missing or fragmented contract candidates, but downstream governance still needs at least one explicit canonical contract to reduce ambiguity and prove the contract-authoring path.
+Contract discovery without at least one real contract leaves the governance system with candidates but no installed contract authority to audit against.
 
-This pipeline converts the top-priority contract candidate into a real authority surface.
+## Objectives
 
-For smaller repositories, this pipeline remains optional until a bounded subsystem, public surface, or authority boundary is important enough to govern with a canonical contract.
+- justify the selected highest-priority subsystem
+- define contract scope, boundaries, and evidence
+- author and install the canonical contract
+- update supporting surfaces and verify installation
 
----
+## Scope
 
-## Universal Skill References
+In scope: candidate selection, scope definition, evidence analysis, design decision, contract authoring, supporting-surface updates, and installation verification.
+
+Out of scope: implementation remediation and post-remediation alignment verification.
+
+## Preconditions
+
+- contract discovery artifacts exist
+- a bounded subsystem can be selected without ambiguity
+- contract publication under `docs/contracts/` or the canonical contract root is available
+
+## Execution Steps
+
+1. Publish the pipeline summary and candidate-selection justification.
+2. Define scope, authority boundaries, and evidence inputs for the selected subsystem.
+3. Record the contract design decision and author the canonical contract.
+4. Update supporting surfaces, verify installation, and record the promotion decision and final verdict.
+
+Universal skills:
 
 - `canonical-contract-authoring`
-  Use for scope definition, authority expression, contract drafting, and installation-ready contract structure.
 - `contract-candidate-discovery`
-  Use when candidate ranking context must be rechecked during selection justification.
 
-# Phase 00 — Pipeline Summary
+## Expected Outputs
 
-## Output Artifact
+- artifact bundle under `docs/pipelines/governance/author-canonical-contract-for-highest-priority-subsystem/`
+- installed canonical contract for the selected subsystem
+- supporting-surface updates and installation verification
 
-`docs/pipelines/governance/author-canonical-contract-for-highest-priority-subsystem/00-pipeline-summary.md`
+## Verification Method
 
-Document:
+- inspect the authored contract and scope artifacts
+- confirm supporting surfaces and installation verification are present
+- confirm the final verdict reflects the installed contract state
 
-- repository under review
-- highest-priority candidate selected
-- selection rationale
-- expected contract output
-- principal governance risk if the contract remains missing
+## Restrictions
 
----
+- preserve the discovered subsystem boundary
+- do not invent broader governance scope than the evidence supports
 
-# Phase 01 — Candidate Selection Justification
+## Non-Claims
 
-## Output Artifact
+- does not prove implementation compliance
+- does not eliminate the need for later audit and remediation lanes
 
-`docs/pipelines/governance/author-canonical-contract-for-highest-priority-subsystem/01-candidate-selection-justification.md`
+## Final Verdict
 
-Use the `contract-candidate-discovery` skill when candidate ranking context needs to be rechecked, then record:
-
-- source discovery artifacts consulted
-- candidate ranking basis
-- why the selected subsystem is highest priority
-- which candidates were deferred
-
----
-
-# Phase 02 — Contract Scope and Boundary Definition
-
-## Output Artifact
-
-`docs/pipelines/governance/author-canonical-contract-for-highest-priority-subsystem/02-contract-scope-and-boundaries.md`
-
-Define:
-
-- in-scope responsibilities
-- out-of-scope responsibilities
-- authority boundaries
-- state ownership boundaries
-- dependent surfaces
-
----
-
-# Phase 03 — Evidence and Authority Analysis
-
-## Output Artifact
-
-`docs/pipelines/governance/author-canonical-contract-for-highest-priority-subsystem/03-evidence-and-authority-analysis.md`
-
-Analyze:
-
-- repository evidence supporting the contract
-- current authority surface status
-- observed ambiguity or drift
-- why a canonical contract is justified now
-
----
-
-# Phase 04 — Contract Design Decision
-
-## Output Artifact
-
-`docs/pipelines/governance/author-canonical-contract-for-highest-priority-subsystem/04-contract-design-decision.md`
-
-Define:
-
-- contract purpose
-- required rules
-- prohibited behaviors
-- compliance expectations
-- relationship to constitution, doctrine, registry, and pipeline definitions
-
----
-
-# Phase 05 — Canonical Contract Authoring
-
-## Output Artifact
-
-`docs/contracts/<contract-name>.md`
-
-Use the `canonical-contract-authoring` skill. The authored contract must include:
-
-- purpose
-- scope
-- governing authority
-- canonical rules
-- allowed and prohibited behaviors
-- compliance signals
-- ambiguity handling
-- governance implications
-- non-goals
-
----
-
-# Phase 06 — Supporting Surface Updates
-
-## Output Artifact
-
-`docs/pipelines/governance/author-canonical-contract-for-highest-priority-subsystem/06-supporting-surface-updates.md`
-
-Record:
-
-- what was updated
-- why
-- what remained unchanged
-- whether stale references remain
-
----
-
-# Phase 07 — Contract Installation Verification
-
-## Output Artifact
-
-`docs/pipelines/governance/author-canonical-contract-for-highest-priority-subsystem/07-contract-installation-verification.md`
-
-Verify:
-
-- canonical contract exists
-- contract is discoverable
-- supporting surfaces align with it
-- deferred ambiguities are recorded
-
----
-
-# Phase 08 — Promotion Decision
-
-## Output Artifact
-
-`docs/pipelines/governance/author-canonical-contract-for-highest-priority-subsystem/08-promotion-decision.md`
-
-Allowed decisions:
-
-- PROMOTE
-- PROMOTE_WITH_OBSERVATIONS
-- REQUIRES_REFINEMENT
-- BLOCKED
-
----
-
-# Phase 09 — Final Verdict
-
-## Output Artifact
-
-`docs/pipelines/governance/author-canonical-contract-for-highest-priority-subsystem/09-final-verdict.md`
-
-Allowed verdicts:
-
-- CANONICAL_CONTRACT_AUTHORED
-- CANONICAL_CONTRACT_AUTHORED_WITH_OBSERVATIONS
-- CANONICAL_CONTRACT_REQUIRES_REFINEMENT
-- CANONICAL_CONTRACT_BLOCKED
-
-The verdict must summarize:
-
-- contract authored
-- installed authority surface
-- residual risks
-- next valid pipeline stage
-
----
-
-# Completion Standard
-
-This pipeline is complete only when a canonical contract exists for the selected highest-priority subsystem and the repository can use it as an operational governance surface.
+Use a bounded contract-authoring verdict such as `CANONICAL_CONTRACT_AUTHORED` or an explicitly restricted equivalent.

@@ -1,0 +1,30 @@
+{
+  "template_name": "cli-worker",
+  "template_type": "overlay",
+  "base_template": "universal-base",
+  "compatible_overlays": [
+    "python-package",
+    "php-package",
+    "node-typescript-service",
+    "monorepo"
+  ],
+  "required_surfaces": [
+    "bin",
+    "jobs",
+    "worker"
+  ],
+  "optional_surfaces": [
+    "tasks",
+    "scheduler",
+    "queue"
+  ],
+  "governance_compatibility": "required",
+  "maturity": "canonical",
+  "supported_runtime_shapes": [
+    "cli",
+    "worker",
+    "batch"
+  ],
+  "template_root": "docs/codex/templates/overlays/cli-worker",
+  "description": "CLI and worker runtime overlay for the universal base scaffold."
+}

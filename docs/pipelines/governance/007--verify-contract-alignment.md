@@ -1,213 +1,91 @@
-# Codex Pipeline — Verify Contract Alignment
-
-Pipeline ID: 007  
-Category: governance  
-Stage: verification  
-Status: PROPOSED
-
+---
+pipeline_id: "007"
+title: "Verify Contract Alignment"
+status: active
+category: governance
+stage: verification
+objective: "Verify that implementation now aligns with the governing contract after remediation."
+depends_on: ["005", "006"]
+outputs: ["docs/pipelines/governance/verify-contract-alignment/"]
+success_criteria: ["Verification criteria are extracted.", "Implementation is reinspected.", "Residual risk and final verdict are recorded."]
+governance_mode: fail-closed
+execution_mode: advisory-then-enforcing
+restrictions: ["Run only after a contract and remediation evidence exist.", "Do not collapse residual uncertainty into a false pass."]
+non_claims: ["Does not author the original contract.", "Does not replace remediation work."]
+classification: governance.verification
+authority: repo-governance
+autonomy: advisory-only
+problem_statement: "Remediation changes are not complete governance work until alignment with the governing contract is explicitly verified."
+scope: "Extract verification criteria, reinspect implementation, evaluate behavior, update compliance status, and record residual risk."
+inputs: ["Canonical contract", "Pipeline 005 audit findings", "Pipeline 006 remediation artifacts", "Optional tests or runtime evidence"]
+entry_conditions: ["A governing contract exists and remediation work is ready for explicit verification."]
+exit_conditions: ["Alignment findings, residual risk, and final verdict are explicitly recorded."]
+validation: ["Inspect verification artifacts and compliance updates.", "Confirm evidence supports the final verdict."]
+rollback: "Restore the lane definition from version control if template migration introduces semantic drift; repository rollback is handled by remediation controls, not this verification lane."
 ---
 
-# Purpose
+# Verify Contract Alignment
+
+## Purpose
 
 Verify that subsystem implementation now conforms to the canonical contract after remediation.
 
-This pipeline confirms contract compliance using implementation inspection, tests, and runtime evidence where available.
+## Problem Statement
 
-Verification establishes closure of the remediation cycle.
+Without explicit verification, remediation cannot be considered complete and contract alignment remains an unproven claim.
 
-This pipeline is conditional on a repository having both a governing contract and completed remediation work that now needs explicit verification.
+## Objectives
 
----
+- extract the contract-alignment criteria that must now hold
+- reinspect implementation and relevant behavior
+- update compliance status and assess residual risk
+- publish an evidence-backed verification verdict
 
-# Why This Pipeline Exists
+## Scope
 
-Remediation pipelines implement changes but do not prove that contract alignment has been achieved.
+In scope: verification-criteria extraction, implementation reinspection, behavioral verification, compliance update, residual-risk assessment, verification summary, and promotion guidance.
 
-Verification ensures:
+Out of scope: original contract authoring or new remediation planning beyond residual-risk notes.
 
-- remediation actions were effective
-- contract rules are respected
-- lifecycle behavior conforms to the contract
-- authority boundaries are enforced
+## Preconditions
 
-Without verification, remediation cannot be considered complete.
+- canonical contract exists
+- remediation work is complete enough to inspect
+- evidence sources such as tests, runtime checks, or documentation are available as applicable
 
----
+## Execution Steps
 
-# Inputs
+1. Publish the verification summary and extract verification criteria.
+2. Reinspect implementation and evaluate relevant behavior against the contract.
+3. Update compliance status, assess residual risk, and publish the verification summary.
+4. Record promotion guidance and the final verdict.
 
-Required inputs:
-
-- canonical subsystem contract
-- remediation artifacts (Pipeline 006)
-- previous audit findings (Pipeline 005)
-
-Optional inputs:
-
-- runtime inspection results
-- test suite outputs
-- monitoring evidence
-
----
-
-## Universal Skill References
+Universal skills:
 
 - `contract-alignment-verification`
-  Use for verification-criteria extraction, reinspection, behavioral verification, residual-risk assessment, and promotion-readiness analysis.
 
-# Phase 00 — Pipeline Summary
+## Expected Outputs
 
-Output artifact:
+- artifact bundle under `docs/pipelines/governance/verify-contract-alignment/`
+- updated contract-alignment assessment and residual-risk notes
+- explicit verification verdict and promotion recommendation
 
-docs/pipelines/governance/verify-contract-alignment/00-pipeline-summary.md
+## Verification Method
 
-The summary must document:
+- inspect verification criteria, reinspection artifacts, and compliance updates
+- confirm residual-risk statements are explicit
+- confirm the final verdict is evidence-backed
 
-- subsystem under verification
-- governing contract
-- remediation actions completed
-- verification scope
+## Restrictions
 
----
+- do not claim full alignment without evidence
+- do not substitute verification for missing remediation
 
-# Phase 01 — Verification Criteria Extraction
+## Non-Claims
 
-Output artifact:
+- does not guarantee the contract is optimal
+- does not eliminate the need for future audits if implementation changes again
 
-docs/pipelines/governance/verify-contract-alignment/01-verification-criteria.md
+## Final Verdict
 
-Use the `contract-alignment-verification` skill to extract contract rules that must be verified.
-
-Examples:
-
-- authority boundaries
-- lifecycle rules
-- state ownership
-- interface behavior
-- event semantics
-
-Each rule must map to verifiable evidence.
-
----
-
-# Phase 02 — Implementation Re-inspection
-
-Output artifact:
-
-docs/pipelines/governance/verify-contract-alignment/02-implementation-reinspection.md
-
-Use the `contract-alignment-verification` skill to re-inspect implementation surfaces relevant to the contract.
-
-Confirm that:
-
-- authority model is respected
-- lifecycle transitions match contract rules
-- state mutations occur only in allowed layers
-- compatibility layers behave as defined
-
----
-
-# Phase 03 — Behavioral Verification
-
-Output artifact:
-
-docs/pipelines/governance/verify-contract-alignment/03-behavioral-verification.md
-
-Use the `contract-alignment-verification` skill to verify subsystem behavior.
-
-Possible evidence:
-
-- unit tests
-- integration tests
-- runtime inspection
-- event traces
-- state transition logs
-
-Behavior must match contract semantics.
-
----
-
-# Phase 04 — Contract Compliance Matrix Update
-
-Output artifact:
-
-docs/pipelines/governance/verify-contract-alignment/04-contract-compliance-matrix.md
-
-Use the `contract-alignment-verification` skill to update the contract compliance matrix.
-
-Each contract rule must be classified:
-
-- verified compliant
-- partially compliant
-- non-compliant
-- unverifiable
-
----
-
-# Phase 05 — Residual Risk Assessment
-
-Output artifact:
-
-docs/pipelines/governance/verify-contract-alignment/05-residual-risk-assessment.md
-
-Identify remaining risks.
-
-Possible risks include:
-
-- incomplete lifecycle coverage
-- partial compatibility dependencies
-- external integrations not yet verified
-- runtime conditions not fully tested
-
----
-
-# Phase 06 — Verification Summary
-
-Output artifact:
-
-docs/pipelines/governance/verify-contract-alignment/06-verification-summary.md
-
-Summarize:
-
-- verified contract rules
-- residual risks
-- test evidence
-- compliance confidence level
-
----
-
-# Phase 07 — Promotion Decision
-
-Output artifact:
-
-docs/pipelines/governance/verify-contract-alignment/07-promotion-decision.md
-
-Possible outcomes:
-
-PROMOTE  
-PROMOTE_WITH_OBSERVATIONS  
-REQUIRES_ADDITIONAL_REMEDIATION  
-BLOCKED
-
-PROMOTE when subsystem behavior conforms to the canonical contract.
-
----
-
-# Phase 08 — Final Verdict
-
-Output artifact:
-
-docs/pipelines/governance/verify-contract-alignment/08-final-verdict.md
-
-Allowed verdicts:
-
-CONTRACT_ALIGNMENT_VERIFIED  
-CONTRACT_ALIGNMENT_VERIFIED_WITH_OBSERVATIONS  
-CONTRACT_ALIGNMENT_INCOMPLETE  
-CONTRACT_ALIGNMENT_BLOCKED
-
----
-
-# Completion Standard
-
-The pipeline is complete when contract compliance has been verified and governance closure has been established.
+Use a bounded verification verdict such as `CONTRACT_ALIGNMENT_VERIFIED` or an explicitly restricted equivalent.

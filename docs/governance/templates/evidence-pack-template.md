@@ -1,6 +1,6 @@
 ---
 id: "REQUIRED: evidence pack identifier"
-title: "REQUIRED: evidence pack title"
+title: "REQUIRED: Evidence Pack Title"
 status: "REQUIRED: proposed|active|complete"
 category: "REQUIRED: evidence"
 stage: "REQUIRED: evidence"

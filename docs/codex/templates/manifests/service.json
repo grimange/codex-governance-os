@@ -1,0 +1,23 @@
+{
+  "template_name": "service",
+  "template_type": "overlay",
+  "base_template": "universal-base",
+  "compatible_overlays": [],
+  "required_surfaces": [
+    "service",
+    "config",
+    "scripts"
+  ],
+  "optional_surfaces": [
+    "deploy",
+    "ops"
+  ],
+  "governance_compatibility": "required",
+  "maturity": "canonical",
+  "supported_runtime_shapes": [
+    "service",
+    "application"
+  ],
+  "template_root": "docs/codex/templates/overlays/service",
+  "description": "Service runtime overlay for the universal base scaffold."
+}

@@ -1,0 +1,21 @@
+{
+  "template_id": "report.universal.governance-summary",
+  "template_name": "Universal Governance Summary Report Template",
+  "template_family": "report",
+  "template_kind": "governance-summary",
+  "version": "1.0.0",
+  "status": "active",
+  "authority_level": "canonical",
+  "description": "Canonical governance summary report template.",
+  "inputs_contract": {"family": "report", "expected_id_field": "id"},
+  "outputs_contract": {"artifact_type": "report-template-body"},
+  "compatible_stacks": ["agnostic"],
+  "compatible_modes": ["reporting"],
+  "constraints": ["fail-closed", "evidence-required"],
+  "resolution_tags": ["report", "governance", "summary"],
+  "file_path": "docs/codex/templates/reports/governance-summary.md",
+  "checksum_sha256": "b7d4513e7c9312d0a08474be5381e6767420a21d1f174f705e88ee45881aca1e",
+  "admitted_at": "2026-03-14",
+  "admitted_by": "codex",
+  "supersedes": []
+}

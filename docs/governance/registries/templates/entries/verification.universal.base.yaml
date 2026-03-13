@@ -1,0 +1,21 @@
+{
+  "template_id": "verification.universal.base",
+  "template_name": "Universal Verification Template",
+  "template_family": "verification",
+  "template_kind": "base",
+  "version": "1.0.0",
+  "status": "active",
+  "authority_level": "canonical",
+  "description": "Canonical django-specialized verification template.",
+  "inputs_contract": {"family": "verification", "expected_id_field": "id"},
+  "outputs_contract": {"artifact_type": "verification-template-body"},
+  "compatible_stacks": ["django"],
+  "compatible_modes": ["verification"],
+  "constraints": ["fail-closed", "no-authority-invention"],
+  "resolution_tags": ["verification", "base", "universal"],
+  "file_path": "docs/codex/templates/verification/universal-base.md",
+  "checksum_sha256": "91b011d5c7f8457b6bfccc7a0d58a48de47a8ddc920782917b98fde6c6a0b0e3",
+  "admitted_at": "2026-03-14",
+  "admitted_by": "codex",
+  "supersedes": []
+}

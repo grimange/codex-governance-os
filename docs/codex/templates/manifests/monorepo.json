@@ -1,0 +1,26 @@
+{
+  "template_name": "monorepo",
+  "template_type": "overlay",
+  "base_template": "universal-base",
+  "compatible_overlays": [
+    "node-typescript-service",
+    "cli-worker"
+  ],
+  "required_surfaces": [
+    "packages",
+    "services",
+    "shared"
+  ],
+  "optional_surfaces": [
+    "platform",
+    "tooling"
+  ],
+  "governance_compatibility": "required",
+  "maturity": "canonical",
+  "supported_runtime_shapes": [
+    "monorepo",
+    "modernization"
+  ],
+  "template_root": "docs/codex/templates/overlays/monorepo",
+  "description": "Monorepo runtime overlay for the universal base scaffold."
+}

@@ -1,0 +1,236 @@
+{
+  "entries": [
+    {
+      "admitted_at": "2026-03-14",
+      "admitted_by": "codex",
+      "authority_level": "canonical",
+      "checksum_sha256": "ad8ec868c65a54676be69ae620fb3635a05c6beef42b33c373876a054bdb1f50",
+      "compatible_modes": [
+        "analysis",
+        "implementation",
+        "verification",
+        "reporting",
+        "design"
+      ],
+      "compatible_stacks": [
+        "agnostic"
+      ],
+      "constraints": [
+        "fail-closed",
+        "no-authority-invention"
+      ],
+      "description": "Canonical agnostic pipeline template.",
+      "file_path": "docs/codex/templates/pipelines/universal-base.md",
+      "inputs_contract": {
+        "expected_id_field": "pipeline_id",
+        "family": "pipeline"
+      },
+      "outputs_contract": {
+        "artifact_type": "pipeline-template-body"
+      },
+      "resolution_tags": [
+        "pipeline",
+        "base",
+        "universal"
+      ],
+      "status": "active",
+      "supersedes": [],
+      "template_family": "pipeline",
+      "template_id": "pipeline.universal.base",
+      "template_kind": "base",
+      "template_name": "Universal Pipeline Template",
+      "version": "1.0.0"
+    },
+    {
+      "admitted_at": "2026-03-14",
+      "admitted_by": "codex",
+      "authority_level": "canonical",
+      "checksum_sha256": "b7d4513e7c9312d0a08474be5381e6767420a21d1f174f705e88ee45881aca1e",
+      "compatible_modes": [
+        "reporting"
+      ],
+      "compatible_stacks": [
+        "agnostic"
+      ],
+      "constraints": [
+        "fail-closed",
+        "evidence-required"
+      ],
+      "description": "Canonical governance summary report template.",
+      "file_path": "docs/codex/templates/reports/governance-summary.md",
+      "inputs_contract": {
+        "expected_id_field": "id",
+        "family": "report"
+      },
+      "outputs_contract": {
+        "artifact_type": "report-template-body"
+      },
+      "resolution_tags": [
+        "report",
+        "governance",
+        "summary"
+      ],
+      "status": "active",
+      "supersedes": [],
+      "template_family": "report",
+      "template_id": "report.universal.governance-summary",
+      "template_kind": "governance-summary",
+      "template_name": "Universal Governance Summary Report Template",
+      "version": "1.0.0"
+    },
+    {
+      "admitted_at": "2026-03-14",
+      "admitted_by": "codex",
+      "authority_level": "canonical",
+      "checksum_sha256": "61a1b01392dd5e470fc89543ac22a181bc3a7fb896179a5d5ca40eb5f136b8fd",
+      "compatible_modes": [
+        "analysis",
+        "implementation",
+        "reporting"
+      ],
+      "compatible_stacks": [
+        "agnostic"
+      ],
+      "constraints": [
+        "fail-closed",
+        "policy-first"
+      ],
+      "description": "Canonical agnostic safety rule template.",
+      "file_path": "docs/codex/templates/rules/safety.md",
+      "inputs_contract": {
+        "expected_id_field": "id",
+        "family": "rule"
+      },
+      "outputs_contract": {
+        "artifact_type": "rule-template-body"
+      },
+      "resolution_tags": [
+        "rule",
+        "safety",
+        "universal"
+      ],
+      "status": "active",
+      "supersedes": [],
+      "template_family": "rule",
+      "template_id": "rule.universal.safety",
+      "template_kind": "safety",
+      "template_name": "Universal Safety Rule Template",
+      "version": "1.0.0"
+    },
+    {
+      "admitted_at": "2026-03-14",
+      "admitted_by": "codex",
+      "authority_level": "canonical",
+      "checksum_sha256": "4911ddb268e145d5d6a992c3812ef75b083c498bf6c2462eeb7936b0c7de4d1c",
+      "compatible_modes": [
+        "analysis",
+        "implementation"
+      ],
+      "compatible_stacks": [
+        "agnostic"
+      ],
+      "constraints": [
+        "fail-closed",
+        "no-authority-invention"
+      ],
+      "description": "Canonical agnostic discovery skill template.",
+      "file_path": "docs/codex/templates/skills/discovery.md",
+      "inputs_contract": {
+        "expected_id_field": "id",
+        "family": "skill"
+      },
+      "outputs_contract": {
+        "artifact_type": "skill-template-body"
+      },
+      "resolution_tags": [
+        "skill",
+        "discovery",
+        "universal"
+      ],
+      "status": "active",
+      "supersedes": [],
+      "template_family": "skill",
+      "template_id": "skill.universal.discovery",
+      "template_kind": "discovery",
+      "template_name": "Universal Discovery Skill Template",
+      "version": "1.0.0"
+    },
+    {
+      "admitted_at": "2026-03-14",
+      "admitted_by": "codex",
+      "authority_level": "canonical",
+      "checksum_sha256": "98c1048f1acbb99d013d2a16891cd742072fd41df1f59122c61012a334bc79b3",
+      "compatible_modes": [
+        "analysis",
+        "design"
+      ],
+      "compatible_stacks": [
+        "agnostic"
+      ],
+      "constraints": [
+        "fail-closed",
+        "no-authority-invention"
+      ],
+      "description": "Canonical sub-agent specialization template for architecture analysis.",
+      "file_path": "docs/codex/templates/subagents/architecture-specialist.md",
+      "inputs_contract": {
+        "expected_id_field": "id",
+        "family": "sub_agent"
+      },
+      "outputs_contract": {
+        "artifact_type": "sub-agent-template-body"
+      },
+      "resolution_tags": [
+        "subagent",
+        "architecture",
+        "specialist"
+      ],
+      "status": "active",
+      "supersedes": [],
+      "template_family": "sub_agent",
+      "template_id": "subagent.universal.architecture-specialist",
+      "template_kind": "architecture-specialist",
+      "template_name": "Universal Architecture Specialist Sub-Agent Template",
+      "version": "1.0.0"
+    },
+    {
+      "admitted_at": "2026-03-14",
+      "admitted_by": "codex",
+      "authority_level": "canonical",
+      "checksum_sha256": "91b011d5c7f8457b6bfccc7a0d58a48de47a8ddc920782917b98fde6c6a0b0e3",
+      "compatible_modes": [
+        "verification"
+      ],
+      "compatible_stacks": [
+        "django"
+      ],
+      "constraints": [
+        "fail-closed",
+        "no-authority-invention"
+      ],
+      "description": "Canonical django-specialized verification template.",
+      "file_path": "docs/codex/templates/verification/universal-base.md",
+      "inputs_contract": {
+        "expected_id_field": "id",
+        "family": "verification"
+      },
+      "outputs_contract": {
+        "artifact_type": "verification-template-body"
+      },
+      "resolution_tags": [
+        "verification",
+        "base",
+        "universal"
+      ],
+      "status": "active",
+      "supersedes": [],
+      "template_family": "verification",
+      "template_id": "verification.universal.base",
+      "template_kind": "base",
+      "template_name": "Universal Verification Template",
+      "version": "1.0.0"
+    }
+  ],
+  "registry_version": "1.0.0",
+  "schema_version": "1.0.0"
+}

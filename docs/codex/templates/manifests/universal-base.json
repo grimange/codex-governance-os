@@ -1,0 +1,43 @@
+{
+  "template_name": "universal-base",
+  "template_type": "base",
+  "base_template": null,
+  "compatible_overlays": [
+    "laravel",
+    "django",
+    "php-package",
+    "python-package",
+    "service",
+    "monorepo",
+    "node-typescript-service",
+    "cli-worker"
+  ],
+  "required_surfaces": [
+    "docs/governance",
+    "docs/pipelines",
+    "docs/pipelines/governance",
+    "docs/codex/templates",
+    "docs/governance/registries/templates",
+    "tools/governance",
+    "tools/templates",
+    "artifacts"
+  ],
+  "optional_surfaces": [
+    "config",
+    "scripts",
+    "src",
+    "app",
+    "backend"
+  ],
+  "governance_compatibility": "required",
+  "maturity": "canonical",
+  "supported_runtime_shapes": [
+    "application",
+    "package",
+    "service",
+    "monorepo",
+    "modernization"
+  ],
+  "template_root": "docs/codex/templates/base",
+  "description": "Canonical governance-first, stack-agnostic repository scaffold."
+}

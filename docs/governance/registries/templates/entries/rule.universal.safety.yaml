@@ -1,0 +1,21 @@
+{
+  "template_id": "rule.universal.safety",
+  "template_name": "Universal Safety Rule Template",
+  "template_family": "rule",
+  "template_kind": "safety",
+  "version": "1.0.0",
+  "status": "active",
+  "authority_level": "canonical",
+  "description": "Canonical agnostic safety rule template.",
+  "inputs_contract": {"family": "rule", "expected_id_field": "id"},
+  "outputs_contract": {"artifact_type": "rule-template-body"},
+  "compatible_stacks": ["agnostic"],
+  "compatible_modes": ["analysis", "implementation", "reporting"],
+  "constraints": ["fail-closed", "policy-first"],
+  "resolution_tags": ["rule", "safety", "universal"],
+  "file_path": "docs/codex/templates/rules/safety.md",
+  "checksum_sha256": "61a1b01392dd5e470fc89543ac22a181bc3a7fb896179a5d5ca40eb5f136b8fd",
+  "admitted_at": "2026-03-14",
+  "admitted_by": "codex",
+  "supersedes": []
+}

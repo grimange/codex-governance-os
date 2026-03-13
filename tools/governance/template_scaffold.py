@@ -1,13 +1,32 @@
 from __future__ import annotations
 
 import argparse
+import dataclasses
 import json
 import re
 import sys
 from pathlib import Path
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 from tools.governance.template_lint import validate_document
 from tools.governance.template_registry import RegistryError, load_registry
+
+DEFAULT_SCAFFOLD_MANIFEST_DIRECTORY = REPO_ROOT / "docs" / "codex" / "templates" / "manifests"
+DEFAULT_SCAFFOLD_SELECTION_PATH = Path("docs/governance/scaffold-selection.json")
+REQUIRED_MANIFEST_KEYS = (
+    "template_name",
+    "template_type",
+    "base_template",
+    "compatible_overlays",
+    "required_surfaces",
+    "optional_surfaces",
+    "governance_compatibility",
+    "maturity",
+    "supported_runtime_shapes",
+)
 
 
 DEFAULT_VALUES = {
@@ -23,6 +42,153 @@ DEFAULT_VALUES = {
     "restrictions": [],
     "non_claims": [],
 }
+
+
+@dataclasses.dataclass(frozen=True)
+class ScaffoldManifest:
+    template_name: str
+    template_type: str
+    base_template: str | None
+    compatible_overlays: tuple[str, ...]
+    required_surfaces: tuple[str, ...]
+    optional_surfaces: tuple[str, ...]
+    governance_compatibility: str
+    maturity: str
+    supported_runtime_shapes: tuple[str, ...]
+    template_root: str
+    description: str = ""
+
+
+def _load_json(path: Path) -> dict:
+    try:
+        return json.loads(path.read_text())
+    except json.JSONDecodeError as exc:
+        raise RegistryError(f"Invalid scaffold manifest at {path}: {exc}") from exc
+
+
+def _tuple_of_strings(value: object, field_name: str) -> tuple[str, ...]:
+    if not isinstance(value, list) or not all(isinstance(item, str) and item for item in value):
+        raise RegistryError(f"{field_name} must be a non-empty list of strings")
+    return tuple(value)
+
+
+def load_scaffold_manifest(
+    template_name: str,
+    manifest_dir: Path | None = None,
+) -> ScaffoldManifest:
+    manifest_dir = manifest_dir or DEFAULT_SCAFFOLD_MANIFEST_DIRECTORY
+    path = manifest_dir / f"{template_name}.json"
+    if not path.exists():
+        raise RegistryError(f"Unknown scaffold manifest: {template_name}")
+    raw = _load_json(path)
+    for key in REQUIRED_MANIFEST_KEYS:
+        if key not in raw:
+            raise RegistryError(f"Scaffold manifest {template_name} missing key `{key}`")
+    template_type = raw["template_type"]
+    if template_type not in {"base", "overlay"}:
+        raise RegistryError(f"Unsupported scaffold template_type `{template_type}`")
+    base_template = raw["base_template"]
+    if base_template is not None and not isinstance(base_template, str):
+        raise RegistryError("base_template must be a string or null")
+    governance_compatibility = raw["governance_compatibility"]
+    maturity = raw["maturity"]
+    template_root = raw.get("template_root")
+    if not isinstance(template_root, str) or not template_root:
+        raise RegistryError("template_root must be a non-empty string")
+    return ScaffoldManifest(
+        template_name=raw["template_name"],
+        template_type=template_type,
+        base_template=base_template,
+        compatible_overlays=_tuple_of_strings(raw["compatible_overlays"], "compatible_overlays"),
+        required_surfaces=_tuple_of_strings(raw["required_surfaces"], "required_surfaces"),
+        optional_surfaces=_tuple_of_strings(raw["optional_surfaces"], "optional_surfaces"),
+        governance_compatibility=str(governance_compatibility),
+        maturity=str(maturity),
+        supported_runtime_shapes=_tuple_of_strings(
+            raw["supported_runtime_shapes"], "supported_runtime_shapes"
+        ),
+        template_root=template_root,
+        description=str(raw.get("description", "")),
+    )
+
+
+def list_scaffold_manifests(
+    manifest_dir: Path | None = None,
+) -> list[ScaffoldManifest]:
+    manifest_dir = manifest_dir or DEFAULT_SCAFFOLD_MANIFEST_DIRECTORY
+    if not manifest_dir.exists():
+        return []
+    manifests: list[ScaffoldManifest] = []
+    for path in sorted(manifest_dir.glob("*.json")):
+        manifests.append(load_scaffold_manifest(path.stem, manifest_dir=manifest_dir))
+    return manifests
+
+
+def realize_repository_scaffold(
+    template_name: str,
+    output_root: Path,
+    *,
+    overlays: list[str] | None = None,
+    include_optional: bool = False,
+    manifest_dir: Path | None = None,
+) -> Path:
+    manifest_dir = manifest_dir or DEFAULT_SCAFFOLD_MANIFEST_DIRECTORY
+    base_manifest = load_scaffold_manifest(template_name, manifest_dir=manifest_dir)
+    if base_manifest.template_type != "base":
+        raise RegistryError(f"{template_name} is not a base scaffold manifest")
+
+    selected_overlays = sorted(overlays or [])
+    overlay_manifests: list[ScaffoldManifest] = []
+    for overlay_name in selected_overlays:
+        if overlay_name not in base_manifest.compatible_overlays:
+            raise RegistryError(f"Overlay {overlay_name} is not compatible with base template {template_name}")
+        overlay_manifest = load_scaffold_manifest(overlay_name, manifest_dir=manifest_dir)
+        if overlay_manifest.template_type != "overlay":
+            raise RegistryError(f"{overlay_name} is not an overlay manifest")
+        if overlay_manifest.base_template != template_name:
+            raise RegistryError(
+                f"Overlay {overlay_name} expects base template {overlay_manifest.base_template}, not {template_name}"
+            )
+        overlay_manifests.append(overlay_manifest)
+
+    for overlay_manifest in overlay_manifests:
+        for other_overlay in selected_overlays:
+            if other_overlay == overlay_manifest.template_name:
+                continue
+            if other_overlay not in overlay_manifest.compatible_overlays:
+                raise RegistryError(
+                    f"Overlay {overlay_manifest.template_name} is not compatible with overlay {other_overlay}"
+                )
+
+    surfaces = list(base_manifest.required_surfaces)
+    if include_optional:
+        surfaces.extend(base_manifest.optional_surfaces)
+    for overlay_manifest in overlay_manifests:
+        surfaces.extend(overlay_manifest.required_surfaces)
+        if include_optional:
+            surfaces.extend(overlay_manifest.optional_surfaces)
+
+    created_paths: list[str] = []
+    for surface in sorted(set(surfaces)):
+        target = output_root / surface
+        if target.suffix:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(f"// scaffold placeholder for {surface}\n")
+        else:
+            target.mkdir(parents=True, exist_ok=True)
+        created_paths.append(surface)
+
+    selection_path = output_root / DEFAULT_SCAFFOLD_SELECTION_PATH
+    selection_path.parent.mkdir(parents=True, exist_ok=True)
+    selection = {
+        "base_template": base_manifest.template_name,
+        "overlays": selected_overlays,
+        "include_optional": include_optional,
+        "required_surfaces": list(base_manifest.required_surfaces),
+        "created_surfaces": created_paths,
+    }
+    selection_path.write_text(json.dumps(selection, indent=2, sort_keys=True) + "\n")
+    return selection_path
 
 
 def _slugify(value: str) -> str:
@@ -99,23 +265,82 @@ def scaffold_document(
 
 
 def main(argv: list[str] | None = None) -> int:
+    if argv is None:
+        argv = sys.argv[1:]
+    if argv and argv[0] not in {"scaffold-document", "list-manifests", "realize-repository"}:
+        parser = argparse.ArgumentParser(description="Scaffold governed artifacts from the universal template system.")
+        parser.add_argument("family")
+        parser.add_argument("artifact_id")
+        parser.add_argument("title")
+        parser.add_argument("--output", type=Path, default=None)
+        parser.add_argument("--overlay", action="append", default=[])
+        parser.add_argument("--registry", type=Path, default=None)
+        args = parser.parse_args(argv)
+        path = scaffold_document(
+            family=args.family,
+            artifact_id=args.artifact_id,
+            title=args.title,
+            output_path=args.output,
+            overlays=args.overlay,
+            registry_path=args.registry,
+        )
+        print(path)
+        return 0
+
     parser = argparse.ArgumentParser(description="Scaffold governed artifacts from the universal template system.")
-    parser.add_argument("family")
-    parser.add_argument("artifact_id")
-    parser.add_argument("title")
-    parser.add_argument("--output", type=Path, default=None)
-    parser.add_argument("--overlay", action="append", default=[])
-    parser.add_argument("--registry", type=Path, default=None)
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
+    document_parser = subparsers.add_parser("scaffold-document")
+    document_parser.add_argument("family")
+    document_parser.add_argument("artifact_id")
+    document_parser.add_argument("title")
+    document_parser.add_argument("--output", type=Path, default=None)
+    document_parser.add_argument("--overlay", action="append", default=[])
+    document_parser.add_argument("--registry", type=Path, default=None)
+
+    list_parser = subparsers.add_parser("list-manifests")
+    list_parser.add_argument("--manifest-dir", type=Path, default=None)
+    list_parser.add_argument("--output", choices=("text", "json"), default="text")
+
+    realize_parser = subparsers.add_parser("realize-repository")
+    realize_parser.add_argument("template_name")
+    realize_parser.add_argument("output_root", type=Path)
+    realize_parser.add_argument("--overlay", action="append", default=[])
+    realize_parser.add_argument("--include-optional", action="store_true")
+    realize_parser.add_argument("--manifest-dir", type=Path, default=None)
+
     args = parser.parse_args(argv)
-    path = scaffold_document(
-        family=args.family,
-        artifact_id=args.artifact_id,
-        title=args.title,
-        output_path=args.output,
+    if args.command == "scaffold-document":
+        path = scaffold_document(
+            family=args.family,
+            artifact_id=args.artifact_id,
+            title=args.title,
+            output_path=args.output,
+            overlays=args.overlay,
+            registry_path=args.registry,
+        )
+        print(path)
+        return 0
+    if args.command == "list-manifests":
+        manifests = [dataclasses.asdict(manifest) for manifest in list_scaffold_manifests(args.manifest_dir)]
+        if args.output == "json":
+            print(json.dumps(manifests, indent=2, sort_keys=True))
+        else:
+            for manifest in manifests:
+                print(
+                    f"{manifest['template_name']} [{manifest['template_type']}] "
+                    f"overlays={','.join(manifest['compatible_overlays']) or '-'}"
+                )
+        return 0
+
+    selection_path = realize_repository_scaffold(
+        args.template_name,
+        args.output_root,
         overlays=args.overlay,
-        registry_path=args.registry,
+        include_optional=args.include_optional,
+        manifest_dir=args.manifest_dir,
     )
-    print(path)
+    print(selection_path)
     return 0
 
 

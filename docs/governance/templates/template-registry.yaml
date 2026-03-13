@@ -221,6 +221,106 @@
       "compatible_overlays": ["python-package", "php-package", "mcp-tools"]
     },
     {
+      "family": "sub_agent",
+      "version": "1.0.0",
+      "required_sections": [
+        "Purpose",
+        "Invocation Conditions",
+        "Inputs",
+        "Outputs",
+        "Authority Boundaries",
+        "Safety Limits",
+        "Examples"
+      ],
+      "optional_sections": ["Notes"],
+      "required_frontmatter": [
+        "id",
+        "title",
+        "status",
+        "category",
+        "stage",
+        "objective",
+        "depends_on",
+        "outputs",
+        "success_criteria",
+        "governance_mode",
+        "execution_mode",
+        "restrictions",
+        "non_claims"
+      ],
+      "normalization_aliases": {},
+      "output_path_pattern": "generated/sub-agents/{id}.md",
+      "validator": "template_lint.py",
+      "scaffold": "template_scaffold.py",
+      "compatible_overlays": ["laravel", "django", "python-package", "php-package", "mcp-tools", "infrastructure"]
+    },
+    {
+      "family": "instruction",
+      "version": "1.0.0",
+      "required_sections": [
+        "Purpose",
+        "Safe Invocation Boundary",
+        "Inputs",
+        "Expected Outputs",
+        "Failure Handling"
+      ],
+      "optional_sections": ["Notes"],
+      "required_frontmatter": [
+        "id",
+        "title",
+        "status",
+        "category",
+        "stage",
+        "objective",
+        "depends_on",
+        "outputs",
+        "success_criteria",
+        "governance_mode",
+        "execution_mode",
+        "restrictions",
+        "non_claims"
+      ],
+      "normalization_aliases": {},
+      "output_path_pattern": "generated/instructions/{id}.md",
+      "validator": "template_lint.py",
+      "scaffold": "template_scaffold.py",
+      "compatible_overlays": ["laravel", "django", "python-package", "php-package", "mcp-tools", "infrastructure"]
+    },
+    {
+      "family": "report",
+      "version": "1.0.0",
+      "required_sections": [
+        "Problem Statement",
+        "Observed State",
+        "Analysis",
+        "Decision",
+        "Remediation Or Recommendation",
+        "Verification",
+        "Final Verdict"
+      ],
+      "optional_sections": ["Notes"],
+      "required_frontmatter": [
+        "id",
+        "title",
+        "status",
+        "category",
+        "stage",
+        "objective",
+        "depends_on",
+        "outputs",
+        "success_criteria",
+        "governance_mode",
+        "execution_mode",
+        "restrictions",
+        "non_claims"
+      ],
+      "normalization_aliases": {},
+      "output_path_pattern": "generated/reports/{id}.md",
+      "validator": "template_lint.py",
+      "scaffold": "template_scaffold.py",
+      "compatible_overlays": ["laravel", "django", "python-package", "php-package", "mcp-tools", "infrastructure"]
+    },
+    {
       "family": "evidence-pack",
       "version": "1.0.0",
       "required_sections": [

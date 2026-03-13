@@ -1,6 +1,6 @@
 ---
 id: "REQUIRED: rule identifier"
-title: "REQUIRED: rule title"
+title: "REQUIRED: Rule Title"
 status: "REQUIRED: proposed|active|deprecated"
 category: "REQUIRED: governance"
 stage: "REQUIRED: policy"

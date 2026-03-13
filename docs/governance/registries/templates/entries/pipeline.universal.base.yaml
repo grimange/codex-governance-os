@@ -1,0 +1,21 @@
+{
+  "template_id": "pipeline.universal.base",
+  "template_name": "Universal Pipeline Template",
+  "template_family": "pipeline",
+  "template_kind": "base",
+  "version": "1.0.0",
+  "status": "active",
+  "authority_level": "canonical",
+  "description": "Canonical agnostic pipeline template.",
+  "inputs_contract": {"family": "pipeline", "expected_id_field": "pipeline_id"},
+  "outputs_contract": {"artifact_type": "pipeline-template-body"},
+  "compatible_stacks": ["agnostic"],
+  "compatible_modes": ["analysis", "implementation", "verification", "reporting", "design"],
+  "constraints": ["fail-closed", "no-authority-invention"],
+  "resolution_tags": ["pipeline", "base", "universal"],
+  "file_path": "docs/codex/templates/pipelines/universal-base.md",
+  "checksum_sha256": "ad8ec868c65a54676be69ae620fb3635a05c6beef42b33c373876a054bdb1f50",
+  "admitted_at": "2026-03-14",
+  "admitted_by": "codex",
+  "supersedes": []
+}

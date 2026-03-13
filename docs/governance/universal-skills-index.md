@@ -18,34 +18,34 @@ This index is the canonical discovery surface for the repository's universal Cod
 ## Available Universal Skills
 
 - `repository-discovery`
-  Location: `skills/discovery/repository-discovery/`
+  Location: `.codex/skills/discovery/repository-discovery/`
   Use cases: repository inventories, authority discovery, structure mapping.
 - `governance-readiness-audit`
-  Location: `skills/audit/governance-readiness-audit/`
+  Location: `.codex/skills/audit/governance-readiness-audit/`
   Use cases: governance maturity checks, readiness reviews, gap identification.
 - `architecture-doctrine-authoring`
-  Location: `skills/doctrine/architecture-doctrine-authoring/`
+  Location: `.codex/skills/doctrine/architecture-doctrine-authoring/`
   Use cases: evidence-based doctrine installation or revision.
 - `contract-candidate-discovery`
-  Location: `skills/contracts/contract-candidate-discovery/`
+  Location: `.codex/skills/contracts/contract-candidate-discovery/`
   Use cases: subsystem candidate ranking, authority-surface discovery.
 - `canonical-contract-authoring`
-  Location: `skills/contracts/canonical-contract-authoring/`
+  Location: `.codex/skills/contracts/canonical-contract-authoring/`
   Use cases: writing canonical contracts under `docs/contracts/`.
 - `implementation-contract-audit`
-  Location: `skills/audit/implementation-contract-audit/`
+  Location: `.codex/skills/audit/implementation-contract-audit/`
   Use cases: contract compliance audits and drift evidence gathering.
 - `implementation-drift-remediation`
-  Location: `skills/remediation/implementation-drift-remediation/`
+  Location: `.codex/skills/remediation/implementation-drift-remediation/`
   Use cases: remediation planning and bounded execution against documented drift.
 - `contract-alignment-verification`
-  Location: `skills/verification/contract-alignment-verification/`
+  Location: `.codex/skills/verification/contract-alignment-verification/`
   Use cases: post-remediation verification and promotion readiness assessment.
 - `pipeline-registry-reconciliation`
-  Location: `skills/governance/pipeline-registry-reconciliation/`
+  Location: `.codex/skills/governance/pipeline-registry-reconciliation/`
   Use cases: registry updates, active-pipeline discoverability checks, normalization.
 - `governed-project-bootstrap`
-  Location: `skills/bootstrap/governed-project-bootstrap/`
+  Location: `.codex/skills/bootstrap/governed-project-bootstrap/`
   Use cases: initializing governed repository structure from the template baseline.
 
 ## Universal Versus Local Skills

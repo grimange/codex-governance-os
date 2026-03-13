@@ -1,285 +1,92 @@
-# Codex Pipeline — Audit Repository Governance Readiness
-
-**Filename**
-docs/pipelines/governance/002--audit-repository-governance-readiness.md
-
-**Pipeline ID:** 002  
-**Category:** governance  
-**Stage:** audit
-
+---
+pipeline_id: "002"
+title: "Audit Repository Governance Readiness"
+status: active
+category: governance
+stage: audit
+objective: "Audit whether repository governance surfaces are sufficient for reliable governed operation."
+depends_on: ["000", "001"]
+outputs: ["docs/pipelines/governance/audit-repository-governance-readiness/"]
+success_criteria: ["Governance surfaces are inventoried.", "Readiness findings are classified.", "A bounded readiness verdict is recorded."]
+governance_mode: fail-closed
+execution_mode: advisory-then-enforcing
+restrictions: ["Do not modify repository state during the audit.", "Do not infer missing controls from silence."]
+non_claims: ["Does not remediate governance gaps.", "Does not replace later contract or implementation audits."]
+classification: governance.foundation
+authority: repo-governance
+autonomy: advisory-only
+problem_statement: "A repository may have bootstrap and doctrine surfaces yet still lack the conditions required for reliable autonomous governance."
+scope: "Audit governance surfaces, doctrine consistency, catalog integrity, registry completeness, artifact compliance, sequencing, and readiness risk."
+inputs: ["Bootstrap artifacts", "Architecture doctrine", "Pipeline catalog and registry", "Governance doctrine surfaces"]
+entry_conditions: ["Governance bootstrap and doctrine surfaces exist or can be inspected."]
+exit_conditions: ["Readiness criteria, risks, and verdict are explicitly recorded."]
+validation: ["Inspect audit artifacts.", "Confirm the verdict is traceable to surface-by-surface findings."]
+rollback: "No repository rollback is expected because this lane is audit-only; restore the lane definition from version control if needed."
 ---
 
-# Purpose
+# Audit Repository Governance Readiness
 
-Audit the repository to determine whether governance infrastructure, architecture doctrine, documentation surfaces, and pipeline controls are sufficiently established for reliable autonomous governance operations.
+## Purpose
 
-This pipeline evaluates whether the repository is **governance-operational**.
+Audit the repository to determine whether its governance infrastructure, doctrine, artifact practices, and pipeline controls are sufficient for reliable governed operation.
 
-It does not modify code or documents.  
-It produces a **governance readiness verdict** and identifies missing governance controls.
+## Problem Statement
 
----
+A repository can contain governance documents and still remain operationally fragile if authority ordering, registry completeness, lifecycle vocabulary, or sequencing discipline are inconsistent.
 
-# Why This Pipeline Exists
+## Objectives
 
-A repository may have:
+- inventory the governance surfaces in use
+- audit doctrine, catalog, registry, and artifact compliance
+- classify governance risks and readiness gaps
+- produce a bounded readiness verdict without mutating state
 
-- governance scaffolding installed
-- an architecture doctrine written
-- pipelines created
+## Scope
 
-…but still lack the conditions necessary for reliable governance.
+In scope: governance-surface inventory, doctrine consistency, pipeline catalog and registry integrity, artifact compliance, sequencing audit, risk assessment, and readiness evaluation.
 
-Common problems include:
+Out of scope: remediation, doctrine authoring, or subsystem contract enforcement.
 
-- missing pipeline registry
-- undocumented authority boundaries
-- ambiguous lifecycle vocabulary
-- incomplete governance artifact structure
-- pipelines operating without clear sequencing rules
+## Preconditions
 
-This pipeline identifies those issues before large-scale audits and remediation pipelines begin.
+- bootstrap and doctrine surfaces are present enough to audit
+- registry and artifact standards are inspectable
+- audit outputs can be stored under the canonical pipeline artifact root
 
----
+## Execution Steps
 
-## Universal Skill References
+1. Record the audit summary and governance-surface inventory.
+2. Audit doctrine consistency, catalog integrity, registry integrity, and artifact compliance.
+3. Audit governance sequencing and classify repository-level readiness risks.
+4. Evaluate readiness, record promotion guidance, and publish the final verdict.
+
+Universal skills:
 
 - `governance-readiness-audit`
-  Use for governance-surface inventory, doctrine consistency review, sequencing checks, and readiness evaluation.
 - `pipeline-registry-reconciliation`
-  Use when validating registry identity, completeness, and active-pipeline discoverability.
 
-# Phase 00 — Pipeline Summary
+## Expected Outputs
 
-Output artifact:
+- audit bundle under `docs/pipelines/governance/audit-repository-governance-readiness/`
+- explicit governance findings and risk classifications
+- a bounded governance-readiness verdict
 
-docs/pipelines/governance/audit-repository-governance-readiness/00-pipeline-summary.md
+## Verification Method
 
-Document:
+- inspect the audit findings for evidence-backed pass/fail logic
+- confirm registry and catalog observations match repository state
+- confirm the final verdict and promotion decision are explicit
 
-- repository under review
-- governance initialization status
-- architecture doctrine status
-- governance audit objective
-- expected governance readiness criteria
+## Restrictions
 
----
+- do not silently correct governance defects during the audit
+- do not overclaim readiness when evidence is partial
 
-# Phase 01 — Governance Surface Inventory
+## Non-Claims
 
-Output artifact:
+- does not make the repository governance-ready by itself
+- does not replace later verification or remediation lanes
 
-docs/pipelines/governance/audit-repository-governance-readiness/01-governance-surface-inventory.md
+## Final Verdict
 
-Use the `governance-readiness-audit` skill to audit the presence of key governance surfaces.
-
-| Surface | Expected Location |
-|------|------|
-| repository constitution | AGENTS.md |
-| Codex governance surface | .codex/AGENTS.md |
-| architecture doctrine | docs/governance/architecture-doctrine.md |
-| contract folder | docs/contracts/ |
-| pipeline catalog | docs/pipelines/ |
-| pipeline registry | docs/pipelines/registry/pipeline-registry.md |
-| modernization docs | docs/modernization/ |
-
-Each surface must be classified as:
-
-- present and complete
-- present but incomplete
-- present but outdated
-- missing
-
----
-
-# Phase 02 — Governance Doctrine Consistency Audit
-
-Output artifact:
-
-docs/pipelines/governance/audit-repository-governance-readiness/02-governance-doctrine-consistency.md
-
-Evaluate whether governance doctrine surfaces are internally consistent.
-
-Check:
-
-- AGENTS.md authority references
-- architecture doctrine authority model
-- contract authority expectations
-- pipeline governance expectations
-
-Document contradictions and classify severity.
-
----
-
-# Phase 03 — Pipeline Catalog Integrity Audit
-
-Output artifact:
-
-docs/pipelines/governance/audit-repository-governance-readiness/03-pipeline-catalog-integrity.md
-
-Use the `governance-readiness-audit` skill, with `pipeline-registry-reconciliation` where registry identity is involved, to confirm:
-
-- pipeline naming conventions
-- coherent numbering system
-- logical pipeline categories
-- correct folder organization
-- valid artifact paths
-
-Identify:
-
-- duplicate pipelines
-- orphan pipelines
-- pipelines missing from registry
-- registry entries pointing to missing pipelines
-
----
-
-# Phase 04 — Pipeline Registry Integrity Audit
-
-Output artifact:
-
-docs/pipelines/governance/audit-repository-governance-readiness/04-pipeline-registry-integrity.md
-
-Use the `pipeline-registry-reconciliation` skill to confirm:
-
-- registry exists
-- registry structure is valid
-- entries correspond to real pipelines
-- no stale entries
-- identifiers match pipeline IDs
-
-Classify registry issues:
-
-- informational
-- moderate
-- high-risk
-
----
-
-# Phase 05 — Governance Artifact Compliance Audit
-
-Output artifact:
-
-docs/pipelines/governance/audit-repository-governance-readiness/05-governance-artifact-compliance.md
-
-Use the `governance-readiness-audit` skill to evaluate whether pipelines follow governance artifact standards.
-
-Expected artifacts include:
-
-00-pipeline-summary.md  
-phase artifacts  
-final-verdict.md
-
-Determine whether pipelines:
-
-- produce deterministic artifacts
-- follow numbering conventions
-- store artifacts in proper directories
-
----
-
-# Phase 06 — Governance Sequencing Audit
-
-Output artifact:
-
-docs/pipelines/governance/audit-repository-governance-readiness/06-governance-sequencing-audit.md
-
-Use the `governance-readiness-audit` skill to evaluate pipeline lifecycle sequencing against the governance lifecycle doctrine.
-
-Typical lifecycle:
-
-- initialization
-- discovery
-- audit
-- remediation
-- verification
-- promotion
-
-Identify:
-
-- missing lifecycle stages
-- sequencing conflicts
-- circular dependencies
-- invalid pipeline references
-
----
-
-# Phase 07 — Governance Risk Assessment
-
-Output artifact:
-
-docs/pipelines/governance/audit-repository-governance-readiness/07-governance-risk-assessment.md
-
-For each risk record:
-
-- description
-- evidence
-- affected governance surface
-- severity
-
-Severity levels:
-
-LOW  
-MODERATE  
-HIGH  
-BLOCKING
-
----
-
-# Phase 08 — Governance Readiness Evaluation
-
-Output artifact:
-
-docs/pipelines/governance/audit-repository-governance-readiness/08-governance-readiness-evaluation.md
-
-Determine repository governance state.
-
-Possible states:
-
-GOVERNANCE_READY  
-PARTIALLY_GOVERNED  
-GOVERNANCE_FRAGMENTED  
-GOVERNANCE_NOT_INITIALIZED
-
----
-
-# Phase 09 — Promotion Decision
-
-Output artifact:
-
-docs/pipelines/governance/audit-repository-governance-readiness/09-promotion-decision.md
-
-Possible outcomes:
-
-PROMOTE  
-PROMOTE_WITH_REMEDIATION_PLAN  
-REQUIRES_REMEDIATION  
-BLOCKED
-
----
-
-# Phase 10 — Final Verdict
-
-Output artifact:
-
-docs/pipelines/governance/audit-repository-governance-readiness/10-final-verdict.md
-
-Allowed verdicts:
-
-REPOSITORY_GOVERNANCE_READY  
-REPOSITORY_GOVERNANCE_PARTIALLY_READY  
-REPOSITORY_GOVERNANCE_FRAGMENTED  
-REPOSITORY_GOVERNANCE_NOT_READY
-
-The verdict must summarize:
-
-- governance strengths
-- missing controls
-- remediation needs
-- recommended next pipeline
-
----
-
-# Completion Standard
-
-This pipeline is complete only when the repository’s governance readiness state is clearly documented and a next governance action is identified.
+Use a bounded readiness verdict such as `REPOSITORY_GOVERNANCE_READY`, `REPOSITORY_GOVERNANCE_READY_WITH_RESTRICTIONS`, or an explicitly non-ready equivalent.

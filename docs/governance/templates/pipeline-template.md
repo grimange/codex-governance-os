@@ -1,6 +1,6 @@
 ---
 pipeline_id: "REQUIRED: pipeline identifier"
-title: "REQUIRED: human-readable pipeline title"
+title: "REQUIRED: Pipeline Title"
 status: "REQUIRED: proposed|active|deprecated"
 category: "REQUIRED: governance|verification|remediation|promotion|other"
 stage: "REQUIRED: lifecycle stage"

@@ -1,6 +1,6 @@
 ---
 id: "REQUIRED: skill identifier"
-title: "REQUIRED: skill title"
+title: "REQUIRED: Skill Title"
 status: "REQUIRED: proposed|active|deprecated"
 category: "REQUIRED: skill"
 stage: "REQUIRED: operational"

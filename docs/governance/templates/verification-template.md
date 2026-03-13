@@ -1,6 +1,6 @@
 ---
 id: "REQUIRED: verification identifier"
-title: "REQUIRED: verification title"
+title: "REQUIRED: Verification Title"
 status: "REQUIRED: proposed|active|complete"
 category: "REQUIRED: verification"
 stage: "REQUIRED: verification"

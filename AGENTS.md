@@ -35,8 +35,13 @@ If authorities conflict, the higher-precedence artifact governs until the confli
 
 ## Routing Rules
 
+- The `docs/` directory is the authoritative root for all governance and Codex-related files in this repository.
 - Governance doctrine belongs in `docs/governance/`.
 - Canonical governance templates belong in `docs/governance/templates/`.
+- Universal scaffold contract belongs in `docs/governance/template-scaffold-contract.md`.
+- Admitted template registry state belongs in `docs/governance/registries/templates/`.
+- Admitted template bodies belong in `docs/codex/templates/`.
+- Template manifest tooling belongs in `tools/templates/`.
 - Bootstrap guidance for future governed repositories belongs in `docs/bootstrap/`.
 - Contracts belong in `docs/contracts/`.
 - Pipelines belong in `docs/pipelines/` grouped by category.

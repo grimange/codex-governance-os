@@ -2,6 +2,8 @@
 
 This repository is a documentation-first template for turning a standard repository into a governed Codex project.
 
+The `docs/` directory is the authoritative root for all governance and Codex-related files in this repository.
+
 ## Start Here
 
 - Quick start: `docs/adoption/quick-start.md`
@@ -38,4 +40,7 @@ This template is intended to remain domain-neutral, architecture-neutral, and la
 - Governance lifecycle doctrine: `docs/governance/governance-lifecycle.md`
 - Governance evolution model: `docs/governance/governance-evolution-model.md`
 - Governance template system: `docs/governance/templates/README.md`
+- Template scaffold contract: `docs/governance/template-scaffold-contract.md`
+- Admitted template registry index: `docs/governance/registries/templates/index.yaml`
+- Admitted template bodies: `docs/codex/templates/`
 - Universal skills index: `docs/governance/universal-skills-index.md`

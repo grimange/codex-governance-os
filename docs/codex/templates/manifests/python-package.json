@@ -1,0 +1,24 @@
+{
+  "template_name": "python-package",
+  "template_type": "overlay",
+  "base_template": "universal-base",
+  "compatible_overlays": [
+    "cli-worker"
+  ],
+  "required_surfaces": [
+    "src",
+    "tests",
+    "docs"
+  ],
+  "optional_surfaces": [
+    "examples",
+    "scripts"
+  ],
+  "governance_compatibility": "required",
+  "maturity": "canonical",
+  "supported_runtime_shapes": [
+    "package"
+  ],
+  "template_root": "docs/codex/templates/overlays/python-package",
+  "description": "Python package runtime overlay for the universal base scaffold."
+}

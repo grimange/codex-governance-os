@@ -1,6 +1,6 @@
 ---
 id: "REQUIRED: remediation identifier"
-title: "REQUIRED: remediation title"
+title: "REQUIRED: Remediation Title"
 status: "REQUIRED: proposed|active|complete"
 category: "REQUIRED: remediation"
 stage: "REQUIRED: remediation"

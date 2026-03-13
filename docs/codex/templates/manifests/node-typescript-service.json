@@ -1,0 +1,28 @@
+{
+  "template_name": "node-typescript-service",
+  "template_type": "overlay",
+  "base_template": "universal-base",
+  "compatible_overlays": [
+    "monorepo",
+    "cli-worker"
+  ],
+  "required_surfaces": [
+    "package.json",
+    "src",
+    "tests",
+    "scripts"
+  ],
+  "optional_surfaces": [
+    "tsconfig.json",
+    "services",
+    "packages"
+  ],
+  "governance_compatibility": "required",
+  "maturity": "canonical",
+  "supported_runtime_shapes": [
+    "service",
+    "application"
+  ],
+  "template_root": "docs/codex/templates/overlays/node-typescript-service",
+  "description": "Node.js and TypeScript service runtime overlay for the universal base scaffold."
+}

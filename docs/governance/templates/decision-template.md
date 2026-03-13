@@ -1,6 +1,6 @@
 ---
 id: "REQUIRED: decision identifier"
-title: "REQUIRED: decision title"
+title: "REQUIRED: Decision Title"
 status: "REQUIRED: proposed|accepted|deprecated"
 category: "REQUIRED: governance"
 stage: "REQUIRED: decision"

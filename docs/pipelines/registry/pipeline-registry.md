@@ -19,3 +19,12 @@
 | 014 | Publish Codex Governance Template And Adoption Guide | ACTIVE | governance | docs/pipelines/governance/014--publish-codex-governance-template-and-adoption-guide.md |
 | 015 | Establish Governance Framework Evolution Model | ACTIVE | governance | docs/pipelines/governance/015--establish-governance-framework-evolution-model.md |
 | 018 | Establish Universal Codex Template System | ACTIVE | governance | docs/pipelines/governance/018--establish-universal-codex-template-system.md |
+| 019 | Implement Universal Template Registry | ACTIVE | governance | docs/pipelines/governance/019--implement-universal-template-registry.md |
+| 020 | Implement Universal Template Linter | ACTIVE | governance | docs/pipelines/governance/020--implement-universal-template-linter.md |
+| 021 | Move Template System And Registry Under Docs Root Governance Tree | ACTIVE | governance | docs/pipelines/governance/021--move-template-system-and-registry-under-docs-root-governance-tree.md |
+| 022 | Implement Universal Template Scaffold | ACTIVE | governance | docs/pipelines/governance/022--implement-universal-template-scaffold.md |
+| 023 | Verify Universal Template Conformance Across Multi-Stack Fixtures | ACTIVE | governance | docs/pipelines/governance/023--verify-universal-template-conformance-across-multi-stack-fixtures.md |
+| 024 | Migrate Core Governance Lanes To Universal Templates | ACTIVE | governance | docs/pipelines/governance/024--migrate-core-governance-lanes-to-universal-templates.md |
+| 025 | Close Unsupported Stack Boundaries For Universal Codex Templates | ACTIVE | governance | docs/pipelines/governance/025--close-unsupported-stack-boundaries-for-universal-codex-templates.md |
+| 026 | Verify Unsupported Stack Boundaries Closure For Universal Codex Templates | ACTIVE | governance | docs/pipelines/governance/026--verify-unsupported-stack-boundaries-closure-for-universal-codex-templates.md |
+| 027 | Expand Universal Codex Template Composition Verification Across Combined Overlay Matrices | ACTIVE | governance | docs/pipelines/governance/027--expand-universal-codex-template-composition-verification-across-combined-overlay-matrices.md |

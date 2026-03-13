@@ -1,285 +1,91 @@
-# Codex Pipeline — Remediate Implementation Drift Against Canonical Contract
-
-Pipeline ID: 006  
-Category: governance  
-Stage: remediation  
-Status: PROPOSED
-
+---
+pipeline_id: "006"
+title: "Remediate Implementation Drift Against Contract"
+status: active
+category: governance
+stage: remediation
+objective: "Design and execute bounded remediation for implementation drift recorded by the contract audit."
+depends_on: ["005"]
+outputs: ["docs/pipelines/governance/remediate-implementation-drift-against-contract/"]
+success_criteria: ["Drift items are consolidated.", "A remediation plan is executed.", "Residual drift and promotion outcome are recorded."]
+governance_mode: fail-closed
+execution_mode: advisory-then-enforcing
+restrictions: ["Run only when documented contract drift already exists.", "Do not silently change the governing contract."]
+non_claims: ["Does not verify closure by itself.", "Does not authorize unbounded architectural redesign."]
+classification: governance.remediation
+authority: repo-governance
+autonomy: advisory-only
+problem_statement: "Contract audits can identify drift, but governance remains observational unless those findings are converted into explicit remediation work."
+scope: "Consolidate drift, design remediation, assess impact, execute bounded fixes, and record residual risk."
+inputs: ["Canonical contract", "Pipeline 005 audit artifacts", "Contract compliance matrix", "Relevant implementation evidence"]
+entry_conditions: ["A canonical contract exists and documented implementation drift requires correction."]
+exit_conditions: ["Remediation actions, post-remediation evidence, residual drift, and verdict are explicitly recorded."]
+validation: ["Inspect remediation artifacts and changed repository state.", "Confirm residual-drift and promotion notes are explicit."]
+rollback: "Restore prior implementation and lane state from version control if remediation or lane normalization introduces unintended drift."
 ---
 
-# Purpose
+# Remediate Implementation Drift Against Contract
 
-Design and implement remediation actions to eliminate implementation drift identified by the contract compliance audit.
+## Purpose
 
-This pipeline modifies implementation so that subsystem behavior conforms to the canonical contract.
+Design and implement remediation actions that eliminate or reduce implementation drift identified by the contract compliance audit.
 
-The pipeline may modify:
+## Problem Statement
 
-- code
-- configuration
-- documentation
-- compatibility layers
+Audit findings do not correct themselves; without a governed remediation path, contract violations persist and architectural drift accumulates.
 
-but must not silently change the contract itself.
+## Objectives
 
----
+- consolidate documented drift into a bounded remediation target
+- design the remediation strategy and impact model
+- execute the approved changes
+- record post-remediation evidence and residual risk
 
-# Why This Pipeline Exists
+## Scope
 
-Contract audits identify implementation drift but do not correct it.
+In scope: drift consolidation, remediation strategy, impact analysis, implementation plan, remediation execution, evidence collection, residual-drift assessment, and remediation summary.
 
-Without structured remediation:
+Out of scope: changing the governing contract itself or claiming verification closure without evidence.
 
-- contract violations persist
-- architectural drift accumulates
-- compatibility layers become permanent
-- governance becomes observational rather than corrective
+## Preconditions
 
-This pipeline transforms audit findings into concrete remediation actions.
+- a governing contract exists
+- pipeline `005` or equivalent audit evidence has documented drift
+- the repository permits bounded remediation changes
 
-This pipeline is conditional on documented contract drift already existing; it is not part of the minimum bootstrap path for every repository.
+## Execution Steps
 
----
+1. Publish the remediation summary and consolidate drift items.
+2. Design the remediation strategy, impact analysis, and implementation plan.
+3. Execute the remediation and collect post-remediation evidence.
+4. Assess residual drift, publish the remediation summary, and record promotion guidance and final verdict.
 
-# Inputs
-
-Required inputs:
-
-- canonical subsystem contract
-- implementation audit artifacts (Pipeline 005)
-- contract compliance matrix
-- drift assessment report
-
-Optional inputs:
-
-- runtime inspection evidence
-- modernization plans
-- architecture doctrine
-
----
-
-## Universal Skill References
+Universal skills:
 
 - `implementation-drift-remediation`
-  Use for drift consolidation, remediation strategy design, impact analysis, execution planning, and residual-drift recording.
 
-# Phase 00 — Pipeline Summary
+## Expected Outputs
 
-Output artifact:
+- artifact bundle under `docs/pipelines/governance/remediate-implementation-drift-against-contract/`
+- implemented remediation changes
+- residual-drift assessment and remediation summary
 
-docs/pipelines/governance/remediate-implementation-drift-against-contract/00-pipeline-summary.md
+## Verification Method
 
-The summary must document:
+- inspect remediation artifacts and changed repository state
+- confirm post-remediation evidence and residual-risk statements are explicit
+- confirm the final verdict does not overclaim verification closure
 
-- subsystem under remediation
-- canonical contract governing behavior
-- audit verdict
-- remediation objective
-- scope of expected changes
+## Restrictions
 
----
+- keep remediation bounded to documented drift
+- do not mutate the governing contract as part of this lane
 
-# Phase 01 — Drift Item Consolidation
+## Non-Claims
 
-Output artifact:
+- does not itself verify contract alignment
+- does not justify unrelated repository changes
 
-docs/pipelines/governance/remediate-implementation-drift-against-contract/01-drift-item-consolidation.md
+## Final Verdict
 
-Use the `implementation-drift-remediation` skill to consolidate drift items discovered during the audit.
-
-Each drift item must include:
-
-- contract rule violated
-- implementation surface
-- severity
-- evidence
-- subsystem impact
-
-Drift items should be categorized:
-
-- authority drift
-- lifecycle drift
-- state ownership drift
-- interface drift
-- compatibility drift
-
----
-
-# Phase 02 — Remediation Strategy Design
-
-Output artifact:
-
-docs/pipelines/governance/remediate-implementation-drift-against-contract/02-remediation-strategy-design.md
-
-Use the `implementation-drift-remediation` skill to design the remediation strategy for each drift item.
-
-Possible remediation strategies:
-
-- implementation correction
-- compatibility isolation
-- legacy path deprecation
-- lifecycle normalization
-- state ownership correction
-- interface normalization
-
-Each remediation plan must include:
-
-- proposed change
-- risk level
-- migration impact
-- rollback strategy
-
----
-
-# Phase 03 — Implementation Impact Analysis
-
-Output artifact:
-
-docs/pipelines/governance/remediate-implementation-drift-against-contract/03-implementation-impact-analysis.md
-
-Evaluate how remediation will affect:
-
-- dependent subsystems
-- external integrations
-- state persistence
-- event consumers
-- compatibility layers
-
-This phase must ensure remediation does not introduce unintended behavior.
-
----
-
-# Phase 04 — Remediation Implementation Plan
-
-Output artifact:
-
-docs/pipelines/governance/remediate-implementation-drift-against-contract/04-remediation-implementation-plan.md
-
-Use the `implementation-drift-remediation` skill to define specific implementation changes.
-
-The plan must identify:
-
-- files to modify
-- modules affected
-- code changes required
-- compatibility adjustments
-- documentation updates
-
-Each change must reference the violated contract rule.
-
----
-
-# Phase 05 — Remediation Execution
-
-Output artifact:
-
-docs/pipelines/governance/remediate-implementation-drift-against-contract/05-remediation-execution.md
-
-Use the `implementation-drift-remediation` skill to execute the remediation plan.
-
-Changes may include:
-
-- code refactoring
-- lifecycle logic corrections
-- state mutation relocation
-- event semantics updates
-- interface normalization
-- compatibility boundary enforcement
-
-Every change must be recorded with:
-
-- file path
-- change summary
-- contract rule addressed
-
----
-
-# Phase 06 — Post-Remediation Evidence Collection
-
-Output artifact:
-
-docs/pipelines/governance/remediate-implementation-drift-against-contract/06-post-remediation-evidence.md
-
-Use the `implementation-drift-remediation` skill to collect evidence demonstrating that remediation has been implemented.
-
-Evidence may include:
-
-- code inspection
-- test results
-- runtime observations
-- state mutation paths
-
-Evidence must show that previous drift items are resolved.
-
----
-
-# Phase 07 — Residual Drift Assessment
-
-Output artifact:
-
-docs/pipelines/governance/remediate-implementation-drift-against-contract/07-residual-drift-assessment.md
-
-Evaluate whether any drift remains after remediation.
-
-Possible statuses:
-
-- fully resolved
-- partially resolved
-- unresolved
-- deferred
-
-Deferred items must include justification.
-
----
-
-# Phase 08 — Remediation Summary
-
-Output artifact:
-
-docs/pipelines/governance/remediate-implementation-drift-against-contract/08-remediation-summary.md
-
-Summarize:
-
-- drift items resolved
-- changes made
-- compatibility adjustments
-- residual risks
-- areas requiring future modernization
-
----
-
-# Phase 09 — Promotion Decision
-
-Output artifact:
-
-docs/pipelines/governance/remediate-implementation-drift-against-contract/09-promotion-decision.md
-
-Possible outcomes:
-
-PROMOTE  
-PROMOTE_WITH_OBSERVATIONS  
-REQUIRES_ADDITIONAL_REMEDIATION  
-BLOCKED
-
-PROMOTE only when major contract violations have been resolved.
-
----
-
-# Phase 10 — Final Verdict
-
-Output artifact:
-
-docs/pipelines/governance/remediate-implementation-drift-against-contract/10-final-verdict.md
-
-Allowed verdicts:
-
-IMPLEMENTATION_REMEDIATED  
-IMPLEMENTATION_REMEDIATED_WITH_RESIDUAL_DRIFT  
-REMEDIATION_INCOMPLETE  
-REMEDIATION_BLOCKED
-
----
-
-# Completion Standard
-
-This pipeline is complete when implementation drift has been remediated sufficiently for verification.
+Use a bounded remediation verdict such as `IMPLEMENTATION_DRIFT_REMEDIATED` or an explicitly restricted residual-drift equivalent.

@@ -1,0 +1,24 @@
+{
+  "template_name": "laravel",
+  "template_type": "overlay",
+  "base_template": "universal-base",
+  "compatible_overlays": [],
+  "required_surfaces": [
+    "app",
+    "bootstrap",
+    "routes",
+    "config"
+  ],
+  "optional_surfaces": [
+    "resources",
+    "database"
+  ],
+  "governance_compatibility": "required",
+  "maturity": "canonical",
+  "supported_runtime_shapes": [
+    "application",
+    "service"
+  ],
+  "template_root": "docs/codex/templates/overlays/laravel",
+  "description": "Laravel runtime overlay for the universal base scaffold."
+}

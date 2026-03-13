@@ -2,16 +2,16 @@
 
 ## Created Skill Set
 
-- `skills/discovery/repository-discovery/`
-- `skills/audit/governance-readiness-audit/`
-- `skills/doctrine/architecture-doctrine-authoring/`
-- `skills/contracts/contract-candidate-discovery/`
-- `skills/contracts/canonical-contract-authoring/`
-- `skills/audit/implementation-contract-audit/`
-- `skills/remediation/implementation-drift-remediation/`
-- `skills/verification/contract-alignment-verification/`
-- `skills/governance/pipeline-registry-reconciliation/`
-- `skills/bootstrap/governed-project-bootstrap/`
+- `.codex/skills/discovery/repository-discovery/`
+- `.codex/skills/audit/governance-readiness-audit/`
+- `.codex/skills/doctrine/architecture-doctrine-authoring/`
+- `.codex/skills/contracts/contract-candidate-discovery/`
+- `.codex/skills/contracts/canonical-contract-authoring/`
+- `.codex/skills/audit/implementation-contract-audit/`
+- `.codex/skills/remediation/implementation-drift-remediation/`
+- `.codex/skills/verification/contract-alignment-verification/`
+- `.codex/skills/governance/pipeline-registry-reconciliation/`
+- `.codex/skills/bootstrap/governed-project-bootstrap/`
 
 ## Authoring Notes
 

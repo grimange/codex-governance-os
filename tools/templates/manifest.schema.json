@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Universal Template Scaffold Manifest",
+  "type": "object",
+  "required": [
+    "template_name",
+    "template_type",
+    "base_template",
+    "compatible_overlays",
+    "required_surfaces",
+    "optional_surfaces",
+    "governance_compatibility",
+    "maturity",
+    "supported_runtime_shapes",
+    "template_root"
+  ],
+  "properties": {
+    "template_name": {"type": "string", "minLength": 1},
+    "template_type": {"type": "string", "enum": ["base", "overlay"]},
+    "base_template": {"type": ["string", "null"]},
+    "compatible_overlays": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "required_surfaces": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "optional_surfaces": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "governance_compatibility": {"type": "string", "minLength": 1},
+    "maturity": {"type": "string", "minLength": 1},
+    "supported_runtime_shapes": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "template_root": {"type": "string", "minLength": 1},
+    "description": {"type": "string"}
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,21 @@
+{
+  "template_id": "subagent.universal.architecture-specialist",
+  "template_name": "Universal Architecture Specialist Sub-Agent Template",
+  "template_family": "sub_agent",
+  "template_kind": "architecture-specialist",
+  "version": "1.0.0",
+  "status": "active",
+  "authority_level": "canonical",
+  "description": "Canonical sub-agent specialization template for architecture analysis.",
+  "inputs_contract": {"family": "sub_agent", "expected_id_field": "id"},
+  "outputs_contract": {"artifact_type": "sub-agent-template-body"},
+  "compatible_stacks": ["agnostic"],
+  "compatible_modes": ["analysis", "design"],
+  "constraints": ["fail-closed", "no-authority-invention"],
+  "resolution_tags": ["subagent", "architecture", "specialist"],
+  "file_path": "docs/codex/templates/subagents/architecture-specialist.md",
+  "checksum_sha256": "98c1048f1acbb99d013d2a16891cd742072fd41df1f59122c61012a334bc79b3",
+  "admitted_at": "2026-03-14",
+  "admitted_by": "codex",
+  "supersedes": []
+}

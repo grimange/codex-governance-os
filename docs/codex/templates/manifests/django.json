@@ -1,0 +1,23 @@
+{
+  "template_name": "django",
+  "template_type": "overlay",
+  "base_template": "universal-base",
+  "compatible_overlays": [],
+  "required_surfaces": [
+    "backend",
+    "config",
+    "apps"
+  ],
+  "optional_surfaces": [
+    "static",
+    "templates"
+  ],
+  "governance_compatibility": "required",
+  "maturity": "canonical",
+  "supported_runtime_shapes": [
+    "application",
+    "service"
+  ],
+  "template_root": "docs/codex/templates/overlays/django",
+  "description": "Django runtime overlay for the universal base scaffold."
+}
