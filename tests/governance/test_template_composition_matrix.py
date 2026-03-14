@@ -13,6 +13,8 @@ class TemplateCompositionMatrixTests(unittest.TestCase):
     def test_supported_composition_matrix_realizes_expected_surfaces(self) -> None:
         cases = (
             ("base-only", [], {"docs/governance", "tools/templates"}),
+            ("django-plus-monorepo", ["django", "monorepo"], {"apps/backend/django-service/manage.py", "apps/backend/django-service/project/settings.py", "packages", "services", "shared"}),
+            ("service-plus-monorepo", ["service", "monorepo"], {"services/service-app/src", "services/service-app/tests", "services/service-app/pyproject.toml", "services/service-app/README.md", "services/service-app/service_entrypoint", "packages", "services", "shared"}),
             ("node-typescript-service-plus-monorepo", ["node-typescript-service", "monorepo"], {"package.json", "packages", "services", "shared"}),
             ("cli-worker-plus-monorepo", ["cli-worker", "monorepo"], {"bin", "jobs", "worker", "packages", "services", "shared"}),
             ("cli-worker-plus-php-package", ["cli-worker", "php-package"], {"bin", "jobs", "worker", "src", "tests", "config"}),
@@ -36,8 +38,6 @@ class TemplateCompositionMatrixTests(unittest.TestCase):
     def test_invalid_composition_matrix_fails_closed(self) -> None:
         cases = (
             ("laravel-plus-cli-worker", ["laravel", "cli-worker"]),
-            ("django-plus-monorepo", ["django", "monorepo"]),
-            ("service-plus-monorepo", ["service", "monorepo"]),
             ("laravel-plus-django", ["laravel", "django"]),
         )
 

@@ -2,7 +2,9 @@
   "template_name": "service",
   "template_type": "overlay",
   "base_template": "universal-base",
-  "compatible_overlays": [],
+  "compatible_overlays": [
+    "monorepo"
+  ],
   "required_surfaces": [
     "service",
     "config",
@@ -18,6 +20,25 @@
     "service",
     "application"
   ],
+  "composition_overrides": {
+    "monorepo": {
+      "type": "service",
+      "overlay": "service",
+      "placement": "services/service-app",
+      "repository_structure": "monorepo",
+      "required_surfaces": [
+        "services/service-app/src",
+        "services/service-app/tests",
+        "services/service-app/pyproject.toml",
+        "services/service-app/README.md",
+        "services/service-app/service_entrypoint"
+      ],
+      "optional_surfaces": [
+        "services/service-app/config",
+        "services/service-app/scripts"
+      ]
+    }
+  },
   "template_root": "docs/codex/templates/overlays/service",
   "description": "Service runtime overlay for the universal base scaffold."
 }

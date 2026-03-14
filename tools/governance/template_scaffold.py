@@ -64,6 +64,7 @@ class ScaffoldManifest:
     supported_runtime_shapes: tuple[str, ...]
     template_root: str
     description: str = ""
+    composition_overrides: dict[str, dict[str, object]] = dataclasses.field(default_factory=dict)
 
 
 def _load_json(path: Path) -> dict:
@@ -77,6 +78,21 @@ def _tuple_of_strings(value: object, field_name: str) -> tuple[str, ...]:
     if not isinstance(value, list) or not all(isinstance(item, str) and item for item in value):
         raise RegistryError(f"{field_name} must be a non-empty list of strings")
     return tuple(value)
+
+
+def _mapping_of_overrides(value: object, field_name: str) -> dict[str, dict[str, object]]:
+    if value in (None, {}):
+        return {}
+    if not isinstance(value, dict):
+        raise RegistryError(f"{field_name} must be a mapping")
+    normalized: dict[str, dict[str, object]] = {}
+    for key, raw in value.items():
+        if not isinstance(key, str) or not key:
+            raise RegistryError(f"{field_name} contains invalid override key")
+        if not isinstance(raw, dict):
+            raise RegistryError(f"{field_name}.{key} must be a mapping")
+        normalized[key] = raw
+    return normalized
 
 
 def load_scaffold_manifest(
@@ -116,7 +132,32 @@ def load_scaffold_manifest(
         ),
         template_root=template_root,
         description=str(raw.get("description", "")),
+        composition_overrides=_mapping_of_overrides(
+            raw.get("composition_overrides", {}),
+            f"{template_name}.composition_overrides",
+        ),
     )
+
+
+def _resolve_overlay_surfaces(
+    overlay_manifest: ScaffoldManifest,
+    selected_overlays: list[str],
+    *,
+    include_optional: bool,
+) -> tuple[list[str], dict[str, object] | None]:
+    for other_overlay in selected_overlays:
+        if other_overlay == overlay_manifest.template_name:
+            continue
+        override = overlay_manifest.composition_overrides.get(other_overlay)
+        if override:
+            required = list(_tuple_of_strings(override.get("required_surfaces", []), "required_surfaces"))
+            optional = list(_tuple_of_strings(override.get("optional_surfaces", []), "optional_surfaces"))
+            surfaces = required + (optional if include_optional else [])
+            return surfaces, override
+    surfaces = list(overlay_manifest.required_surfaces)
+    if include_optional:
+        surfaces.extend(overlay_manifest.optional_surfaces)
+    return surfaces, None
 
 
 def list_scaffold_manifests(
@@ -174,12 +215,22 @@ def realize_repository_scaffold(
                 )
 
     surfaces = list(base_manifest.required_surfaces)
+    composition_metadata: dict[str, dict[str, object]] = {}
     if include_optional:
         surfaces.extend(base_manifest.optional_surfaces)
     for overlay_manifest in overlay_manifests:
-        surfaces.extend(overlay_manifest.required_surfaces)
-        if include_optional:
-            surfaces.extend(overlay_manifest.optional_surfaces)
+        overlay_surfaces, override = _resolve_overlay_surfaces(
+            overlay_manifest,
+            selected_overlays,
+            include_optional=include_optional,
+        )
+        surfaces.extend(overlay_surfaces)
+        if override:
+            composition_metadata[overlay_manifest.template_name] = {
+                key: value
+                for key, value in override.items()
+                if key not in {"required_surfaces", "optional_surfaces"}
+            }
 
     created_paths: list[str] = []
     for surface in sorted(set(surfaces)):
@@ -200,6 +251,8 @@ def realize_repository_scaffold(
         "required_surfaces": list(base_manifest.required_surfaces),
         "created_surfaces": created_paths,
     }
+    if composition_metadata:
+        selection["composition_metadata"] = composition_metadata
     selection_path.write_text(json.dumps(selection, indent=2, sort_keys=True) + "\n")
     return selection_path
 

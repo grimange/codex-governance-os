@@ -2,7 +2,9 @@
   "template_name": "django",
   "template_type": "overlay",
   "base_template": "universal-base",
-  "compatible_overlays": [],
+  "compatible_overlays": [
+    "monorepo"
+  ],
   "required_surfaces": [
     "backend",
     "config",
@@ -18,6 +20,27 @@
     "application",
     "service"
   ],
+  "composition_overrides": {
+    "monorepo": {
+      "type": "django-service",
+      "overlay": "django",
+      "placement": "apps/backend/django-service",
+      "repository_structure": "monorepo",
+      "required_surfaces": [
+        "apps/backend/django-service/manage.py",
+        "apps/backend/django-service/pyproject.toml",
+        "apps/backend/django-service/requirements.txt",
+        "apps/backend/django-service/project/settings.py",
+        "apps/backend/django-service/project/urls.py",
+        "apps/backend/django-service/project/asgi.py",
+        "apps/backend/django-service/app_modules"
+      ],
+      "optional_surfaces": [
+        "apps/backend/django-service/static",
+        "apps/backend/django-service/templates"
+      ]
+    }
+  },
   "template_root": "docs/codex/templates/overlays/django",
   "description": "Django runtime overlay for the universal base scaffold."
 }

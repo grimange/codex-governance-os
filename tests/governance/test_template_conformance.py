@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -31,6 +32,8 @@ class TemplateConformanceTests(unittest.TestCase):
             ("php-package", ["php-package"]),
             ("service-repository", ["service"]),
             ("monorepo", ["monorepo"]),
+            ("django-in-monorepo", ["django", "monorepo"]),
+            ("service-in-monorepo", ["service", "monorepo"]),
             ("node-typescript-service", ["node-typescript-service"]),
             ("cli-worker", ["cli-worker"]),
             ("node-typescript-service-in-monorepo", ["node-typescript-service", "monorepo"]),
@@ -53,6 +56,8 @@ class TemplateConformanceTests(unittest.TestCase):
                         include_optional=False,
                     )
                     self.assertTrue(selection.exists())
+                    payload = json.loads(selection.read_text())
+                    created = set(payload["created_surfaces"])
                     for surface in self.governance_core:
                         self.assertTrue(
                             (Path(tmp) / surface).is_dir(),
@@ -66,12 +71,22 @@ class TemplateConformanceTests(unittest.TestCase):
                             set(overlay.required_surfaces).isdisjoint(self.governance_core),
                             msg=f"{overlay_name} redefines governance core surfaces",
                         )
-                        for surface in overlay.required_surfaces:
-                            target = Path(tmp) / surface
-                            self.assertTrue(
-                                target.exists(),
-                                msg=f"{fixture_name} missing overlay surface {surface}",
-                            )
+                        override = None
+                        for other_overlay in overlays:
+                            if other_overlay == overlay_name:
+                                continue
+                            override = overlay.composition_overrides.get(other_overlay)
+                            if override:
+                                break
+                        expected_surfaces = (
+                            set(override["required_surfaces"])
+                            if override
+                            else set(overlay.required_surfaces)
+                        )
+                        self.assertTrue(
+                            expected_surfaces.issubset(created),
+                            msg=f"{fixture_name} missing overlay surfaces for {overlay_name}",
+                        )
                     for overlay_name in overlays:
                         self.assertIn(overlay_name, base_manifest.compatible_overlays)
 
