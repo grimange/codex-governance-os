@@ -26,6 +26,12 @@ Canonical session-evidence interpretation semantics are defined by
 [codex-session-evidence-interpretation-model.md](codex-session-evidence-interpretation-model.md).
 Canonical session-reconstruction procedure semantics are defined by
 [codex-session-reconstruction-rules.md](codex-session-reconstruction-rules.md).
+Canonical session-reconstruction verification semantics are defined by
+[session-reconstruction-verification-harness.md](session-reconstruction-verification-harness.md).
+Canonical session-reconstruction case-structure semantics are defined by
+[session-reconstruction-case-verification-model.md](session-reconstruction-case-verification-model.md).
+Canonical session-reconstruction evidence-packaging semantics are defined by
+[session-reconstruction-evidence-packaging-standard.md](session-reconstruction-evidence-packaging-standard.md).
 
 ## Scope
 

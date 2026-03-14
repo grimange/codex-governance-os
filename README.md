@@ -54,6 +54,9 @@ This template is intended to remain domain-neutral, architecture-neutral, and la
 - Codex session lifecycle observation discipline: `docs/governance/codex-session-lifecycle-observation-discipline.md`
 - Codex session evidence interpretation model: `docs/governance/codex-session-evidence-interpretation-model.md`
 - Codex session reconstruction rules: `docs/governance/codex-session-reconstruction-rules.md`
+- Session reconstruction verification harness: `docs/governance/session-reconstruction-verification-harness.md`
+- Session reconstruction case verification model: `docs/governance/session-reconstruction-case-verification-model.md`
+- Session reconstruction evidence packaging standard: `docs/governance/session-reconstruction-evidence-packaging-standard.md`
 - Codex session state machine canon: `docs/contracts/codex-session-state-machine-canon.md`
 - Codex session handoff packet contract: `docs/contracts/codex-session-handoff-packet-and-continuity-contract.md`
 - Codex governance surface schema contract: `docs/contracts/codex-governance-surface-schema-contract.md`
