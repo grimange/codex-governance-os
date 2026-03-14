@@ -6,8 +6,19 @@
     "python-package",
     "php-package",
     "node-typescript-service",
-    "monorepo"
+    "monorepo",
+    "scheduler"
   ],
+  "capabilities": {
+    "provides": [
+      "worker-runtime"
+    ],
+    "requires": [
+      "runtime-environment"
+    ],
+    "conflicts": [],
+    "composition_role": "worker"
+  },
   "required_surfaces": [
     "bin",
     "jobs",

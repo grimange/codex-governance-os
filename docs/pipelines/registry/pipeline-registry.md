@@ -2,6 +2,7 @@
 
 | pipeline id | pipeline name | status | category | path |
 |-------------|---------------|--------|----------|------|
+| L0-00 | Codex Pipeline — Scan Repository and Verify Layer 0 Governance Canon Gaps | ACTIVE | governance | docs/pipelines/governance/000x--scan-repository-and-verify-layer-0-governance-canon-gaps.md |
 | 000 | Initialize Governed Project | ACTIVE | governance | docs/pipelines/governance/000--initialize-governed-project.md |
 | 001 | Discover Existing Architecture and Establish Doctrine | ACTIVE | governance | docs/pipelines/governance/001--discover-existing-architecture-and-establish-doctrine.md |
 | 002 | Audit Repository Governance Readiness | ACTIVE | governance | docs/pipelines/governance/002--audit-repository-governance-readiness.md |
@@ -45,3 +46,27 @@
 | 042 | Inventory Remaining Unsupported Template Composition Boundaries | ACTIVE | governance | docs/pipelines/governance/042--inventory-remaining-unsupported-template-composition-boundaries.md |
 | 043 | Exercise Laravel Monorepo Template Composition Boundary | ACTIVE | governance | docs/pipelines/governance/043--exercise-laravel-monorepo-template-composition-boundary.md |
 | 044 | Implement Laravel Monorepo Template Composition Support | ACTIVE | governance | docs/pipelines/governance/044--implement-laravel-monorepo-template-composition-support.md |
+| 045 | Verify Laravel Monorepo Composition Stability | ACTIVE | governance | docs/pipelines/governance/045--verify-laravel-monorepo-composition-stability.md |
+| 046 | Reverify Composition Consistency and Drift Protection After Laravel Monorepo Expansion | ACTIVE | governance | docs/pipelines/governance/046--reverify-composition-consistency-and-drift-protection-after-laravel-monorepo-expansion.md |
+| 047 | Close Laravel Unsupported Stack Boundary for Laravel Plus CLI Worker Composition | ACTIVE | governance | docs/pipelines/governance/047--close-laravel-unsupported-stack-boundary-for-laravel-plus-cli-worker-composition.md |
+| 048 | Reverify Template Composition Matrix After Boundary Closure | ACTIVE | governance | docs/pipelines/governance/048--reverify-template-composition-matrix-after-boundary-closure.md |
+| 049 | Establish Continuous Composition Drift Detection for Template Matrix | ACTIVE | governance | docs/pipelines/governance/049--establish-continuous-composition-drift-detection-for-template-matrix.md |
+| 050 | Establish Universal Template Composition Capability Registry | ACTIVE | governance | docs/pipelines/governance/050--establish-universal-template-composition-capability-registry.md |
+| 051 | Verify Capability Registry Preserves Certified Composition Matrix | ACTIVE | governance | docs/pipelines/governance/051--verify-capability-registry-preserves-certified-composition-matrix.md |
+| 052 | Admit First Capability-Composed Triple Overlay | ACTIVE | governance | docs/pipelines/governance/052--admit-first-capability-composed-triple-overlay.md |
+| 053 | Reverify Template Composition Matrix After Triple Overlay Admission | ACTIVE | governance | docs/pipelines/governance/053--reverify-template-composition-matrix-after-triple-overlay-admission.md |
+| 054 | Expand Capability Conflict Taxonomy for Future Overlay Families | ACTIVE | governance | docs/pipelines/governance/054--expand-capability-conflict-taxonomy-for-future-overlay-families.md |
+| 055 | Verify Expanded Capability Conflict Taxonomy Preserves Current Composition Matrix | ACTIVE | governance | docs/pipelines/governance/055--verify-expanded-capability-conflic-taxonomy-preserves-current-composition-matrix.md |
+| 056 | Admit First Scheduler-Oriented Overlay Family | ACTIVE | governance | docs/pipelines/governance/056--admit-first-scheduler-oriented-overlay-family.md |
+| 057 | Reverify Template Composition Matrix After Scheduler Overlay Admission | ACTIVE | governance | docs/pipelines/governance/057--reverify-template-composition-matrix-after-scheduler-overlay-admission.md |
+| 058 | Exercise Scheduler Overlay Scaffold Generation Across Certified Compositions | ACTIVE | governance | docs/pipelines/governance/058--exercise-scheduler-overlay-scaffold-generation-across-certified-compositions.md |
+| 059 | Verify Scheduler Overlay Generated Surface Conformance and Drift Boundaries | ACTIVE | governance | docs/pipelines/governance/059--verify-scheduler-overlay-generated-surface-conformance-and-drift-boundaries.md |
+| 060 | Expand Universal Template Composition Matrix to Include Certified Scheduler Compositions | ACTIVE | governance | docs/pipelines/governance/060--expand-universal-template-composition-matrix-to-include-certified-scheduler-compositions.md |
+| 061 | Verify Universal Template Composition Matrix Includes Certified Scheduler Compositions | ACTIVE | governance | docs/pipelines/governance/061--verify-universal-template-composition-matrix-includes-certified-scheduler-compositions.md |
+| 062 | Close Unsupported Framework Scheduler Composition Boundaries | ACTIVE | governance | docs/pipelines/governance/062--close-unsupported-framework-scheduler-composition-boundaries.md |
+| 063 | Verify Unsupported Framework Scheduler Composition Boundaries Remain Non-Drifting | ACTIVE | governance | docs/pipelines/governance/063--verify-framework-scheduler-composition-boundaries-remain-non-drifting.md |
+| 064 | Establish the First Framework-Native Scheduler Composition Contract | ACTIVE | governance | docs/pipelines/governance/064--establish-the-first-framework-native-scheduler-composition-contract.md |
+| 065 | Verify Laravel Scheduler Composition Remains Non-Drifting | ACTIVE | governance | docs/pipelines/governance/065--verify-laravel-scheduler-composition-remains-non-drifting.md |
+| 066 | Establish Django-Native Scheduler Composition Contract | ACTIVE | governance | docs/pipelines/governance/066--establish-django-native-scheduler-composition-contract.md |
+| 067 | Verify Django Scheduler Composition Remains Non-Drifting | ACTIVE | governance | docs/pipelines/governance/067--verify-django-scheduler-composition-remains-non-drifting.md |
+| 068 | Evaluate Framework-Native Scheduler Compound Composition Expansion | ACTIVE | governance | docs/pipelines/governance/068--evaluate-framework-native-scheduler-compound-composition-expansion.md |

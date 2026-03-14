@@ -1,0 +1,39 @@
+{
+  "template_name": "scheduler",
+  "template_type": "overlay",
+  "base_template": "universal-base",
+  "compatible_overlays": [
+    "cli-worker",
+    "django",
+    "laravel",
+    "monorepo",
+    "python-package"
+  ],
+  "capabilities": {
+    "provides": [
+      "scheduler-runtime"
+    ],
+    "requires": [
+      "runtime-environment"
+    ],
+    "conflicts": [],
+    "composition_role": "scheduler"
+  },
+  "required_surfaces": [
+    "scheduler",
+    "scheduler/schedule.py",
+    "scheduler/scheduler_runtime.py"
+  ],
+  "optional_surfaces": [
+    "scheduler/jobs",
+    "scheduler/config"
+  ],
+  "governance_compatibility": "required",
+  "maturity": "canonical",
+  "supported_runtime_shapes": [
+    "scheduler",
+    "automation"
+  ],
+  "template_root": "docs/codex/templates/overlays/scheduler",
+  "description": "Scheduler runtime overlay for periodic and scheduled execution on the universal base scaffold."
+}

@@ -37,14 +37,22 @@ Base-only realization and single-overlay realization remain admitted when the ov
 The currently certified combinations are:
 
 - base-only
+- `django + scheduler`
 - `django + monorepo`
 - `laravel + monorepo`
 - `service + monorepo`
 - `node-typescript-service + monorepo`
 - `node-typescript-service + cli-worker`
 - `cli-worker + monorepo`
+- `cli-worker + monorepo + scheduler`
+- `cli-worker + monorepo + python-package`
 - `cli-worker + python-package`
+- `cli-worker + python-package + scheduler`
+- `cli-worker + scheduler`
 - `cli-worker + php-package`
+- `laravel + scheduler`
+- `monorepo + scheduler`
+- `python-package + scheduler`
 
 These combinations are certified because scaffold realization, manifest declarations, repository docs, and governance tests align on the same result.
 
@@ -54,6 +62,7 @@ The following remain valid outside the multi-overlay matrix:
 
 - base-only
 - a single admitted overlay applied to `universal-base`
+- `scheduler` as a certified admitted single-overlay realization
 
 Single-overlay realization is governed by the admitted overlay inventory under `docs/codex/templates/manifests/` and is not treated as a multi-overlay expansion.
 
@@ -68,14 +77,22 @@ Representative rejection cases must remain covered by governance verification so
 
 `laravel + cli-worker` is explicitly rejected because the repository does not define a Laravel-specific worker composition contract for application-root ownership, worker lifecycle, and command dispatch coordination.
 
+`django + scheduler` is now admitted only through a Django-native scheduler composition contract. That support is limited to the direct pair and requires the canonical Django scheduler surface at `project/celery.py` together with the governed companion surfaces `project/scheduler.py`, `project/settings.py`, and `manage.py`. It does not imply broader framework-native scheduler support or automatic admission of `django + monorepo + scheduler`.
+
+`laravel + scheduler` is now admitted only through the first framework-native scheduler contract. That support is limited to the direct pair and requires the canonical Laravel scheduler surface at `app/Console/Kernel.php` together with the governed companion surfaces `routes/console.php` and `config/scheduler.php`. It does not imply broader framework-native scheduler support or automatic admission of `laravel + monorepo + scheduler`.
+
 ## Overlay Compatibility Rules
 
-- `django` may compose only with `monorepo`
+- `django` may compose only with `monorepo` and `scheduler`
 - `service` may compose only with `monorepo`
-- `laravel` may compose only with `monorepo`
+- `laravel` may compose only with `monorepo` and `scheduler`
 - `monorepo` may compose only with `laravel`, `django`, `service`, `node-typescript-service`, and `cli-worker`
-- `cli-worker` may compose only with `python-package`, `php-package`, `node-typescript-service`, and `monorepo`
+- `monorepo` may compose only with `laravel`, `django`, `service`, `node-typescript-service`, `cli-worker`, and `scheduler`
+- `cli-worker` may compose only with `python-package`, `php-package`, `node-typescript-service`, `monorepo`, and `scheduler`
+- `python-package` may compose only with `cli-worker` and `scheduler`
+- `scheduler` may compose only with `cli-worker`, `django`, `laravel`, `monorepo`, and `python-package`
 - `node-typescript-service` may compose only with `monorepo` and `cli-worker`
+- certified triple-overlay composition may be admitted through governed capability compatibility when it is explicitly listed in the certified matrix
 - overlays not listed in a compatible pair are non-composable by default
 - the base scaffold may be realized without overlays
 

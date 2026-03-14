@@ -3,8 +3,24 @@
   "template_type": "overlay",
   "base_template": "universal-base",
   "compatible_overlays": [
-    "monorepo"
+    "monorepo",
+    "scheduler"
   ],
+  "capabilities": {
+    "provides": [
+      "web-framework",
+      "php-runtime",
+      "laravel-framework",
+      "laravel-native-scheduler-surface"
+    ],
+    "requires": [
+      "runtime-environment"
+    ],
+    "conflicts": [
+      "worker-runtime"
+    ],
+    "composition_role": "framework"
+  },
   "required_surfaces": [
     "app",
     "bootstrap",
@@ -22,6 +38,26 @@
     "service"
   ],
   "composition_overrides": {
+    "scheduler": {
+      "type": "laravel-native-scheduler-contract",
+      "overlay": "laravel",
+      "scheduler_surface": "app/Console/Kernel.php",
+      "scheduler_contract": "framework-native",
+      "required_surfaces": [
+        "app",
+        "bootstrap",
+        "routes",
+        "config",
+        "app/Console/Kernel.php",
+        "app/Console/Commands",
+        "routes/console.php",
+        "config/scheduler.php"
+      ],
+      "optional_surfaces": [
+        "app/Jobs",
+        "storage/logs"
+      ]
+    },
     "monorepo": {
       "type": "laravel-application",
       "overlay": "laravel",

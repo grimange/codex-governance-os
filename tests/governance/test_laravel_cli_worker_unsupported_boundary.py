@@ -37,6 +37,7 @@ class LaravelCliWorkerUnsupportedBoundaryTests(unittest.TestCase):
         self.assertFalse(result.supported)
         self.assertEqual(("cli-worker", "laravel"), result.normalized_overlays)
         self.assertEqual("explicitly-rejected", result.reason_code)
+        self.assertEqual("worker-model-collision", result.conflict_code)
         self.assertEqual("missing Laravel worker composition contract", result.rejection_reason)
 
     def test_doctor_surface_reports_explicit_boundary_reason(self) -> None:
@@ -46,6 +47,7 @@ class LaravelCliWorkerUnsupportedBoundaryTests(unittest.TestCase):
         self.assertEqual(["laravel", "cli-worker"], payload["requested_overlays"])
         self.assertEqual(["cli-worker", "laravel"], payload["normalized_overlays"])
         self.assertEqual("explicitly-rejected", payload["reason_code"])
+        self.assertEqual("worker-model-collision", payload["conflict_code"])
         self.assertEqual(
             "missing Laravel worker composition contract",
             payload["rejection_reason"],

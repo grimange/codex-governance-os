@@ -1,0 +1,113 @@
+{
+  "capabilities": [
+    "governance-foundation",
+    "runtime-environment",
+    "workspace-orchestration",
+    "worker-runtime",
+    "scheduler-runtime",
+    "django-native-scheduler-surface",
+    "laravel-native-scheduler-surface",
+    "package-distribution",
+    "python-runtime",
+    "php-runtime",
+    "node-runtime",
+    "web-framework",
+    "laravel-framework",
+    "django-framework",
+    "service-runtime"
+  ],
+  "conflict_taxonomy": {
+    "cross-framework-application-collision": "Two full application frameworks attempt to occupy the same governed runtime surface.",
+    "framework-native-scheduler-required": "A framework pairing requires framework-native scheduler semantics rather than direct universal scheduler overlay composition.",
+    "runtime-ownership-collision": "Multiple overlays claim the same governed runtime capability.",
+    "worker-model-collision": "Incompatible worker orchestration models are combined.",
+    "entrypoint-surface-collision": "Multiple overlays attempt to define incompatible application entrypoints.",
+    "package-application-role-collision": "A package-only runtime is combined with an application-oriented runtime role.",
+    "workspace-orchestration-collision": "Multiple overlays attempt to control workspace structure."
+  },
+  "explicit_boundary_codes": {
+    "cli-worker+laravel": "worker-model-collision",
+    "django+laravel": "cross-framework-application-collision",
+    "laravel+scheduler": "framework-native-scheduler-required"
+  },
+  "role_collision_codes": {
+    "framework+framework": "cross-framework-application-collision",
+    "framework+package": "package-application-role-collision",
+    "framework+service-host": "entrypoint-surface-collision",
+    "package+service-host": "package-application-role-collision",
+    "topology+topology": "workspace-orchestration-collision"
+  },
+  "capability_collision_codes": {
+    "worker-runtime": "worker-model-collision",
+    "scheduler-runtime": "runtime-ownership-collision",
+    "python-runtime": "runtime-ownership-collision",
+    "php-runtime": "runtime-ownership-collision",
+    "node-runtime": "runtime-ownership-collision",
+    "web-framework": "cross-framework-application-collision",
+    "service-runtime": "entrypoint-surface-collision",
+    "workspace-orchestration": "workspace-orchestration-collision"
+  },
+  "composition_roles": {
+    "base": {
+      "compatible_with": [
+        "base",
+        "framework",
+        "package",
+        "scheduler",
+        "service-host",
+        "topology",
+        "worker"
+      ]
+    },
+    "framework": {
+      "compatible_with": [
+        "base",
+        "scheduler",
+        "topology"
+      ]
+    },
+    "package": {
+      "compatible_with": [
+        "base",
+        "scheduler",
+        "topology",
+        "worker"
+      ]
+    },
+    "scheduler": {
+      "compatible_with": [
+        "base",
+        "framework",
+        "package",
+        "topology",
+        "worker"
+      ]
+    },
+    "service-host": {
+      "compatible_with": [
+        "base",
+        "topology",
+        "worker"
+      ]
+    },
+    "topology": {
+      "compatible_with": [
+        "base",
+        "framework",
+        "package",
+        "scheduler",
+        "service-host",
+        "worker"
+      ]
+    },
+    "worker": {
+      "compatible_with": [
+        "base",
+        "package",
+        "scheduler",
+        "service-host",
+        "topology"
+      ]
+    }
+  }
+}

@@ -10,8 +10,20 @@
     "service",
     "monorepo",
     "node-typescript-service",
-    "cli-worker"
+    "cli-worker",
+    "scheduler"
   ],
+  "capabilities": {
+    "provides": [
+      "governance-foundation",
+      "runtime-environment"
+    ],
+    "requires": [
+      "governance-foundation"
+    ],
+    "conflicts": [],
+    "composition_role": "base"
+  },
   "required_surfaces": [
     "docs/governance",
     "docs/pipelines",
@@ -36,7 +48,8 @@
     "package",
     "service",
     "monorepo",
-    "modernization"
+    "modernization",
+    "scheduler"
   ],
   "template_root": "docs/codex/templates/base",
   "description": "Canonical governance-first, stack-agnostic repository scaffold."

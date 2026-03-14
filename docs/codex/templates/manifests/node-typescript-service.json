@@ -6,6 +6,17 @@
     "monorepo",
     "cli-worker"
   ],
+  "capabilities": {
+    "provides": [
+      "service-runtime",
+      "node-runtime"
+    ],
+    "requires": [
+      "runtime-environment"
+    ],
+    "conflicts": [],
+    "composition_role": "service-host"
+  },
   "required_surfaces": [
     "package.json",
     "src",

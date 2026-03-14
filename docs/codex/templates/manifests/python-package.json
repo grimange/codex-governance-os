@@ -3,8 +3,20 @@
   "template_type": "overlay",
   "base_template": "universal-base",
   "compatible_overlays": [
-    "cli-worker"
+    "cli-worker",
+    "scheduler"
   ],
+  "capabilities": {
+    "provides": [
+      "package-distribution",
+      "python-runtime"
+    ],
+    "requires": [
+      "runtime-environment"
+    ],
+    "conflicts": [],
+    "composition_role": "package"
+  },
   "required_surfaces": [
     "src",
     "tests",

@@ -3,8 +3,22 @@
   "template_type": "overlay",
   "base_template": "universal-base",
   "compatible_overlays": [
-    "monorepo"
+    "monorepo",
+    "scheduler"
   ],
+  "capabilities": {
+    "provides": [
+      "web-framework",
+      "python-runtime",
+      "django-framework",
+      "django-native-scheduler-surface"
+    ],
+    "requires": [
+      "runtime-environment"
+    ],
+    "conflicts": [],
+    "composition_role": "framework"
+  },
   "required_surfaces": [
     "backend",
     "config",
@@ -21,6 +35,28 @@
     "service"
   ],
   "composition_overrides": {
+    "scheduler": {
+      "type": "django-native-scheduler-contract",
+      "overlay": "django",
+      "scheduler_surface": "project/celery.py",
+      "scheduler_contract": "framework-native",
+      "required_surfaces": [
+        "backend",
+        "config",
+        "apps",
+        "manage.py",
+        "project/settings.py",
+        "project/urls.py",
+        "project/asgi.py",
+        "project/celery.py",
+        "project/scheduler.py"
+      ],
+      "optional_surfaces": [
+        "app_modules",
+        "static",
+        "templates"
+      ]
+    },
     "monorepo": {
       "type": "django-service",
       "overlay": "django",

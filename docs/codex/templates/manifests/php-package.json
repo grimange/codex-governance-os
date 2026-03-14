@@ -5,6 +5,17 @@
   "compatible_overlays": [
     "cli-worker"
   ],
+  "capabilities": {
+    "provides": [
+      "package-distribution",
+      "php-runtime"
+    ],
+    "requires": [
+      "runtime-environment"
+    ],
+    "conflicts": [],
+    "composition_role": "package"
+  },
   "required_surfaces": [
     "src",
     "tests",

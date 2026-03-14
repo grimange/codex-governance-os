@@ -7,8 +7,19 @@
     "django",
     "service",
     "node-typescript-service",
-    "cli-worker"
+    "cli-worker",
+    "scheduler"
   ],
+  "capabilities": {
+    "provides": [
+      "workspace-orchestration"
+    ],
+    "requires": [
+      "governance-foundation"
+    ],
+    "conflicts": [],
+    "composition_role": "topology"
+  },
   "required_surfaces": [
     "packages",
     "services",

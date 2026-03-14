@@ -5,6 +5,16 @@
   "compatible_overlays": [
     "monorepo"
   ],
+  "capabilities": {
+    "provides": [
+      "service-runtime"
+    ],
+    "requires": [
+      "runtime-environment"
+    ],
+    "conflicts": [],
+    "composition_role": "service-host"
+  },
   "required_surfaces": [
     "service",
     "config",

@@ -1,0 +1,87 @@
+{
+  "explicitly_rejected": [
+    {
+      "pair": [
+        "laravel",
+        "cli-worker"
+      ],
+      "reason": "missing Laravel worker composition contract"
+    },
+    {
+      "pair": [
+        "django",
+        "laravel"
+      ],
+      "reason": "cross-framework application collision"
+    }
+  ],
+  "supported": [
+    [
+      "django",
+      "scheduler"
+    ],
+    [
+      "django",
+      "monorepo"
+    ],
+    [
+      "laravel",
+      "monorepo"
+    ],
+    [
+      "service",
+      "monorepo"
+    ],
+    [
+      "laravel",
+      "scheduler"
+    ],
+    [
+      "node-typescript-service",
+      "monorepo"
+    ],
+    [
+      "node-typescript-service",
+      "cli-worker"
+    ],
+    [
+      "cli-worker",
+      "monorepo"
+    ],
+    [
+      "cli-worker",
+      "monorepo",
+      "scheduler"
+    ],
+    [
+      "cli-worker",
+      "monorepo",
+      "python-package"
+    ],
+    [
+      "cli-worker",
+      "python-package"
+    ],
+    [
+      "cli-worker",
+      "python-package",
+      "scheduler"
+    ],
+    [
+      "cli-worker",
+      "scheduler"
+    ],
+    [
+      "cli-worker",
+      "php-package"
+    ],
+    [
+      "monorepo",
+      "scheduler"
+    ],
+    [
+      "python-package",
+      "scheduler"
+    ]
+  ]
+}

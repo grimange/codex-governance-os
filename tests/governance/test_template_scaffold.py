@@ -25,6 +25,7 @@ class TemplateScaffoldTests(unittest.TestCase):
         self.assertIn("django", names)
         self.assertIn("node-typescript-service", names)
         self.assertIn("cli-worker", names)
+        self.assertIn("scheduler", names)
 
     def test_scaffold_output_is_deterministic(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -133,6 +134,54 @@ class TemplateScaffoldTests(unittest.TestCase):
             self.assertTrue((Path(tmp) / "bin").is_dir())
             self.assertTrue((Path(tmp) / "jobs").is_dir())
             self.assertTrue((Path(tmp) / "src").is_dir())
+
+    def test_overlay_composition_for_scheduler_and_cli_worker_is_supported(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            selection = realize_repository_scaffold(
+                "universal-base",
+                Path(tmp),
+                overlays=["scheduler", "cli-worker"],
+                include_optional=False,
+            )
+            self.assertTrue(selection.exists())
+            self.assertTrue((Path(tmp) / "scheduler").is_dir())
+            self.assertTrue((Path(tmp) / "scheduler/schedule.py").is_file())
+            self.assertTrue((Path(tmp) / "bin").is_dir())
+
+    def test_overlay_composition_for_scheduler_triple_is_supported(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            selection = realize_repository_scaffold(
+                "universal-base",
+                Path(tmp),
+                overlays=["scheduler", "cli-worker", "monorepo"],
+                include_optional=False,
+            )
+            self.assertTrue(selection.exists())
+            self.assertTrue((Path(tmp) / "scheduler/scheduler_runtime.py").is_file())
+            self.assertTrue((Path(tmp) / "packages").is_dir())
+            self.assertTrue((Path(tmp) / "worker").is_dir())
+
+    def test_triple_overlay_composition_for_cli_worker_monorepo_python_package_is_supported(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            selection = realize_repository_scaffold(
+                "universal-base",
+                Path(tmp),
+                overlays=["cli-worker", "monorepo", "python-package"],
+                include_optional=False,
+            )
+            self.assertTrue(selection.exists())
+            payload = json.loads(selection.read_text())
+            self.assertEqual(
+                ["cli-worker", "monorepo", "python-package"],
+                payload["overlays"],
+            )
+            self.assertTrue((Path(tmp) / "bin").is_dir())
+            self.assertTrue((Path(tmp) / "jobs").is_dir())
+            self.assertTrue((Path(tmp) / "worker").is_dir())
+            self.assertTrue((Path(tmp) / "packages").is_dir())
+            self.assertTrue((Path(tmp) / "services").is_dir())
+            self.assertTrue((Path(tmp) / "src").is_dir())
+            self.assertTrue((Path(tmp) / "docs").is_dir())
 
     def test_overlay_manifest_must_match_base_template(self) -> None:
         manifest = load_scaffold_manifest("django")
@@ -258,6 +307,52 @@ class TemplateScaffoldTests(unittest.TestCase):
         payload = json.loads(run.stdout)
         self.assertTrue(payload["supported"])
         self.assertEqual(["laravel", "monorepo"], payload["normalized_overlays"])
+
+    def test_doctor_composition_cli_reports_triple_overlay_as_supported(self) -> None:
+        run = subprocess.run(
+            [
+                sys.executable,
+                "tools/governance/template_scaffold.py",
+                "doctor-composition",
+                "--overlays",
+                "cli-worker",
+                "monorepo",
+                "python-package",
+                "--output",
+                "json",
+            ],
+            cwd=Path(__file__).resolve().parents[2],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        payload = json.loads(run.stdout)
+        self.assertTrue(payload["supported"])
+        self.assertEqual(
+            ["cli-worker", "monorepo", "python-package"],
+            payload["normalized_overlays"],
+        )
+
+    def test_doctor_composition_cli_reports_scheduler_overlay_as_supported(self) -> None:
+        run = subprocess.run(
+            [
+                sys.executable,
+                "tools/governance/template_scaffold.py",
+                "doctor-composition",
+                "--overlays",
+                "scheduler",
+                "cli-worker",
+                "--output",
+                "json",
+            ],
+            cwd=Path(__file__).resolve().parents[2],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        payload = json.loads(run.stdout)
+        self.assertTrue(payload["supported"])
+        self.assertEqual(["cli-worker", "scheduler"], payload["normalized_overlays"])
 
     def test_doctor_composition_cli_reports_service_monorepo_as_supported(self) -> None:
         run = subprocess.run(
