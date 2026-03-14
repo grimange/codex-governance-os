@@ -68,7 +68,7 @@ No generated artifact, cache, mirrored note, or future convenience summary may b
 - `AGENTS.md` defines mission, routing, and governance authority ordering.
 - `.codex/AGENTS.md` defines repository-local operating behavior for Codex agents.
 - `docs/governance/architecture-doctrine.md` defines the canonical architecture model and interpretation rules for repository structure.
-- `docs/governance/governance-lifecycle.md`, `docs/governance/pipeline-artifact-standard.md`, `docs/governance/pipeline-naming-standard.md`, `docs/governance/contract-writing-standard.md`, `docs/governance/governance-terminology.md`, `docs/governance/governance-evolution-model.md`, `docs/governance/templates/README.md`, and `docs/governance/template-scaffold-contract.md` define reusable governance law and template control surfaces that future pipelines and contracts should reference instead of duplicating.
+- `docs/governance/governance-lifecycle.md`, `docs/governance/pipeline-artifact-standard.md`, `docs/governance/pipeline-naming-standard.md`, `docs/governance/contract-writing-standard.md`, `docs/governance/governance-terminology.md`, `docs/governance/governance-evolution-model.md`, `docs/governance/templates/README.md`, `docs/governance/template-scaffold-contract.md`, and `docs/contracts/universal-template-composition-contract.md` define reusable governance law and template control surfaces that future pipelines and contracts should reference instead of duplicating.
 - `docs/governance/skill-authoring-standard.md`, `docs/governance/skill-invocation-standard.md`, and `docs/governance/universal-skills-index.md` define how governed skills are authored, selected, and discovered.
 - `skills/` contains reusable universal skill packages for template inheritance.
 - `.codex/skills/` contains project-local skill extensions or overrides when repository-specific specialization is required.
@@ -76,6 +76,7 @@ No generated artifact, cache, mirrored note, or future convenience summary may b
 - `docs/pipelines/<category>/<pipeline-name>/NN-*.md` records execution evidence for a specific pipeline run and must remain inspectable and reproducible from repository state.
 - `docs/pipelines/registry/pipeline-registry.md` records which pipelines are recognized as active governance surfaces.
 - `docs/contracts/` and `docs/modernization/` are reserved canonical roots for future work but are not yet architecture-authoring surfaces in practice.
+- `docs/contracts/universal-template-composition-contract.md` defines the certified overlay composition boundary for the universal scaffold.
 - `docs/governance/templates/` contains canonical cross-family template definitions for machine-checkable governed artifacts.
 - `docs/governance/template-scaffold-contract.md` defines the canonical universal scaffold contract for governed repositories.
 - `docs/governance/registries/templates/` contains admitted template identities and the compiled template registry index.

@@ -41,6 +41,7 @@ This template is intended to remain domain-neutral, architecture-neutral, and la
 - Governance evolution model: `docs/governance/governance-evolution-model.md`
 - Governance template system: `docs/governance/templates/README.md`
 - Template scaffold contract: `docs/governance/template-scaffold-contract.md`
+- Universal template composition contract: `docs/contracts/universal-template-composition-contract.md`
 - Admitted template registry index: `docs/governance/registries/templates/index.yaml`
 - Admitted template bodies: `docs/codex/templates/`
 - Universal skills index: `docs/governance/universal-skills-index.md`

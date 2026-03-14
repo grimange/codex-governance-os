@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -107,12 +108,65 @@ class TemplateScaffoldTests(unittest.TestCase):
 
     def test_incompatible_overlay_pair_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
-            with self.assertRaises(RegistryError):
+            with self.assertRaisesRegex(RegistryError, "doctor-composition --overlays laravel cli-worker"):
                 realize_repository_scaffold(
                     "universal-base",
                     Path(tmp),
                     overlays=["laravel", "cli-worker"],
                 )
+
+    def test_list_manifests_cli_fails_when_manifest_inventory_drifts(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(__file__).resolve().parents[2] / "docs/codex/templates/manifests"
+            shutil.copytree(source, Path(tmp), dirs_exist_ok=True)
+            laravel_path = Path(tmp) / "laravel.json"
+            payload = json.loads(laravel_path.read_text())
+            payload["compatible_overlays"] = ["cli-worker"]
+            laravel_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
+
+            run = subprocess.run(
+                [
+                    sys.executable,
+                    "tools/governance/template_scaffold.py",
+                    "list-manifests",
+                    "--manifest-dir",
+                    tmp,
+                    "--output",
+                    "json",
+                ],
+                cwd=Path(__file__).resolve().parents[2],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertNotEqual(0, run.returncode)
+            payload = json.loads(run.stdout)
+            self.assertFalse(payload["valid"])
+            self.assertIn("unsupported composition", payload["errors"][0])
+
+    def test_doctor_composition_cli_outputs_structured_diagnostics(self) -> None:
+        run = subprocess.run(
+            [
+                sys.executable,
+                "tools/governance/template_scaffold.py",
+                "doctor-composition",
+                "--overlays",
+                "laravel",
+                "cli-worker",
+                "--output",
+                "json",
+            ],
+            cwd=Path(__file__).resolve().parents[2],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertNotEqual(0, run.returncode)
+        payload = json.loads(run.stdout)
+        self.assertFalse(payload["supported"])
+        self.assertEqual(["laravel", "cli-worker"], payload["requested_overlays"])
+        self.assertEqual(["cli-worker", "laravel"], payload["normalized_overlays"])
+        self.assertIn(["cli-worker", "python-package"], payload["closest_supported"])
 
     def test_list_templates_cli_outputs_json(self) -> None:
         run = subprocess.run(

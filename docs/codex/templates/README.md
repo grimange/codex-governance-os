@@ -43,3 +43,7 @@ Explicitly fail-closed examples:
 - `laravel + django`
 
 Use `tools/templates/list_templates.py` to inspect the scaffold manifest inventory.
+
+The certified composition boundary for these overlays is published in `docs/contracts/universal-template-composition-contract.md`, and scaffold plus manifest-inspection tooling enforce that boundary fail-closed.
+
+Use `python tools/governance/template_scaffold.py doctor-composition --overlays ... --output json` to inspect why a composition is supported or rejected and to see the closest certified alternatives.

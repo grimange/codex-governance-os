@@ -4,6 +4,8 @@
 
 This contract defines the canonical universal scaffold model for governed repositories derived from this governance OS.
 
+The certified overlay composition boundary for this scaffold is governed by `docs/contracts/universal-template-composition-contract.md`.
+
 ## Canonical Rule
 
 The universal scaffold is governance-first, stack-agnostic, and extension-safe.
@@ -51,13 +53,15 @@ The current supported overlay inventory is:
 - `node-typescript-service`
 - `cli-worker`
 
-Composability rules currently supported:
+Certified composition truth is delegated to `docs/contracts/universal-template-composition-contract.md`, including the rule that single admitted overlays remain valid while multi-overlay expansion is allowlisted explicitly.
+
+Overlay composability rules currently supported:
 
 - `monorepo` may compose with `node-typescript-service` and `cli-worker`
 - `cli-worker` may compose with `python-package`, `php-package`, `node-typescript-service`, and `monorepo`
 - `node-typescript-service` may compose with `monorepo` and `cli-worker`
 
-Explicit fail-closed boundary examples:
+Explicit fail-closed boundary examples recorded by the certified contract:
 
 - `laravel` may not compose with `cli-worker`
 - `django` may not compose with `monorepo`

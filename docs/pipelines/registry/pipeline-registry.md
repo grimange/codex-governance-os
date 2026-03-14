@@ -28,3 +28,7 @@
 | 025 | Close Unsupported Stack Boundaries For Universal Codex Templates | ACTIVE | governance | docs/pipelines/governance/025--close-unsupported-stack-boundaries-for-universal-codex-templates.md |
 | 026 | Verify Unsupported Stack Boundaries Closure For Universal Codex Templates | ACTIVE | governance | docs/pipelines/governance/026--verify-unsupported-stack-boundaries-closure-for-universal-codex-templates.md |
 | 027 | Expand Universal Codex Template Composition Verification Across Combined Overlay Matrices | ACTIVE | governance | docs/pipelines/governance/027--expand-universal-codex-template-composition-verification-across-combined-overlay-matrices.md |
+| 028 | Certify Universal Template Composition Contract | ACTIVE | governance | docs/pipelines/governance/028--certify-universal-template-composition-contract.md |
+| 029 | Enforce Universal Template Composition Contract At Scaffold And Admission Time | ACTIVE | governance | docs/pipelines/governance/029--enforce-universal-template-composition-contract-at-scaffold-and-admission-time.md |
+| 030 | Establish Universal Template Composition Explain And Doctor Surface | ACTIVE | governance | docs/pipelines/governance/030--establish-universal-template-composition-explain-and-doctor-surface.md |
+| 031 | Verify Universal Template Composition Decision Consistency Across All Surfaces | ACTIVE | governance | docs/pipelines/governance/031--verify-universal-template-composition-decision-consistency-across-all-surfaces.md |

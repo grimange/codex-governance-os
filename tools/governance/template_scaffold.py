@@ -13,6 +13,13 @@ if str(REPO_ROOT) not in sys.path:
 
 from tools.governance.template_lint import validate_document
 from tools.governance.template_registry import RegistryError, load_registry
+from tools.templates.composition_contract import (
+    explain_template_composition,
+    format_rejection_message,
+    render_explanation_summary,
+    validate_manifest_inventory,
+    validate_template_composition,
+)
 
 DEFAULT_SCAFFOLD_MANIFEST_DIRECTORY = REPO_ROOT / "docs" / "codex" / "templates" / "manifests"
 DEFAULT_SCAFFOLD_SELECTION_PATH = Path("docs/governance/scaffold-selection.json")
@@ -121,6 +128,9 @@ def list_scaffold_manifests(
     manifests: list[ScaffoldManifest] = []
     for path in sorted(manifest_dir.glob("*.json")):
         manifests.append(load_scaffold_manifest(path.stem, manifest_dir=manifest_dir))
+    validation = validate_manifest_inventory(manifests)
+    if not validation.valid:
+        raise RegistryError("; ".join(validation.errors))
     return manifests
 
 
@@ -133,6 +143,9 @@ def realize_repository_scaffold(
     manifest_dir: Path | None = None,
 ) -> Path:
     manifest_dir = manifest_dir or DEFAULT_SCAFFOLD_MANIFEST_DIRECTORY
+    composition = validate_template_composition(overlays or [])
+    if not composition.supported:
+        raise RegistryError(format_rejection_message(composition, overlays or []))
     base_manifest = load_scaffold_manifest(template_name, manifest_dir=manifest_dir)
     if base_manifest.template_type != "base":
         raise RegistryError(f"{template_name} is not a base scaffold manifest")
@@ -267,7 +280,7 @@ def scaffold_document(
 def main(argv: list[str] | None = None) -> int:
     if argv is None:
         argv = sys.argv[1:]
-    if argv and argv[0] not in {"scaffold-document", "list-manifests", "realize-repository"}:
+    if argv and argv[0] not in {"scaffold-document", "list-manifests", "realize-repository", "doctor-composition"}:
         parser = argparse.ArgumentParser(description="Scaffold governed artifacts from the universal template system.")
         parser.add_argument("family")
         parser.add_argument("artifact_id")
@@ -309,6 +322,10 @@ def main(argv: list[str] | None = None) -> int:
     realize_parser.add_argument("--include-optional", action="store_true")
     realize_parser.add_argument("--manifest-dir", type=Path, default=None)
 
+    doctor_parser = subparsers.add_parser("doctor-composition")
+    doctor_parser.add_argument("--overlays", nargs="*", default=[])
+    doctor_parser.add_argument("--output", choices=("text", "json"), default="text")
+
     args = parser.parse_args(argv)
     if args.command == "scaffold-document":
         path = scaffold_document(
@@ -322,26 +339,58 @@ def main(argv: list[str] | None = None) -> int:
         print(path)
         return 0
     if args.command == "list-manifests":
-        manifests = [dataclasses.asdict(manifest) for manifest in list_scaffold_manifests(args.manifest_dir)]
+        try:
+            manifests = [dataclasses.asdict(manifest) for manifest in list_scaffold_manifests(args.manifest_dir)]
+            if args.output == "json":
+                print(json.dumps(manifests, indent=2, sort_keys=True))
+            else:
+                for manifest in manifests:
+                    print(
+                        f"{manifest['template_name']} [{manifest['template_type']}] "
+                        f"overlays={','.join(manifest['compatible_overlays']) or '-'}"
+                    )
+            return 0
+        except RegistryError as exc:
+            if args.output == "json":
+                print(json.dumps({"valid": False, "errors": [str(exc)]}, indent=2, sort_keys=True))
+            else:
+                print(f"ERROR: {exc}")
+            return 1
+    if args.command == "doctor-composition":
+        explanation = explain_template_composition(args.overlays)
         if args.output == "json":
-            print(json.dumps(manifests, indent=2, sort_keys=True))
-        else:
-            for manifest in manifests:
-                print(
-                    f"{manifest['template_name']} [{manifest['template_type']}] "
-                    f"overlays={','.join(manifest['compatible_overlays']) or '-'}"
+            print(
+                json.dumps(
+                    {
+                        "requested_overlays": list(explanation.requested_overlays),
+                        "normalized_overlays": list(explanation.normalized_overlays),
+                        "supported": explanation.supported,
+                        "decision_source": explanation.decision_source,
+                        "rejection_reason": explanation.rejection_reason,
+                        "closest_supported": [list(item) for item in explanation.closest_supported],
+                        "reason_code": explanation.reason_code,
+                    },
+                    indent=2,
+                    sort_keys=True,
                 )
-        return 0
+            )
+        else:
+            print(render_explanation_summary(explanation))
+        return 0 if explanation.supported else 1
 
-    selection_path = realize_repository_scaffold(
-        args.template_name,
-        args.output_root,
-        overlays=args.overlay,
-        include_optional=args.include_optional,
-        manifest_dir=args.manifest_dir,
-    )
-    print(selection_path)
-    return 0
+    try:
+        selection_path = realize_repository_scaffold(
+            args.template_name,
+            args.output_root,
+            overlays=args.overlay,
+            include_optional=args.include_optional,
+            manifest_dir=args.manifest_dir,
+        )
+        print(selection_path)
+        return 0
+    except RegistryError as exc:
+        print(f"ERROR: {exc}")
+        return 1
 
 
 if __name__ == "__main__":

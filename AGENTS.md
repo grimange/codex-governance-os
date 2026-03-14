@@ -39,6 +39,7 @@ If authorities conflict, the higher-precedence artifact governs until the confli
 - Governance doctrine belongs in `docs/governance/`.
 - Canonical governance templates belong in `docs/governance/templates/`.
 - Universal scaffold contract belongs in `docs/governance/template-scaffold-contract.md`.
+- Certified universal template composition contract belongs in `docs/contracts/universal-template-composition-contract.md`.
 - Admitted template registry state belongs in `docs/governance/registries/templates/`.
 - Admitted template bodies belong in `docs/codex/templates/`.
 - Template manifest tooling belongs in `tools/templates/`.

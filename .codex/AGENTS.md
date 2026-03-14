@@ -16,6 +16,7 @@ This file defines repository-local operating instructions for Codex agents worki
 - Treat `docs/` as the authoritative root for all governance and Codex-related files in this repository.
 - Use `docs/governance/templates/` and `tools/governance/` when authoring, validating, or scaffolding governed artifact families from the universal template system.
 - Use `docs/governance/template-scaffold-contract.md` and `tools/templates/` when working on repository-level scaffold manifests or overlay discovery.
+- Use `docs/contracts/universal-template-composition-contract.md` when changing or verifying certified overlay composition boundaries.
 - Use `docs/governance/registries/templates/` and `docs/codex/templates/` when admitting, resolving, or auditing governed template identities.
 - Treat `docs/bootstrap/` as the canonical adoption surface for future repositories inheriting this template's governance baseline.
 - Use `docs/governance/universal-skills-index.md` and `docs/governance/skill-invocation-standard.md` to decide when universal or project-local skills apply.
@@ -28,6 +29,7 @@ This file defines repository-local operating instructions for Codex agents worki
 - Keep governance doctrine under `docs/governance/`.
 - Keep canonical governance templates under `docs/governance/templates/`.
 - Keep the universal scaffold contract under `docs/governance/template-scaffold-contract.md`.
+- Keep the certified universal template composition contract under `docs/contracts/universal-template-composition-contract.md`.
 - Keep admitted template registry metadata under `docs/governance/registries/templates/`.
 - Keep admitted template bodies under `docs/codex/templates/`.
 - Keep template manifest tooling under `tools/templates/`.
