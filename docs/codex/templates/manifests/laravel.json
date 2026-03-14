@@ -2,7 +2,9 @@
   "template_name": "laravel",
   "template_type": "overlay",
   "base_template": "universal-base",
-  "compatible_overlays": [],
+  "compatible_overlays": [
+    "monorepo"
+  ],
   "required_surfaces": [
     "app",
     "bootstrap",
@@ -19,6 +21,27 @@
     "application",
     "service"
   ],
+  "composition_overrides": {
+    "monorepo": {
+      "type": "laravel-application",
+      "overlay": "laravel",
+      "placement": "apps/backend/laravel-app",
+      "repository_structure": "monorepo",
+      "required_surfaces": [
+        "apps/backend/laravel-app/composer.json",
+        "apps/backend/laravel-app/bootstrap/app.php",
+        "apps/backend/laravel-app/config/app.php",
+        "apps/backend/laravel-app/routes/web.php",
+        "apps/backend/laravel-app/public/index.php",
+        "apps/backend/laravel-app/app/Console",
+        "apps/backend/laravel-app/app/Http"
+      ],
+      "optional_surfaces": [
+        "apps/backend/laravel-app/resources",
+        "apps/backend/laravel-app/database"
+      ]
+    }
+  },
   "template_root": "docs/codex/templates/overlays/laravel",
   "description": "Laravel runtime overlay for the universal base scaffold."
 }

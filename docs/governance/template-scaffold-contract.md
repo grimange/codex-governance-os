@@ -57,15 +57,16 @@ Certified composition truth is delegated to `docs/contracts/universal-template-c
 
 Overlay composability rules currently supported:
 
-- `monorepo` may compose with `node-typescript-service` and `cli-worker`
+- `laravel` may compose with `monorepo`
+- `django` may compose with `monorepo`
+- `service` may compose with `monorepo`
+- `monorepo` may compose with `laravel`, `django`, `service`, `node-typescript-service`, and `cli-worker`
 - `cli-worker` may compose with `python-package`, `php-package`, `node-typescript-service`, and `monorepo`
 - `node-typescript-service` may compose with `monorepo` and `cli-worker`
 
 Explicit fail-closed boundary examples recorded by the certified contract:
 
 - `laravel` may not compose with `cli-worker`
-- `django` may not compose with `monorepo`
-- `service` may not compose with `monorepo`
 - `laravel` may not compose with `django`
 
 ## Extension Rules

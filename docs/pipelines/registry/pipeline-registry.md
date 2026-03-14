@@ -32,3 +32,16 @@
 | 029 | Enforce Universal Template Composition Contract At Scaffold And Admission Time | ACTIVE | governance | docs/pipelines/governance/029--enforce-universal-template-composition-contract-at-scaffold-and-admission-time.md |
 | 030 | Establish Universal Template Composition Explain And Doctor Surface | ACTIVE | governance | docs/pipelines/governance/030--establish-universal-template-composition-explain-and-doctor-surface.md |
 | 031 | Verify Universal Template Composition Decision Consistency Across All Surfaces | ACTIVE | governance | docs/pipelines/governance/031--verify-universal-template-composition-decision-consistency-across-all-surfaces.md |
+| 032 | Establish Template Composition Contract Drift Detection | ACTIVE | governance | docs/pipelines/governance/032--establish-template-composition-contract-drift-detection.md |
+| 033 | Close Django And Monorepo Template Composition Boundary | ACTIVE | governance | docs/pipelines/governance/033--close-django-and-monorepo-template-composition-boundary.md |
+| 034 | Expand And Verify Universal Template Composition Matrix | ACTIVE | governance | docs/pipelines/governance/034--expand-and-verify-universal-template-composition-matrix.md |
+| 035 | Reverify Composition Consistency And Drift Protection After Matrix Expansion | ACTIVE | governance | docs/pipelines/governance/035--reverify-composition-consistency-and-drift-protection-after-matrix-expansion.md |
+| 036 | Close Service And Monorepo Template Composition Boundary | ACTIVE | governance | docs/pipelines/governance/036--close-service-and-monorepo-template-composition-boundary.md |
+| 037 | Expand And Verify Universal Template Composition Matrix After Service Monorepo Expansion | ACTIVE | governance | docs/pipelines/governance/037--expand-and-verify-universal-template-composition-matrix-after-service-monorepo.md |
+| 038 | Reverify Composition Consistency And Drift Protection After Service Monorepo Expansion | ACTIVE | governance | docs/pipelines/governance/038--reverify-composition-consistency-and-drift-protection-after-service-monorepo-expansion.md |
+| 039 | Exercise Laravel CLI Worker Template Composition Boundary | ACTIVE | governance | docs/pipelines/governance/039--exercise-laravel-cli-worker-template-composition-boundary.md |
+| 040 | Codify Laravel CLI Worker As Explicit Unsupported Template Composition Boundary | ACTIVE | governance | docs/pipelines/governance/040--codify-laravel-cli-worker-as-explicit-unsupported-template-composition-boundary.md |
+| 041 | Verify Explicit Laravel CLI Worker Unsupported Boundary Enforcement | ACTIVE | governance | docs/pipelines/governance/041--verify-explicit-laravel-cli-worker-unsupported-boundary-enforcement.md |
+| 042 | Inventory Remaining Unsupported Template Composition Boundaries | ACTIVE | governance | docs/pipelines/governance/042--inventory-remaining-unsupported-template-composition-boundaries.md |
+| 043 | Exercise Laravel Monorepo Template Composition Boundary | ACTIVE | governance | docs/pipelines/governance/043--exercise-laravel-monorepo-template-composition-boundary.md |
+| 044 | Implement Laravel Monorepo Template Composition Support | ACTIVE | governance | docs/pipelines/governance/044--implement-laravel-monorepo-template-composition-support.md |

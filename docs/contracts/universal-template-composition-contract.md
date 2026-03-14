@@ -37,6 +37,9 @@ Base-only realization and single-overlay realization remain admitted when the ov
 The currently certified combinations are:
 
 - base-only
+- `django + monorepo`
+- `laravel + monorepo`
+- `service + monorepo`
 - `node-typescript-service + monorepo`
 - `node-typescript-service + cli-worker`
 - `cli-worker + monorepo`
@@ -59,15 +62,18 @@ Single-overlay realization is governed by the admitted overlay inventory under `
 The following combinations are explicitly not supported and must remain rejected unless a future governance lane broadens the contract:
 
 - `laravel + cli-worker`
-- `django + monorepo`
-- `service + monorepo`
 - `laravel + django`
 
 Representative rejection cases must remain covered by governance verification so unsupported behavior cannot expand silently.
 
+`laravel + cli-worker` is explicitly rejected because the repository does not define a Laravel-specific worker composition contract for application-root ownership, worker lifecycle, and command dispatch coordination.
+
 ## Overlay Compatibility Rules
 
-- `monorepo` may compose only with `node-typescript-service` and `cli-worker`
+- `django` may compose only with `monorepo`
+- `service` may compose only with `monorepo`
+- `laravel` may compose only with `monorepo`
+- `monorepo` may compose only with `laravel`, `django`, `service`, `node-typescript-service`, and `cli-worker`
 - `cli-worker` may compose only with `python-package`, `php-package`, `node-typescript-service`, and `monorepo`
 - `node-typescript-service` may compose only with `monorepo` and `cli-worker`
 - overlays not listed in a compatible pair are non-composable by default

@@ -29,6 +29,9 @@ Current supported overlays:
 Verified supported compositions:
 
 - base-only
+- `laravel + monorepo`
+- `django + monorepo`
+- `service + monorepo`
 - `node-typescript-service + monorepo`
 - `node-typescript-service + cli-worker`
 - `cli-worker + monorepo`
@@ -38,8 +41,6 @@ Verified supported compositions:
 Explicitly fail-closed examples:
 
 - `laravel + cli-worker`
-- `django + monorepo`
-- `service + monorepo`
 - `laravel + django`
 
 Use `tools/templates/list_templates.py` to inspect the scaffold manifest inventory.

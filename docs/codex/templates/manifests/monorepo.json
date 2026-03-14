@@ -3,6 +3,9 @@
   "template_type": "overlay",
   "base_template": "universal-base",
   "compatible_overlays": [
+    "laravel",
+    "django",
+    "service",
     "node-typescript-service",
     "cli-worker"
   ],

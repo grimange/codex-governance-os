@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Iterable
 
 
@@ -13,14 +15,15 @@ CERTIFIED_MULTI_OVERLAY_COMPOSITIONS = frozenset(
         ("cli-worker", "node-typescript-service"),
         ("cli-worker", "php-package"),
         ("cli-worker", "python-package"),
+        ("django", "monorepo"),
+        ("laravel", "monorepo"),
+        ("monorepo", "service"),
         ("monorepo", "node-typescript-service"),
     }
 )
 
 EXPLICITLY_REJECTED_COMPOSITIONS = {
-    ("cli-worker", "laravel"): "incompatible runtime assumptions",
-    ("django", "monorepo"): "unsupported composition model",
-    ("monorepo", "service"): "scaffold structure conflict",
+    ("cli-worker", "laravel"): "missing Laravel worker composition contract",
     ("django", "laravel"): "cross-framework application collision",
 }
 
@@ -56,6 +59,19 @@ class CompositionExplanation:
     reason_code: str
 
 
+@dataclass(frozen=True)
+class ContractDocumentMatrix:
+    admitted_non_composite: tuple[str, ...]
+    certified_multi_overlay: tuple[tuple[str, ...], ...]
+    certified_fail_closed: tuple[tuple[str, ...], ...]
+
+
+@dataclass(frozen=True)
+class ContractDriftReport:
+    valid: bool
+    errors: tuple[str, ...]
+
+
 def normalize_overlays(overlays: Iterable[str]) -> tuple[str, ...]:
     normalized = []
     for overlay in overlays:
@@ -85,6 +101,63 @@ def validate_template_composition(overlays: Iterable[str]) -> CompositionValidat
         normalized,
         "not present in certified composition matrix",
         "unsupported",
+    )
+
+
+def _contract_document_path(contract_path: str | Path | None = None) -> Path:
+    if contract_path is None:
+        return Path(__file__).resolve().parents[2] / CONTRACT_PATH
+    path = Path(contract_path)
+    if path.is_absolute():
+        return path
+    return Path(__file__).resolve().parents[2] / path
+
+
+def _extract_section(text: str, heading: str) -> str:
+    pattern = rf"^## {re.escape(heading)}\n(?P<body>.*?)(?=^## |\Z)"
+    match = re.search(pattern, text, flags=re.MULTILINE | re.DOTALL)
+    if not match:
+        raise ValueError(f"Missing contract section: {heading}")
+    return match.group("body")
+
+
+def _extract_bullets(section_text: str) -> tuple[str, ...]:
+    bullets = []
+    for line in section_text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("- "):
+            bullets.append(stripped[2:].strip())
+    return tuple(bullets)
+
+
+def _parse_composition_bullet(bullet: str) -> tuple[str, ...]:
+    normalized = bullet.replace("`", "").strip()
+    if normalized == "base-only":
+        return ()
+    if " + " in normalized:
+        return normalize_overlays(normalized.split(" + "))
+    return (normalized,)
+
+
+def load_contract_document_matrix(
+    contract_path: str | Path | None = None,
+) -> ContractDocumentMatrix:
+    text = _contract_document_path(contract_path).read_text()
+    non_composite = _extract_bullets(_extract_section(text, "Admitted Non-Composite Realizations"))
+    supported = _extract_bullets(_extract_section(text, "Certified Supported Multi-Overlay Matrix"))
+    rejected = _extract_bullets(_extract_section(text, "Certified Fail-Closed Boundary"))
+    return ContractDocumentMatrix(
+        admitted_non_composite=non_composite,
+        certified_multi_overlay=tuple(
+            composition
+            for composition in (_parse_composition_bullet(item) for item in supported)
+            if composition
+        ),
+        certified_fail_closed=tuple(
+            composition
+            for composition in (_parse_composition_bullet(item) for item in rejected)
+            if composition
+        ),
     )
 
 
@@ -214,3 +287,57 @@ def validate_manifest_inventory(manifests: Iterable[object]) -> InventoryValidat
             errors.append(f"{right} is missing certified compatibility with {left}")
 
     return InventoryValidationResult(not errors, tuple(errors))
+
+
+def detect_contract_drift(
+    manifests: Iterable[object],
+    *,
+    contract_path: str | Path | None = None,
+) -> ContractDriftReport:
+    errors: list[str] = []
+    document = load_contract_document_matrix(contract_path)
+    runtime_supported = set(CERTIFIED_MULTI_OVERLAY_COMPOSITIONS)
+    document_supported = set(document.certified_multi_overlay)
+    runtime_rejected = set(EXPLICITLY_REJECTED_COMPOSITIONS)
+    document_rejected = set(document.certified_fail_closed)
+
+    if "base-only" not in document.admitted_non_composite:
+        errors.append("contract document is missing admitted non-composite entry base-only")
+    if "a single admitted overlay applied to `universal-base`" not in document.admitted_non_composite:
+        errors.append("contract document is missing admitted single-overlay realization rule")
+
+    missing_supported = sorted(document_supported - runtime_supported)
+    for composition in missing_supported:
+        errors.append(
+            "CONTRACT_DRIFT_DETECTED: contract documents unsupported runtime support for "
+            + " + ".join(composition)
+        )
+
+    undocumented_supported = sorted(runtime_supported - document_supported)
+    for composition in undocumented_supported:
+        errors.append(
+            "CONTRACT_DRIFT_DETECTED: runtime supports undocumented composition "
+            + " + ".join(composition)
+        )
+
+    missing_rejected = sorted(document_rejected - runtime_rejected)
+    for composition in missing_rejected:
+        errors.append(
+            "CONTRACT_DRIFT_DETECTED: contract documents rejection missing from runtime "
+            + " + ".join(composition)
+        )
+
+    undocumented_rejected = sorted(runtime_rejected - document_rejected)
+    for composition in undocumented_rejected:
+        errors.append(
+            "CONTRACT_DRIFT_DETECTED: runtime rejects undocumented composition "
+            + " + ".join(composition)
+        )
+
+    manifest_validation = validate_manifest_inventory(manifests)
+    if not manifest_validation.valid:
+        errors.extend(
+            f"CONTRACT_DRIFT_DETECTED: {message}" for message in manifest_validation.errors
+        )
+
+    return ContractDriftReport(not errors, tuple(errors))

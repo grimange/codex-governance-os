@@ -29,6 +29,15 @@ class TemplateCompositionContractTests(unittest.TestCase):
             ("monorepo", "node-typescript-service"),
             result.normalized_overlays,
         )
+        laravel_monorepo = validate_template_composition(["laravel", "monorepo"])
+        self.assertTrue(laravel_monorepo.supported)
+        self.assertEqual(("laravel", "monorepo"), laravel_monorepo.normalized_overlays)
+        django_monorepo = validate_template_composition(["django", "monorepo"])
+        self.assertTrue(django_monorepo.supported)
+        self.assertEqual(("django", "monorepo"), django_monorepo.normalized_overlays)
+        service_monorepo = validate_template_composition(["service", "monorepo"])
+        self.assertTrue(service_monorepo.supported)
+        self.assertEqual(("monorepo", "service"), service_monorepo.normalized_overlays)
 
     def test_explicit_rejection_has_deterministic_message(self) -> None:
         result = validate_template_composition(["laravel", "cli-worker"])

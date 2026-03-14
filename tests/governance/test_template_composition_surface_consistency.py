@@ -35,6 +35,9 @@ class TemplateCompositionSurfaceConsistencyTests(unittest.TestCase):
     def test_supported_decisions_match_between_contract_doctor_and_scaffold(self) -> None:
         cases = (
             [],
+            ["laravel", "monorepo"],
+            ["django", "monorepo"],
+            ["service", "monorepo"],
             ["node-typescript-service", "monorepo"],
             ["node-typescript-service", "cli-worker"],
             ["cli-worker", "monorepo"],
@@ -61,8 +64,6 @@ class TemplateCompositionSurfaceConsistencyTests(unittest.TestCase):
     def test_rejected_decisions_match_between_contract_doctor_and_scaffold(self) -> None:
         cases = (
             ["laravel", "cli-worker"],
-            ["django", "monorepo"],
-            ["service", "monorepo"],
             ["laravel", "django"],
         )
 
