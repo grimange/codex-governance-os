@@ -57,6 +57,9 @@ This template is intended to remain domain-neutral, architecture-neutral, and la
 - Session reconstruction verification harness: `docs/governance/session-reconstruction-verification-harness.md`
 - Session reconstruction case verification model: `docs/governance/session-reconstruction-case-verification-model.md`
 - Session reconstruction evidence packaging standard: `docs/governance/session-reconstruction-evidence-packaging-standard.md`
+- Multi-session continuity verification model: `docs/governance/multi-session-continuity-verification-model.md`
+- Multi-session continuity evidence harness: `docs/governance/multi-session-continuity-evidence-harness.md`
+- Multi-session continuity evaluation scenarios: `docs/governance/multi-session-continuity-evaluation-scenarios.md`
 - Codex session state machine canon: `docs/contracts/codex-session-state-machine-canon.md`
 - Codex session handoff packet contract: `docs/contracts/codex-session-handoff-packet-and-continuity-contract.md`
 - Codex governance surface schema contract: `docs/contracts/codex-governance-surface-schema-contract.md`

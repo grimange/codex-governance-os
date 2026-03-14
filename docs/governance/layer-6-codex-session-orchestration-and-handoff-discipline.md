@@ -32,6 +32,12 @@ Canonical session-reconstruction case-structure semantics are defined by
 [session-reconstruction-case-verification-model.md](session-reconstruction-case-verification-model.md).
 Canonical session-reconstruction evidence-packaging semantics are defined by
 [session-reconstruction-evidence-packaging-standard.md](session-reconstruction-evidence-packaging-standard.md).
+Canonical multi-session continuity-verification semantics are defined by
+[multi-session-continuity-verification-model.md](multi-session-continuity-verification-model.md).
+Canonical multi-session continuity-evidence semantics are defined by
+[multi-session-continuity-evidence-harness.md](multi-session-continuity-evidence-harness.md).
+Canonical multi-session continuity-evaluation scenario semantics are defined by
+[multi-session-continuity-evaluation-scenarios.md](multi-session-continuity-evaluation-scenarios.md).
 
 ## Scope
 
