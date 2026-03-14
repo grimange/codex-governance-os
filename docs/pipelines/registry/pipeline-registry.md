@@ -77,3 +77,10 @@
 | 073 | Verify Generated Scaffold Surface Remains Deterministic Across Certified Triple Overlay Compositions | ACTIVE | governance | docs/pipelines/governance/073--verify-generated-scaffold-surface-remains-deterministic-across-certified-triple-overlay-compositions.md |
 | 074 | Establish First Governed Quadruple-Overlay Composition Contract | ACTIVE | governance | docs/pipelines/governance/074--establish-first-governed-quadruple-overlay-composition-contract.md |
 | 075 | Verify Generated Scaffold Surface Remains Deterministic Across Certified Quadruple-Overlay Composition | ACTIVE | governance | docs/pipelines/governance/075--verify-quadruple-overlay-scaffold-determinism.md |
+| 076 | Establish Governance Evidence Interpretation Canon | ACTIVE | governance | docs/pipelines/governance/076--establish-governance-evidence-interpretation-canon.md |
+| 077 | Verify Governance Evidence Interpretation Canon | ACTIVE | governance | docs/pipelines/governance/077--verify-governance-evidence-interpretation-canon.md |
+| 078 | Establish Governance Safety Invariants Canon | ACTIVE | governance | docs/pipelines/governance/078--establish-governance-safety-invariants-canon.md |
+| 079 | Verify Governance Safety Invariants Canon | ACTIVE | governance | docs/pipelines/governance/079--verify-governance-safety-invariants-canon.md |
+| 080 | Verify Layer 0 Doctrine Closure And Discoverability | ACTIVE | governance | docs/pipelines/governance/080--verify-layer-0-doctrine-closure-and-discoverability.md |
+| 081 | Verify Layer 1 Interpretation Canon Closure | ACTIVE | governance | docs/pipelines/governance/081--verify-layer-1-interpretation-canon-closure.md |
+| 082 | Verify Layer 2 Enforcement And Execution Closure | ACTIVE | governance | docs/pipelines/governance/082--verify-layer-2-enforcement-and-execution-closure.md |

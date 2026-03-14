@@ -12,6 +12,8 @@ This file defines repository-local operating instructions for Codex agents worki
 - Preserve authority ordering defined in the repository constitution and architecture doctrine.
 - Treat `docs/governance/architecture-doctrine.md` as the canonical interpretation layer for repository structure, authority, and pipeline artifact meaning.
 - Use the doctrine foundation under `docs/governance/` as the canonical source for lifecycle, artifact, naming, contract-writing, and terminology rules.
+- Use `docs/governance/governance-evidence-interpretation-canon.md` when deciding what evidence is sufficient to support a governance claim, verdict, restriction, or verification result.
+- Use `docs/governance/governance-safety-invariants-canon.md` when deciding what governance mutation, summary, or normalization behavior must fail closed.
 - Use `docs/governance/governance-evolution-model.md` when changing governance doctrine, active pipeline structure, registry policy, or other meta-governance surfaces.
 - Treat `docs/` as the authoritative root for all governance and Codex-related files in this repository.
 - Use `docs/governance/templates/` and `tools/governance/` when authoring, validating, or scaffolding governed artifact families from the universal template system.

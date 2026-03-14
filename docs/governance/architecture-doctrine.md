@@ -68,7 +68,7 @@ No generated artifact, cache, mirrored note, or future convenience summary may b
 - `AGENTS.md` defines mission, routing, and governance authority ordering.
 - `.codex/AGENTS.md` defines repository-local operating behavior for Codex agents.
 - `docs/governance/architecture-doctrine.md` defines the canonical architecture model and interpretation rules for repository structure.
-- `docs/governance/governance-lifecycle.md`, `docs/governance/pipeline-artifact-standard.md`, `docs/governance/pipeline-naming-standard.md`, `docs/governance/contract-writing-standard.md`, `docs/governance/governance-terminology.md`, `docs/governance/governance-evolution-model.md`, `docs/governance/templates/README.md`, `docs/governance/template-scaffold-contract.md`, and `docs/contracts/universal-template-composition-contract.md` define reusable governance law and template control surfaces that future pipelines and contracts should reference instead of duplicating.
+- `docs/governance/governance-lifecycle.md`, `docs/governance/pipeline-artifact-standard.md`, `docs/governance/pipeline-naming-standard.md`, `docs/governance/contract-writing-standard.md`, `docs/governance/governance-terminology.md`, `docs/governance/governance-evidence-interpretation-canon.md`, `docs/governance/governance-safety-invariants-canon.md`, `docs/governance/governance-evolution-model.md`, `docs/governance/templates/README.md`, `docs/governance/template-scaffold-contract.md`, and `docs/contracts/universal-template-composition-contract.md` define reusable governance law and template control surfaces that future pipelines and contracts should reference instead of duplicating.
 - `docs/governance/skill-authoring-standard.md`, `docs/governance/skill-invocation-standard.md`, and `docs/governance/universal-skills-index.md` define how governed skills are authored, selected, and discovered.
 - `skills/` contains reusable universal skill packages for template inheritance.
 - `.codex/skills/` contains project-local skill extensions or overrides when repository-specific specialization is required.
@@ -119,6 +119,8 @@ Because the repository currently has no application runtime, terms such as backe
 - Governance-framework mutations must follow the governance evolution doctrine so meta-governance changes remain versioned, compatible, and auditable.
 - When future implementation code appears, downstream pipelines must explicitly determine whether this doctrine remains sufficient or requires replacement.
 - Verification work must distinguish between authoritative documents, execution evidence, and placeholder surfaces.
+- Verification and establishment work must interpret governance evidence through `docs/governance/governance-evidence-interpretation-canon.md` instead of relying on local narrative convention.
+- Governance mutation, verification, and later normalization work must preserve the fail-closed rules in `docs/governance/governance-safety-invariants-canon.md`.
 - Promotion decisions must not treat empty folders or descriptive stubs as completed architecture.
 
 ## Non-Goals

@@ -38,6 +38,8 @@ This template is intended to remain domain-neutral, architecture-neutral, and la
 
 - Example adoption scenarios: `docs/adoption/example-adoption-scenarios.md`
 - Governance lifecycle doctrine: `docs/governance/governance-lifecycle.md`
+- Governance evidence interpretation canon: `docs/governance/governance-evidence-interpretation-canon.md`
+- Governance safety invariants canon: `docs/governance/governance-safety-invariants-canon.md`
 - Governance evolution model: `docs/governance/governance-evolution-model.md`
 - Governance template system: `docs/governance/templates/README.md`
 - Template scaffold contract: `docs/governance/template-scaffold-contract.md`
