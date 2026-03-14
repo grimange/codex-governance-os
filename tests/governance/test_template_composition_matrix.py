@@ -14,8 +14,10 @@ class TemplateCompositionMatrixTests(unittest.TestCase):
     def test_supported_composition_matrix_realizes_expected_surfaces(self) -> None:
         cases = (
             ("base-only", [], {"docs/governance", "tools/templates"}),
+            ("cli-worker-plus-monorepo-plus-python-package-plus-scheduler", ["cli-worker", "monorepo", "python-package", "scheduler"], {"bin", "jobs", "worker", "packages", "services", "shared", "src", "tests", "docs", "scheduler", "scheduler/schedule.py", "scheduler/scheduler_runtime.py"}),
             ("scheduler-plus-django", ["scheduler", "django"], {"backend", "config", "apps", "scheduler", "scheduler/schedule.py", "scheduler/scheduler_runtime.py", "manage.py", "project/settings.py", "project/urls.py", "project/asgi.py", "project/celery.py", "project/scheduler.py"}),
             ("django-plus-monorepo", ["django", "monorepo"], {"apps/backend/django-service/manage.py", "apps/backend/django-service/project/settings.py", "packages", "services", "shared"}),
+            ("laravel-plus-monorepo-plus-scheduler", ["laravel", "monorepo", "scheduler"], {"apps/backend/laravel-app/app/Console/Kernel.php", "apps/backend/laravel-app/routes/console.php", "apps/backend/laravel-app/config/scheduler.php", "scheduler", "scheduler/schedule.py", "scheduler/scheduler_runtime.py", "packages", "services", "shared"}),
             ("service-plus-monorepo", ["service", "monorepo"], {"services/service-app/src", "services/service-app/tests", "services/service-app/pyproject.toml", "services/service-app/README.md", "services/service-app/service_entrypoint", "packages", "services", "shared"}),
             ("node-typescript-service-plus-monorepo", ["node-typescript-service", "monorepo"], {"package.json", "packages", "services", "shared"}),
             ("cli-worker-plus-monorepo", ["cli-worker", "monorepo"], {"bin", "jobs", "worker", "packages", "services", "shared"}),
@@ -48,6 +50,7 @@ class TemplateCompositionMatrixTests(unittest.TestCase):
         cases = (
             ("laravel-plus-cli-worker", ["laravel", "cli-worker"]),
             ("laravel-plus-django", ["laravel", "django"]),
+            ("django-plus-monorepo-plus-scheduler", ["django", "monorepo", "scheduler"]),
         )
 
         for case_name, overlays in cases:

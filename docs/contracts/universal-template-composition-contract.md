@@ -37,9 +37,11 @@ Base-only realization and single-overlay realization remain admitted when the ov
 The currently certified combinations are:
 
 - base-only
+- `cli-worker + monorepo + python-package + scheduler`
 - `django + scheduler`
 - `django + monorepo`
 - `laravel + monorepo`
+- `laravel + monorepo + scheduler`
 - `service + monorepo`
 - `node-typescript-service + monorepo`
 - `node-typescript-service + cli-worker`
@@ -55,6 +57,8 @@ The currently certified combinations are:
 - `python-package + scheduler`
 
 These combinations are certified because scaffold realization, manifest declarations, repository docs, and governance tests align on the same result.
+
+`cli-worker + monorepo + python-package + scheduler` is the first governed quadruple-overlay contract. It extends the already certified worker, topology, package, and scheduler compounds without introducing a new ownership role, so the generated scaffold remains the deterministic union of those governed surfaces under the existing fail-closed composition model.
 
 ## Admitted Non-Composite Realizations
 
@@ -79,7 +83,9 @@ Representative rejection cases must remain covered by governance verification so
 
 `django + scheduler` is now admitted only through a Django-native scheduler composition contract. That support is limited to the direct pair and requires the canonical Django scheduler surface at `project/celery.py` together with the governed companion surfaces `project/scheduler.py`, `project/settings.py`, and `manage.py`. It does not imply broader framework-native scheduler support or automatic admission of `django + monorepo + scheduler`.
 
-`laravel + scheduler` is now admitted only through the first framework-native scheduler contract. That support is limited to the direct pair and requires the canonical Laravel scheduler surface at `app/Console/Kernel.php` together with the governed companion surfaces `routes/console.php` and `config/scheduler.php`. It does not imply broader framework-native scheduler support or automatic admission of `laravel + monorepo + scheduler`.
+`laravel + scheduler` is now admitted only through the first framework-native scheduler contract. That support is limited to the direct pair and requires the canonical Laravel scheduler surface at `app/Console/Kernel.php` together with the governed companion surfaces `routes/console.php` and `config/scheduler.php`.
+
+`laravel + monorepo + scheduler` is now admitted only through the Laravel monorepo scheduler compound contract. Under that contract, Laravel-native scheduler truth remains framework-owned, but the governed Laravel scheduler surfaces are placed under `apps/backend/laravel-app/`, with the canonical scheduler surface at `apps/backend/laravel-app/app/Console/Kernel.php` and companion surfaces at `apps/backend/laravel-app/routes/console.php` and `apps/backend/laravel-app/config/scheduler.php`.
 
 ## Overlay Compatibility Rules
 
@@ -93,6 +99,8 @@ Representative rejection cases must remain covered by governance verification so
 - `scheduler` may compose only with `cli-worker`, `django`, `laravel`, `monorepo`, and `python-package`
 - `node-typescript-service` may compose only with `monorepo` and `cli-worker`
 - certified triple-overlay composition may be admitted through governed capability compatibility when it is explicitly listed in the certified matrix
+- certified quadruple-overlay composition may be admitted only when it is explicitly listed in the certified matrix and ledger
+- framework-native scheduler triple-overlay composition is not implied by pairwise support; each admitted triplet requires its own governed compound contract
 - overlays not listed in a compatible pair are non-composable by default
 - the base scaffold may be realized without overlays
 

@@ -30,6 +30,13 @@
     "django+laravel": "cross-framework-application-collision",
     "laravel+scheduler": "framework-native-scheduler-required"
   },
+  "compound_contracts": {
+    "cli-worker+monorepo+python-package+scheduler": "worker-monorepo-package-scheduler-quadruple-contract",
+    "cli-worker+monorepo+python-package": "worker-monorepo-package-compound-contract",
+    "cli-worker+monorepo+scheduler": "worker-monorepo-scheduler-compound-contract",
+    "cli-worker+python-package+scheduler": "worker-package-scheduler-compound-contract",
+    "laravel+monorepo+scheduler": "laravel-monorepo-scheduler-compound-contract"
+  },
   "role_collision_codes": {
     "framework+framework": "cross-framework-application-collision",
     "framework+package": "package-application-role-collision",

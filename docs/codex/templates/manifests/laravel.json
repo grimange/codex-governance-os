@@ -38,6 +38,32 @@
     "service"
   ],
   "composition_overrides": {
+    "monorepo+scheduler": {
+      "type": "laravel-monorepo-scheduler-compound-contract",
+      "overlay": "laravel",
+      "placement": "apps/backend/laravel-app",
+      "scheduler_surface": "apps/backend/laravel-app/app/Console/Kernel.php",
+      "scheduler_contract": "framework-native-monorepo",
+      "required_surfaces": [
+        "apps/backend/laravel-app/composer.json",
+        "apps/backend/laravel-app/bootstrap/app.php",
+        "apps/backend/laravel-app/config/app.php",
+        "apps/backend/laravel-app/routes/web.php",
+        "apps/backend/laravel-app/public/index.php",
+        "apps/backend/laravel-app/app/Console",
+        "apps/backend/laravel-app/app/Http",
+        "apps/backend/laravel-app/app/Console/Kernel.php",
+        "apps/backend/laravel-app/app/Console/Commands",
+        "apps/backend/laravel-app/routes/console.php",
+        "apps/backend/laravel-app/config/scheduler.php"
+      ],
+      "optional_surfaces": [
+        "apps/backend/laravel-app/resources",
+        "apps/backend/laravel-app/database",
+        "apps/backend/laravel-app/app/Jobs",
+        "apps/backend/laravel-app/storage/logs"
+      ]
+    },
     "scheduler": {
       "type": "laravel-native-scheduler-contract",
       "overlay": "laravel",

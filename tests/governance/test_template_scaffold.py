@@ -106,6 +106,30 @@ class TemplateScaffoldTests(unittest.TestCase):
             self.assertTrue((Path(tmp) / "packages").is_dir())
             self.assertTrue((Path(tmp) / "services").is_dir())
 
+    def test_compound_overlay_composition_for_laravel_monorepo_scheduler_is_supported(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            selection = realize_repository_scaffold(
+                "universal-base",
+                Path(tmp),
+                overlays=["laravel", "monorepo", "scheduler"],
+                include_optional=False,
+            )
+            self.assertTrue(selection.exists())
+            payload = json.loads(selection.read_text())
+            self.assertEqual(
+                "apps/backend/laravel-app/app/Console/Kernel.php",
+                payload["composition_metadata"]["laravel"]["scheduler_surface"],
+            )
+            self.assertEqual(
+                "apps/backend/laravel-app",
+                payload["composition_metadata"]["laravel"]["placement"],
+            )
+            self.assertTrue((Path(tmp) / "apps/backend/laravel-app/app/Console/Kernel.php").is_file())
+            self.assertTrue((Path(tmp) / "apps/backend/laravel-app/routes/console.php").is_file())
+            self.assertTrue((Path(tmp) / "apps/backend/laravel-app/config/scheduler.php").is_file())
+            self.assertTrue((Path(tmp) / "scheduler/schedule.py").is_file())
+            self.assertTrue((Path(tmp) / "packages").is_dir())
+
     def test_overlay_composition_for_service_in_monorepo_is_supported(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             selection = realize_repository_scaffold(
@@ -211,6 +235,29 @@ class TemplateScaffoldTests(unittest.TestCase):
                     "universal-base",
                     Path(tmp),
                     overlays=["laravel", "cli-worker"],
+                )
+
+    def test_ambiguous_compound_override_resolution_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest_root = Path(tmp) / "manifests"
+            shutil.copytree(
+                Path(__file__).resolve().parents[2] / "docs/codex/templates/manifests",
+                manifest_root,
+                dirs_exist_ok=True,
+            )
+            laravel_manifest = manifest_root / "laravel.json"
+            payload = json.loads(laravel_manifest.read_text())
+            payload["composition_overrides"]["scheduler+monorepo"] = payload["composition_overrides"][
+                "monorepo+scheduler"
+            ]
+            laravel_manifest.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
+
+            with self.assertRaisesRegex(RegistryError, "Ambiguous compound override resolution"):
+                realize_repository_scaffold(
+                    "universal-base",
+                    Path(tmp) / "output",
+                    overlays=["laravel", "monorepo", "scheduler"],
+                    manifest_dir=manifest_root,
                 )
 
     def test_list_manifests_cli_fails_when_manifest_inventory_drifts(self) -> None:

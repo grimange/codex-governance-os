@@ -173,15 +173,34 @@ def _resolve_overlay_surfaces(
     *,
     include_optional: bool,
 ) -> tuple[list[str], dict[str, object] | None]:
-    for other_overlay in selected_overlays:
-        if other_overlay == overlay_manifest.template_name:
-            continue
-        override = overlay_manifest.composition_overrides.get(other_overlay)
-        if override:
-            required = list(_tuple_of_strings(override.get("required_surfaces", []), "required_surfaces"))
-            optional = list(_tuple_of_strings(override.get("optional_surfaces", []), "optional_surfaces"))
-            surfaces = required + (optional if include_optional else [])
-            return surfaces, override
+    selected_other_overlays = sorted(
+        other_overlay
+        for other_overlay in selected_overlays
+        if other_overlay != overlay_manifest.template_name
+    )
+    matched_overrides: list[tuple[int, str, dict[str, object]]] = []
+    for key, override in overlay_manifest.composition_overrides.items():
+        key_parts = tuple(sorted(part.strip() for part in key.split("+") if part.strip()))
+        if key_parts and all(part in selected_other_overlays for part in key_parts):
+            matched_overrides.append((len(key_parts), key, override))
+
+    if matched_overrides:
+        highest_specificity = max(score for score, _, _ in matched_overrides)
+        specific_overrides = [
+            (key, override)
+            for score, key, override in matched_overrides
+            if score == highest_specificity
+        ]
+        if len(specific_overrides) > 1:
+            raise RegistryError(
+                f"Ambiguous compound override resolution for {overlay_manifest.template_name}: "
+                + ", ".join(key for key, _ in specific_overrides)
+            )
+        _, override = specific_overrides[0]
+        required = list(_tuple_of_strings(override.get("required_surfaces", []), "required_surfaces"))
+        optional = list(_tuple_of_strings(override.get("optional_surfaces", []), "optional_surfaces"))
+        surfaces = required + (optional if include_optional else [])
+        return surfaces, override
     surfaces = list(overlay_manifest.required_surfaces)
     if include_optional:
         surfaces.extend(overlay_manifest.optional_surfaces)
@@ -189,6 +208,15 @@ def _resolve_overlay_surfaces(
 
 
 def render_scaffold_surface(surface: str) -> str:
+    laravel_monorepo_prefix = "apps/backend/laravel-app/"
+    if surface.startswith(laravel_monorepo_prefix):
+        relative_surface = surface[len(laravel_monorepo_prefix):]
+        if relative_surface in {
+            "app/Console/Kernel.php",
+            "routes/console.php",
+            "config/scheduler.php",
+        }:
+            return render_scaffold_surface(relative_surface)
     if surface == "manage.py":
         return (
             "#!/usr/bin/env python\n"

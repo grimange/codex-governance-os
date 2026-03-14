@@ -21,8 +21,10 @@ class TemplateCapabilityCompositionTests(unittest.TestCase):
     def test_capability_resolution_preserves_supported_matrix_entries(self) -> None:
         manifests = list_scaffold_manifests()
         for pair in (
+            ["cli-worker", "monorepo", "python-package", "scheduler"],
             ["django", "scheduler"],
             ["laravel", "monorepo"],
+            ["laravel", "monorepo", "scheduler"],
             ["laravel", "scheduler"],
             ["service", "monorepo"],
             ["cli-worker", "python-package"],

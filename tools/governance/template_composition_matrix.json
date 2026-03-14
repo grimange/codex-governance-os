@@ -34,6 +34,11 @@
     ],
     [
       "laravel",
+      "monorepo",
+      "scheduler"
+    ],
+    [
+      "laravel",
       "scheduler"
     ],
     [
@@ -57,6 +62,12 @@
       "cli-worker",
       "monorepo",
       "python-package"
+    ],
+    [
+      "cli-worker",
+      "monorepo",
+      "python-package",
+      "scheduler"
     ],
     [
       "cli-worker",

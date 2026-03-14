@@ -30,10 +30,12 @@ Current supported overlays:
 Verified supported compositions:
 
 - base-only
+- `cli-worker + monorepo + python-package + scheduler`
 - `django + scheduler`
 - `scheduler` as an admitted single-overlay realization
 - `laravel + scheduler`
 - `laravel + monorepo`
+- `laravel + monorepo + scheduler`
 - `django + monorepo`
 - `service + monorepo`
 - `node-typescript-service + monorepo`
@@ -58,6 +60,8 @@ Explicitly fail-closed examples:
 Use `tools/templates/list_templates.py` to inspect the scaffold manifest inventory.
 
 The certified composition boundary for these overlays is published in `docs/contracts/universal-template-composition-contract.md`, and scaffold plus manifest-inspection tooling enforce that boundary fail-closed.
+
+Certified compound composition and fail-closed higher-order boundaries are centralized in [compound-composition-certification-ledger.md](/home/ramjf/python-projects/codex-governance-os/docs/governance/compound-composition-certification-ledger.md). Triple or quadruple support is never inferred from pairwise support alone.
 
 Use `python tools/governance/template_scaffold.py doctor-composition --overlays ... --output json` to inspect why a composition is supported or rejected and to see the closest certified alternatives.
 
@@ -86,4 +90,4 @@ Current canonical conflict codes:
 - `package-application-role-collision`
 - `workspace-orchestration-collision`
 
-Framework-native scheduler support currently exists for the direct pairs `laravel + scheduler` and `django + scheduler`. The Django-native contract requires the canonical scheduler surface at `project/celery.py` and the companion surfaces `project/scheduler.py`, `project/settings.py`, and `manage.py`. Broader compound framework-native scheduler combinations remain unsupported unless a future lane admits them explicitly.
+Framework-native scheduler support currently exists for the direct pairs `laravel + scheduler` and `django + scheduler`, and for the first admitted compound `laravel + monorepo + scheduler`. The Django-native contract requires the canonical scheduler surface at `project/celery.py` and the companion surfaces `project/scheduler.py`, `project/settings.py`, and `manage.py`. The Laravel monorepo scheduler compound requires the placed scheduler surface at `apps/backend/laravel-app/app/Console/Kernel.php` and the companion surfaces `apps/backend/laravel-app/routes/console.php` and `apps/backend/laravel-app/config/scheduler.php`. `django + monorepo + scheduler` and worker-oriented framework scheduler compounds remain unsupported unless a future lane admits them explicitly.

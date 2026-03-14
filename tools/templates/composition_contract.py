@@ -8,6 +8,7 @@ from typing import Iterable
 
 
 CONTRACT_PATH = "docs/contracts/universal-template-composition-contract.md"
+COMPOUND_LEDGER_PATH = "docs/governance/compound-composition-certification-ledger.md"
 MATRIX_SNAPSHOT_PATH = "tools/governance/template_composition_matrix.json"
 CAPABILITY_REGISTRY_PATH = "tools/governance/template_capability_registry.json"
 BASE_TEMPLATE_NAME = "universal-base"
@@ -16,6 +17,7 @@ CERTIFIED_MULTI_OVERLAY_COMPOSITIONS = frozenset(
     {
         ("cli-worker", "monorepo"),
         ("cli-worker", "monorepo", "python-package"),
+        ("cli-worker", "monorepo", "python-package", "scheduler"),
         ("cli-worker", "monorepo", "scheduler"),
         ("cli-worker", "node-typescript-service"),
         ("cli-worker", "php-package"),
@@ -23,8 +25,9 @@ CERTIFIED_MULTI_OVERLAY_COMPOSITIONS = frozenset(
         ("cli-worker", "python-package", "scheduler"),
         ("cli-worker", "scheduler"),
         ("django", "scheduler"),
-        ("laravel", "scheduler"),
         ("django", "monorepo"),
+        ("laravel", "monorepo", "scheduler"),
+        ("laravel", "scheduler"),
         ("laravel", "monorepo"),
         ("monorepo", "service"),
         ("monorepo", "node-typescript-service"),
@@ -86,6 +89,12 @@ class ContractDriftReport:
 
 
 @dataclass(frozen=True)
+class CompoundCompositionLedger:
+    certified_compounds: tuple[tuple[str, ...], ...]
+    fail_closed_triple_boundaries: tuple[tuple[str, ...], ...]
+
+
+@dataclass(frozen=True)
 class CompositionMatrixSnapshot:
     supported: tuple[tuple[str, ...], ...]
     explicitly_rejected: tuple[tuple[tuple[str, ...], str], ...]
@@ -103,6 +112,7 @@ class TemplateCapabilityRegistry:
     roles: dict[str, frozenset[str]]
     conflict_taxonomy: dict[str, str]
     explicit_boundary_codes: dict[tuple[str, ...], str]
+    compound_contracts: dict[tuple[str, ...], str]
     role_collision_codes: dict[tuple[str, str], str]
     capability_collision_codes: dict[str, str]
 
@@ -314,6 +324,15 @@ def _matrix_snapshot_path(snapshot_path: str | Path | None = None) -> Path:
     return Path(__file__).resolve().parents[2] / path
 
 
+def _compound_ledger_path(ledger_path: str | Path | None = None) -> Path:
+    if ledger_path is None:
+        return Path(__file__).resolve().parents[2] / COMPOUND_LEDGER_PATH
+    path = Path(ledger_path)
+    if path.is_absolute():
+        return path
+    return Path(__file__).resolve().parents[2] / path
+
+
 def _capability_registry_path(registry_path: str | Path | None = None) -> Path:
     if registry_path is None:
         return Path(__file__).resolve().parents[2] / CAPABILITY_REGISTRY_PATH
@@ -331,6 +350,7 @@ def load_template_capability_registry(
     roles_raw = payload.get("composition_roles")
     taxonomy_raw = payload.get("conflict_taxonomy")
     explicit_raw = payload.get("explicit_boundary_codes", {})
+    compound_raw = payload.get("compound_contracts", {})
     role_codes_raw = payload.get("role_collision_codes", {})
     capability_codes_raw = payload.get("capability_collision_codes", {})
     if not isinstance(capabilities_raw, list):
@@ -341,6 +361,8 @@ def load_template_capability_registry(
         raise ValueError("conflict_taxonomy must be a mapping")
     if not isinstance(explicit_raw, dict):
         raise ValueError("explicit_boundary_codes must be a mapping")
+    if not isinstance(compound_raw, dict):
+        raise ValueError("compound_contracts must be a mapping")
     if not isinstance(role_codes_raw, dict):
         raise ValueError("role_collision_codes must be a mapping")
     if not isinstance(capability_codes_raw, dict):
@@ -381,6 +403,11 @@ def load_template_capability_registry(
         if not isinstance(key, str) or not key or not isinstance(value, str) or not value:
             raise ValueError("explicit_boundary_codes entries must be non-empty string pairs")
         explicit_boundary_codes[normalize_overlays(key.split("+"))] = value
+    compound_contracts: dict[tuple[str, ...], str] = {}
+    for key, value in compound_raw.items():
+        if not isinstance(key, str) or not key or not isinstance(value, str) or not value:
+            raise ValueError("compound_contracts entries must be non-empty string pairs")
+        compound_contracts[normalize_overlays(key.split("+"))] = value
     role_collision_codes: dict[tuple[str, str], str] = {}
     for key, value in role_codes_raw.items():
         if not isinstance(key, str) or not key or not isinstance(value, str) or not value:
@@ -399,6 +426,7 @@ def load_template_capability_registry(
         roles=roles,
         conflict_taxonomy=taxonomy,
         explicit_boundary_codes=explicit_boundary_codes,
+        compound_contracts=compound_contracts,
         role_collision_codes=role_collision_codes,
         capability_collision_codes=capability_collision_codes,
     )
@@ -448,6 +476,26 @@ def load_contract_document_matrix(
             composition
             for composition in (_parse_composition_bullet(item) for item in rejected)
             if composition
+        ),
+    )
+
+
+def load_compound_composition_ledger(
+    ledger_path: str | Path | None = None,
+) -> CompoundCompositionLedger:
+    text = _compound_ledger_path(ledger_path).read_text()
+    certified = _extract_bullets(_extract_section(text, "Certified Compound Compositions"))
+    fail_closed = _extract_bullets(_extract_section(text, "Fail-Closed Triple-Overlay Boundaries"))
+    return CompoundCompositionLedger(
+        certified_compounds=tuple(
+            composition
+            for composition in (_parse_composition_bullet(item) for item in certified)
+            if len(composition) >= 3
+        ),
+        fail_closed_triple_boundaries=tuple(
+            composition
+            for composition in (_parse_composition_bullet(item) for item in fail_closed)
+            if len(composition) == 3
         ),
     )
 
@@ -808,12 +856,14 @@ def verify_composition_matrix(
     *,
     snapshot_path: str | Path | None = None,
     contract_path: str | Path | None = None,
+    ledger_path: str | Path | None = None,
 ) -> CompositionMatrixVerificationReport:
     errors: list[str] = []
     snapshot = load_composition_matrix_snapshot(snapshot_path)
     contract_report = detect_contract_drift(manifests, contract_path=contract_path)
     if not contract_report.valid:
         errors.extend(contract_report.errors)
+    ledger = load_compound_composition_ledger(ledger_path)
 
     snapshot_supported = set(snapshot.supported)
     runtime_supported = set(CERTIFIED_MULTI_OVERLAY_COMPOSITIONS)
@@ -889,6 +939,30 @@ def verify_composition_matrix(
                 "COMPOSITION_MATRIX_DRIFT: explicitly rejected snapshot pair has mismatched reason "
                 + " + ".join(composition)
                 + f" (snapshot={reason!r}, runtime={explanation.rejection_reason!r})"
+            )
+
+    runtime_compounds = {composition for composition in runtime_supported if len(composition) >= 3}
+    ledger_compounds = set(ledger.certified_compounds)
+    undocumented_compounds = sorted(runtime_compounds - ledger_compounds)
+    for composition in undocumented_compounds:
+        errors.append(
+            "COMPOSITION_LEDGER_DRIFT: runtime supports compound composition missing from ledger "
+            + " + ".join(composition)
+        )
+
+    missing_compounds = sorted(ledger_compounds - runtime_compounds)
+    for composition in missing_compounds:
+        errors.append(
+            "COMPOSITION_LEDGER_DRIFT: ledger certifies compound composition missing from runtime "
+            + " + ".join(composition)
+        )
+
+    for composition in sorted(ledger.fail_closed_triple_boundaries):
+        explanation = explain_template_composition(composition)
+        if explanation.supported:
+            errors.append(
+                "COMPOSITION_LEDGER_DRIFT: fail-closed triple boundary resolves as supported "
+                + " + ".join(composition)
             )
 
     return CompositionMatrixVerificationReport(not errors, tuple(errors))
