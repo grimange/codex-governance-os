@@ -12,11 +12,20 @@ handoff requirements. It does not establish a runtime orchestration engine,
 automatic delegation, or autonomous multi-session control.
 
 Canonical lifecycle state semantics for governed sessions are defined by
-[codex-session-state-machine-canon.md](/home/ramjf/python-projects/codex-governance-os/docs/contracts/codex-session-state-machine-canon.md).
+[codex-session-state-machine-canon.md](../contracts/codex-session-state-machine-canon.md).
 Canonical handoff and resume evidence semantics are defined by
-[codex-session-handoff-contract-and-resume-evidence-model.md](/home/ramjf/python-projects/codex-governance-os/docs/governance/codex-session-handoff-contract-and-resume-evidence-model.md).
+[codex-session-handoff-contract-and-resume-evidence-model.md](codex-session-handoff-contract-and-resume-evidence-model.md).
 Canonical admission and activation semantics are defined by
-[codex-session-admission-and-activation-rules.md](/home/ramjf/python-projects/codex-governance-os/docs/governance/codex-session-admission-and-activation-rules.md).
+[codex-session-admission-and-activation-rules.md](codex-session-admission-and-activation-rules.md).
+Canonical runtime-boundary and runtime-evidence compatibility semantics are
+defined by
+[codex-session-runtime-boundary-and-evidence-model.md](codex-session-runtime-boundary-and-evidence-model.md).
+Canonical lifecycle-observation normalization semantics are defined by
+[codex-session-lifecycle-observation-discipline.md](codex-session-lifecycle-observation-discipline.md).
+Canonical session-evidence interpretation semantics are defined by
+[codex-session-evidence-interpretation-model.md](codex-session-evidence-interpretation-model.md).
+Canonical session-reconstruction procedure semantics are defined by
+[codex-session-reconstruction-rules.md](codex-session-reconstruction-rules.md).
 
 ## Scope
 

@@ -10,7 +10,7 @@ universal template scaffold.
 
 This ledger governs only compound overlay composition with three or more
 overlays. Pairwise support and explicit pairwise rejection remain governed by
-[universal-template-composition-contract.md](/home/ramjf/python-projects/codex-governance-os/docs/contracts/universal-template-composition-contract.md).
+[universal-template-composition-contract.md](../contracts/universal-template-composition-contract.md).
 
 ## Certified Compound Compositions
 

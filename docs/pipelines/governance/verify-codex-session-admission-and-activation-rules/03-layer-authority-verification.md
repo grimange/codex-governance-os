@@ -16,5 +16,5 @@ Restriction note:
 - pipeline `107` refers to
   `docs/governance/codex-session-state-machine-canon.md`, but the repository’s
   canonical state-machine canon is
-  [codex-session-state-machine-canon.md](/home/ramjf/python-projects/codex-governance-os/docs/contracts/codex-session-state-machine-canon.md)
+  [codex-session-state-machine-canon.md](../../../contracts/codex-session-state-machine-canon.md)
   under `docs/contracts/`

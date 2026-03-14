@@ -54,6 +54,11 @@ reasoning, and unsupported AI inference.
 
 Editing, cleanup, or normalization must not silently change governance meaning.
 
+### Repository Portability Link Invariants
+
+Canonical governance and repository-entry surfaces must remain portable across
+clone locations, users, and operating systems.
+
 ## Governed Execution Invariants
 
 ### Governed Execution Required
@@ -220,6 +225,50 @@ meaning.
 If normalization would alter meaning, it must block or be handled through an
 explicit higher-authority lane.
 
+## Repository Portability Link Invariants
+
+### Machine-Local Filesystem References Are Forbidden In Canonical Links
+
+Canonical governance surfaces must not use machine-local absolute filesystem
+references as live repository links, canonical references, navigation paths, or
+doctrinal pointers.
+
+Forbidden machine-local patterns include, but are not limited to:
+
+- `/home/...`
+- `/Users/...`
+- `C:\...`
+- `file://...`
+- `~/...`
+
+Portable repository references must instead use:
+
+- document-relative links
+- repository-relative paths
+- intentional external URLs
+
+### Historical Evidence Must Remain Visible
+
+Historical artifacts may preserve older portability defects as evidence when a
+later remediation or verification lane needs that record.
+
+Those historical mentions must not be used as live canonical navigation or
+treated as approval for future machine-local references in canonical surfaces.
+
+### Examples And Pattern Definitions Are Not Live References
+
+Literal pattern examples inside doctrine, contracts, or pipeline definitions
+may mention forbidden path forms when they are being described as disallowed
+inputs or remediation targets rather than used as live links or canonical
+navigation.
+
+### Deterministic Preflight Enforcement Is Allowed
+
+Governed execution may enforce this invariant through a deterministic
+repository preflight or admission scan that fails closed on new portability
+violations while classifying rule examples, scan definitions, and preserved
+historical evidence explicitly.
+
 ## Compliance Signals
 
 This canon is being followed when:
@@ -231,6 +280,8 @@ This canon is being followed when:
 - unsupported boundaries do not silently broaden
 - narrative or AI summaries do not outrank repository truth
 - cleanup or normalization does not silently rewrite governance meaning
+- canonical links and repository references remain portable rather than
+  machine-local
 
 ## Non-Goals
 

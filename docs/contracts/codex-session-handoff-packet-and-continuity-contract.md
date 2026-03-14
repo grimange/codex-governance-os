@@ -44,9 +44,9 @@ session-governance surfaces.
 
 Canonical lifecycle state meaning for handoff, resumption, and closure remains
 governed by
-[codex-session-state-machine-canon.md](/home/ramjf/python-projects/codex-governance-os/docs/contracts/codex-session-state-machine-canon.md).
+[codex-session-state-machine-canon.md](codex-session-state-machine-canon.md).
 Canonical handoff and resume admissibility meaning remains governed by
-[codex-session-handoff-contract-and-resume-evidence-model.md](/home/ramjf/python-projects/codex-governance-os/docs/governance/codex-session-handoff-contract-and-resume-evidence-model.md).
+[codex-session-handoff-contract-and-resume-evidence-model.md](../governance/codex-session-handoff-contract-and-resume-evidence-model.md).
 
 ## Canonical Rules
 

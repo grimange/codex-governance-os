@@ -62,7 +62,7 @@ The scheduler overlay is explicitly recognized as an admitted single-overlay rea
 
 Capability vocabulary is governed by `tools/governance/template_capability_registry.json`. Capability evaluation is used to verify that manifest declarations remain consistent with the certified matrix and explicit fail-closed boundaries.
 
-Compound composition certification is centralized in [compound-composition-certification-ledger.md](/home/ramjf/python-projects/codex-governance-os/docs/governance/compound-composition-certification-ledger.md). Triple-overlay compositions not listed there must fail closed, even if some of their pairwise edges are already certified.
+Compound composition certification is centralized in [compound-composition-certification-ledger.md](compound-composition-certification-ledger.md). Triple-overlay compositions not listed there must fail closed, even if some of their pairwise edges are already certified.
 Certified quadruple-overlay compositions are also governed there and must fail closed unless both the ledger and certified matrix admit them explicitly.
 
 Capability conflict semantics are also governed there. Rejected capability compositions must expose deterministic taxonomy via canonical conflict codes even when the top-level decision class remains `explicitly-rejected`, `capability-conflict`, or `capability-role-conflict`.

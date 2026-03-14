@@ -18,6 +18,9 @@ This ledger governs:
 - task and mutation-scope event recording
 - handoff traceability
 - final session execution outcome recording
+- compatibility expectations for future runtime event evidence mapped into the
+  canonical ledger
+- lifecycle observation evidence normalized into canonical ledger meaning
 
 This ledger does not:
 
@@ -55,7 +58,7 @@ These events should be recorded in execution order for a governed session when
 the repository chooses to record that session.
 
 The canonical lifecycle states that these events move between are defined by
-[codex-session-state-machine-canon.md](/home/ramjf/python-projects/codex-governance-os/docs/contracts/codex-session-state-machine-canon.md).
+[codex-session-state-machine-canon.md](../contracts/codex-session-state-machine-canon.md).
 
 ## Ledger Fields
 
@@ -64,6 +67,7 @@ Each ledger entry should record:
 - `session_id`
 - `event`
 - `event_date`
+- `evidence_reference`
 - `from_state`
 - `to_state`
 - `orchestrator_session`
@@ -91,6 +95,8 @@ Field intent:
 
 - `from_state` and `to_state` identify the canonical lifecycle transition
   represented by the event when lifecycle movement is being recorded
+- `evidence_reference` identifies the supporting runtime or artifact evidence
+  for the event when such evidence exists
 - `mutation_scope` identifies the canonical surface or directory affected by
   the session event
 - `pipeline_executed` identifies the governed lane associated with the session
@@ -144,6 +150,18 @@ Lifecycle transition recording must not contradict the canonical state machine.
 Events may add execution detail, but they must not imply an invalid lifecycle
 movement such as reopening a closed session directly into active execution.
 
+If a future runtime implementation emits native event identifiers or richer
+telemetry, governed recording must map that evidence back to canonical ledger
+fields such as `session_id`, `event`, `event_date`, `from_state`, `to_state`,
+and `evidence_reference` rather than replacing the ledger with a parallel
+runtime-only truth surface.
+
+Lifecycle observations should be interpreted through
+`codex-session-lifecycle-observation-discipline.md` so initialization,
+admission, activation, execution, handoff, resumed continuity, closure, and
+violation evidence remain reconstructable without creating a competing ledger
+schema.
+
 ## Mutation Scope Rules
 
 Every governed session that mutates repository state should declare a bounded
@@ -161,8 +179,8 @@ mutations to be serialized rather than performed concurrently.
 The ledger begins as an empty canonical evidence surface until later governed
 work records specific session events.
 
-| session_id | event | event_date | from_state | to_state | orchestrator_session | agent_role | pipeline_executed | task_scope | mutation_scope | handoff_packet | predecessor_handoff_packet | admission_status | activation_status | admission_failure_reason | resume_status | handoff_from_session | handoff_to_session | handoff_objective | handoff_constraints | preserved_restrictions | handoff_expected_outputs | first_admitted_action | first_successor_action | final_verdict |
-|------------|-------|------------|------------|----------|----------------------|------------|-------------------|------------|----------------|----------------|----------------------------|------------------|-------------------|--------------------------|---------------|----------------------|--------------------|-------------------|---------------------|------------------------|--------------------------|----------------------|------------------------|---------------|
+| session_id | event | event_date | evidence_reference | from_state | to_state | orchestrator_session | agent_role | pipeline_executed | task_scope | mutation_scope | handoff_packet | predecessor_handoff_packet | admission_status | activation_status | admission_failure_reason | resume_status | handoff_from_session | handoff_to_session | handoff_objective | handoff_constraints | preserved_restrictions | handoff_expected_outputs | first_admitted_action | first_successor_action | final_verdict |
+|------------|-------|------------|--------------------|------------|----------|----------------------|------------|-------------------|------------|----------------|----------------|----------------------------|------------------|-------------------|--------------------------|---------------|----------------------|--------------------|-------------------|---------------------|------------------------|--------------------------|----------------------|------------------------|---------------|
 
 ## Explicit Restrictions
 

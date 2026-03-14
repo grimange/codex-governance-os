@@ -40,6 +40,8 @@ This template is intended to remain domain-neutral, architecture-neutral, and la
 - Governance lifecycle doctrine: `docs/governance/governance-lifecycle.md`
 - Governance evidence interpretation canon: `docs/governance/governance-evidence-interpretation-canon.md`
 - Governance safety invariants canon: `docs/governance/governance-safety-invariants-canon.md`
+- Repository portability link invariant: canonical governance and repository-entry references must avoid machine-local filesystem paths and use portable relative paths or explicit external URLs instead.
+- Governance preflight command: run `python tools/governance/preflight.py` to execute the active fail-closed portability reference scan before governed execution.
 - Layer 3 Codex rules canon: `docs/governance/layer-3-codex-rules-canon.md`
 - Layer 4 Codex role model: `docs/governance/layer-4-codex-role-model.md`
 - Layer 5 Codex collaboration operating model: `docs/governance/layer-5-codex-collaboration-operating-model.md`
@@ -48,6 +50,10 @@ This template is intended to remain domain-neutral, architecture-neutral, and la
 - Codex session execution ledger: `docs/governance/codex-session-ledger.md`
 - Codex session handoff and resume evidence model: `docs/governance/codex-session-handoff-contract-and-resume-evidence-model.md`
 - Codex session admission and activation rules: `docs/governance/codex-session-admission-and-activation-rules.md`
+- Codex session runtime boundary and evidence model: `docs/governance/codex-session-runtime-boundary-and-evidence-model.md`
+- Codex session lifecycle observation discipline: `docs/governance/codex-session-lifecycle-observation-discipline.md`
+- Codex session evidence interpretation model: `docs/governance/codex-session-evidence-interpretation-model.md`
+- Codex session reconstruction rules: `docs/governance/codex-session-reconstruction-rules.md`
 - Codex session state machine canon: `docs/contracts/codex-session-state-machine-canon.md`
 - Codex session handoff packet contract: `docs/contracts/codex-session-handoff-packet-and-continuity-contract.md`
 - Codex governance surface schema contract: `docs/contracts/codex-governance-surface-schema-contract.md`

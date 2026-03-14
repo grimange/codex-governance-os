@@ -19,6 +19,9 @@ This registry governs:
 - orchestrator and parent-session relationships
 - lifecycle state recording
 - final verdict recording for governed sessions
+- compatibility expectations for future runtime session evidence mapped into
+  registry meaning
+- lifecycle observation summaries normalized from later runtime evidence
 
 This registry does not:
 
@@ -121,7 +124,7 @@ Field intent:
 ## Lifecycle Status Values
 
 Canonical lifecycle status values are defined by
-[codex-session-state-machine-canon.md](/home/ramjf/python-projects/codex-governance-os/docs/contracts/codex-session-state-machine-canon.md).
+[codex-session-state-machine-canon.md](../contracts/codex-session-state-machine-canon.md).
 
 Allowed lifecycle status values are:
 
@@ -164,7 +167,7 @@ Allowed activation status values are:
 
 These values summarize current state at the registry level. Detailed event
 history belongs in
-[codex-session-ledger.md](/home/ramjf/python-projects/codex-governance-os/docs/governance/codex-session-ledger.md).
+[codex-session-ledger.md](codex-session-ledger.md).
 
 ## Recording Rules
 
@@ -180,6 +183,14 @@ history belongs in
 - admission and activation outcomes should be explicit rather than inferred
 - resumed successors should reference `predecessor_handoff_packet` and record
   imported `preserved_restrictions` and `first_successor_action`
+- future runtime implementations must map runtime-native identity back to the
+  canonical `session_id` rather than replacing registry identity with a native
+  runtime handle
+- future lifecycle observations must map into canonical registry fields such as
+  `start_date`, `closure_date`, `admission_status`, `activation_status`, and
+  `lifecycle_status` rather than introducing parallel registry aliases
+- future runtime evidence may enrich registry support records, but canonical
+  registry meaning must remain centered on the existing field set
 
 ## Initial Registry State
 

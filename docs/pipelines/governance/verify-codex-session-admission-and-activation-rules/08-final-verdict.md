@@ -13,7 +13,7 @@ Restrictions:
 
 - pipeline `107` names the state-machine canon under `docs/governance/`, while
   the repository’s canonical state-machine path is
-  [codex-session-state-machine-canon.md](/home/ramjf/python-projects/codex-governance-os/docs/contracts/codex-session-state-machine-canon.md)
+  [codex-session-state-machine-canon.md](../../../contracts/codex-session-state-machine-canon.md)
 - pipeline `107` expects activation to produce a session ID, registry entry,
   and ledger execution record as an explicit canon invariant, but the current
   repository state establishes those as documentation-level recording surfaces

@@ -11,7 +11,7 @@ created_by: codex
 governance_mode: documentation
 affects:
   - docs/governance/codex-session-admission-and-activation-rules.md
-  - docs/governance/codex-session-state-machine-canon.md
+  - docs/contracts/codex-session-state-machine-canon.md
   - docs/governance/codex-session-registry.md
   - docs/governance/codex-session-ledger.md
   - docs/governance/layer-6-codex-session-orchestration-and-handoff-discipline.md
