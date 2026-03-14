@@ -32,8 +32,8 @@ This contract refines registry behavior without overriding higher-order governan
 
 1. A governance pipeline is active when the repository is using it as an operational workflow for current or future governed work.
 2. Every active pipeline must have exactly one corresponding registry entry in `docs/pipelines/registry/pipeline-registry.md`.
-3. Each registry entry must include pipeline ID, pipeline name, status, category, and canonical path.
-4. Registry entries must point to real pipeline definition files in version control.
+3. Each registry entry must include pipeline ID, pipeline name, status, category, pipeline definition path, and artifact bundle path.
+4. Registry entries must point to real pipeline definition files in version control and to the canonical artifact bundle directory for the lane.
 5. The pipeline ID in the registry must match the ID declared or implied by the pipeline filename.
 6. The registry records activation and discoverability status only; it must not redefine the pipeline's substantive procedure.
 7. Proposed or draft status text inside a pipeline definition does not excuse omission from the registry when the pipeline is operationally active.
@@ -43,7 +43,7 @@ This contract refines registry behavior without overriding higher-order governan
 ## Allowed Behaviors
 
 - registering a pipeline when it becomes active
-- correcting stale paths, names, or IDs in existing registry entries
+- correcting stale definition paths, artifact bundle paths, names, or IDs in existing registry entries
 - leaving inactive placeholder category roots unregistered
 - using the registry as a discoverability surface for governance routing and audit
 
@@ -60,6 +60,7 @@ Compliance is indicated when:
 
 - every active pipeline in `docs/pipelines/` appears once in the registry
 - every registry entry resolves to an existing pipeline definition
+- every registry entry resolves to the canonical artifact bundle root for that lane
 - IDs, names, and paths remain internally consistent
 - audits can determine active governance coverage from the registry without reconstructing it from scattered evidence
 
@@ -67,6 +68,7 @@ Non-compliance is indicated when:
 
 - active pipelines are absent from the registry
 - registry entries point to missing files
+- registry entries omit canonical artifact bundle paths
 - duplicate or contradictory entries exist
 - audits must infer active status from artifacts alone
 

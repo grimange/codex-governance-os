@@ -40,6 +40,22 @@ This template is intended to remain domain-neutral, architecture-neutral, and la
 - Governance lifecycle doctrine: `docs/governance/governance-lifecycle.md`
 - Governance evidence interpretation canon: `docs/governance/governance-evidence-interpretation-canon.md`
 - Governance safety invariants canon: `docs/governance/governance-safety-invariants-canon.md`
+- Layer 3 Codex rules canon: `docs/governance/layer-3-codex-rules-canon.md`
+- Layer 4 Codex role model: `docs/governance/layer-4-codex-role-model.md`
+- Layer 5 Codex collaboration operating model: `docs/governance/layer-5-codex-collaboration-operating-model.md`
+- Layer 6 Codex session orchestration and handoff discipline: `docs/governance/layer-6-codex-session-orchestration-and-handoff-discipline.md`
+- Codex session registry: `docs/governance/codex-session-registry.md`
+- Codex session execution ledger: `docs/governance/codex-session-ledger.md`
+- Codex session handoff and resume evidence model: `docs/governance/codex-session-handoff-contract-and-resume-evidence-model.md`
+- Codex session admission and activation rules: `docs/governance/codex-session-admission-and-activation-rules.md`
+- Codex session state machine canon: `docs/contracts/codex-session-state-machine-canon.md`
+- Codex session handoff packet contract: `docs/contracts/codex-session-handoff-packet-and-continuity-contract.md`
+- Codex governance surface schema contract: `docs/contracts/codex-governance-surface-schema-contract.md`
+- Codex session handoff packet root: `docs/codex/sessions/handoffs/`
+- Governed session lifecycle state semantics: Layer 6 session-governance surfaces should use the canonical states and transitions defined in `docs/contracts/codex-session-state-machine-canon.md`.
+- Governed session resume claims must remain evidence-backed through explicit predecessor linkage, preserved restrictions, and fail-closed admissibility rules defined in `docs/governance/codex-session-handoff-contract-and-resume-evidence-model.md`.
+- Governed session execution must pass admission before activation, with the first active action remaining bounded, evidence-backed, and fail-closed under `docs/governance/codex-session-admission-and-activation-rules.md`.
+- Governed session closure discipline: required handoff packets must be created before closure when continuity evidence is required, with resulting packet references or continuity violations remaining visible in session-governance records.
 - Governance evolution model: `docs/governance/governance-evolution-model.md`
 - Governance template system: `docs/governance/templates/README.md`
 - Template scaffold contract: `docs/governance/template-scaffold-contract.md`
