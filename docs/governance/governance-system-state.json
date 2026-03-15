@@ -1,0 +1,60 @@
+{
+  "governance_maturity_estimate": 84,
+  "trend_classification": "newly_established",
+  "layers": {
+    "governance_doctrine_and_safety": "complete",
+    "pipeline_governance": "complete",
+    "execution_governance": "complete",
+    "observability_and_evidence": "complete",
+    "governance_intelligence": "in_progress",
+    "capability_advancement_tracking": "in_progress",
+    "governance_state_introspection": "in_progress",
+    "autonomous_governance": "not_implemented",
+    "architecture_advisor": "not_implemented"
+  },
+  "capabilities": {
+    "Governance Doctrine": "complete",
+    "Pipeline Governance": "complete",
+    "Execution Governance": "complete",
+    "Observability": "complete",
+    "Governance Intelligence": "in_progress",
+    "Governance Capability Advancement Tracking": "in_progress",
+    "Governance State Introspection": "planned",
+    "Autonomous Governance Loop": "planned",
+    "Architecture Advisor": "planned"
+  },
+  "capability_snapshot": {
+    "completed": [
+      "Governance Doctrine",
+      "Pipeline Governance",
+      "Execution Governance",
+      "Observability"
+    ],
+    "in_progress": [
+      "Governance Intelligence",
+      "Governance Capability Advancement Tracking"
+    ],
+    "planned": [
+      "Governance State Introspection",
+      "Autonomous Governance Loop",
+      "Architecture Advisor"
+    ]
+  },
+  "bounded_constraints": {
+    "unresolved_historical_gaps": 6,
+    "bounded_verdict_family_runs": 11,
+    "analytics_other_verdicts": 12
+  },
+  "capability_sources": [
+    "docs/governance/governance-capability-registry.md",
+    "docs/governance/governance-capability-execution-map.md",
+    "docs/governance/governance-capability-progress.md"
+  ],
+  "maturity_sources": [
+    "docs/governance/governance-maturity-scorecard.md",
+    "docs/governance/governance-maturity-history.md",
+    "docs/governance/governance-maturity-gap-analysis.md",
+    "docs/governance/governance-capability-advancement-plan.md"
+  ],
+  "evidence_inventory": "docs/governance/governance-evidence-inventory.md"
+}

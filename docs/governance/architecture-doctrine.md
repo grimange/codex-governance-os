@@ -96,7 +96,7 @@ No generated artifact, cache, mirrored note, or future convenience summary may b
 - `docs/governance/template-scaffold-contract.md` defines the canonical universal scaffold contract for governed repositories.
 - `docs/governance/registries/templates/` contains admitted template identities and the compiled template registry index.
 - `docs/codex/templates/` contains admitted template bodies referenced by the template registry.
-- `tools/governance/` contains governance tooling such as template registry loading, linting, scaffold generation, and governance preflight scanning for active portability enforcement.
+- `tools/governance/` contains governance tooling such as template registry loading, linting, scaffold generation, governance preflight scanning for active portability enforcement, and executable multi-session continuity scenario evaluation.
 - `tools/templates/` contains manifest schema and discovery helpers for repository-level scaffold inventory.
 
 ## State and Projection Rules
@@ -138,6 +138,7 @@ Because the repository currently has no application runtime, terms such as backe
 - Governance mutation, verification, and later normalization work must preserve the fail-closed rules in `docs/governance/governance-safety-invariants-canon.md`.
 - Canonical governance and repository-entry references must preserve the repository portability link invariant in `docs/governance/governance-safety-invariants-canon.md`, so machine-local filesystem paths do not become live canonical links or navigation targets.
 - Governed execution may use `python tools/governance/preflight.py` as the canonical repository preflight entrypoint, with portability reference violations failing closed before downstream governed execution proceeds.
+- Governed continuity evaluation may use `python tools/governance/continuity_harness.py --run-scenarios` as the canonical executable entrypoint for the established multi-session continuity scenario fixtures.
 - Codex-directed work must follow `docs/governance/layer-3-codex-rules-canon.md`, while remaining subordinate to the lower-layer doctrine, interpretation, and execution surfaces.
 - Role-scoped Codex specialization must follow `docs/governance/layer-4-codex-role-model.md` and must not imply autonomous orchestration or authority beyond the lower layers.
 - Codex collaboration behavior must follow `docs/governance/layer-5-codex-collaboration-operating-model.md` and must not imply runtime orchestration, delegation, or authority beyond Layers 0 through 4.

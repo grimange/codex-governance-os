@@ -1,0 +1,35 @@
+{
+  "overall_maturity": 50,
+  "current_governance_maturity_reference": 84,
+  "domains": {
+    "codex_governance_layer": 100,
+    "pipeline_governance": 100,
+    "passive_observation": 100,
+    "autonomous_governance_loop": 0,
+    "multi_agent_governance": 0,
+    "architecture_advisor": 0
+  },
+  "domain_classifications": {
+    "codex_governance_layer": "VERIFIED",
+    "pipeline_governance": "VERIFIED",
+    "passive_observation": "VERIFIED",
+    "autonomous_governance_loop": "UNVERIFIED",
+    "multi_agent_governance": "INVALID_STATE",
+    "architecture_advisor": "UNVERIFIED"
+  },
+  "blockers": [
+    "autonomous_governance_loop_unverified",
+    "multi_agent_governance_missing_registry",
+    "architecture_advisor_unverified"
+  ],
+  "recommended_next_pipelines": [
+    165,
+    166,
+    167
+  ],
+  "sources": [
+    "docs/governance/governance-system-state.json",
+    "docs/governance/governance-capability-registry.md",
+    "docs/pipelines/registry/pipeline-registry.md"
+  ]
+}

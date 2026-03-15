@@ -1,5 +1,11 @@
 # Pipeline Registry
 
+The pipeline registry is the canonical discoverability surface for active
+governance lanes.
+
+Authoritative centralized execution history now lives in
+`docs/governance/pipeline-run-ledger.md`.
+
 | pipeline id | pipeline name | status | category | pipeline_definition_path | artifact_bundle_path |
 |-------------|---------------|--------|----------|--------------------------|----------------------|
 | L0-00 | Codex Pipeline — Scan Repository and Verify Layer 0 Governance Canon Gaps | ACTIVE | governance | docs/pipelines/governance/000x--scan-repository-and-verify-layer-0-governance-canon-gaps.md | docs/pipelines/governance/scan-repository-and-verify-layer-0-governance-canon-gaps/ |
@@ -134,3 +140,17 @@
 | 132 | Establish Multi-Session Continuity Evidence Harness | ACTIVE | governance | docs/pipelines/governance/132--establish-multi-session-continuity-evidence-harness.md | docs/pipelines/governance/establish-multi-session-continuity-evidence-harness/ |
 | 133 | Verify Multi-Session Continuity Evidence Harness | ACTIVE | governance | docs/pipelines/governance/133--verify-multi-session-continuity-evidence-harness.md | docs/pipelines/governance/verify-multi-session-continuity-evidence-harness/ |
 | 134 | Establish Multi-Session Continuity Evaluation Scenarios | ACTIVE | governance | docs/pipelines/governance/134--establish-multi-session-continuity-evaluation-scenarios.md | docs/pipelines/governance/establish-multi-session-continuity-evaluation-scenarios/ |
+| 135 | Verify Multi-Session Continuity Evaluation Scenarios | ACTIVE | governance | docs/pipelines/governance/135--verify-multi-session-continuity-evaluation-scenarios.md | docs/pipelines/governance/verify-multi-session-continuity-evaluation-scenarios/ |
+| 136 | Implement Multi-Session Continuity Evidence Harness | ACTIVE | governance | docs/pipelines/governance/136--implement-multi-session-continuity-evidence-harness.md | docs/pipelines/governance/implement-multi-session-continuity-evidence-harness/ |
+| 137 | Verify Multi-Session Continuity Evidence Harness | ACTIVE | governance | docs/pipelines/governance/137--verify-multi-session-continuity-evidence-harness.md | docs/pipelines/governance/verify-multi-session-continuity-evidence-harness-implementation/ |
+| 138 | Normalize Multi-Session Continuity Evidence Harness Pipeline | ACTIVE | governance | docs/pipelines/governance/138--normalize-multi-session-continuity-evidence-harness-pipeline.md | docs/pipelines/governance/normalize-multi-session-continuity-evidence-harness-pipeline/ |
+| 139 | Establish Centralized Pipeline Run Ledger | ACTIVE | governance | docs/pipelines/governance/139--establish-centralized-pipeline-run-ledger.md | docs/pipelines/governance/establish-centralized-pipeline-run-ledger/ |
+| 140 | Verify Centralized Pipeline Run Ledger Integrity and Historical Mapping | ACTIVE | governance | docs/pipelines/governance/140--verify-centralized-pipeline-run-ledger-integrity-and-historical-mapping.md | docs/pipelines/governance/verify-centralized-pipeline-run-ledger-integrity-and-historical-mapping/ |
+| 141 | Backfill Historical Pipeline Run Ledger Coverage | ACTIVE | governance | docs/pipelines/governance/141--backfill-historical-pipeline-run-ledger-coverage.md | docs/pipelines/governance/backfill-historical-pipeline-run-ledger-coverage/ |
+| 142 | Verify Historical Pipeline Run Ledger Backfill Integrity | ACTIVE | governance | docs/pipelines/governance/142--verify-historical-pipeline-run-ledger-backfill-integrity.md | docs/pipelines/governance/verify-historical-pipeline-run-ledger-backfill-integrity/ |
+| 143 | Establish Governance Run Analytics Surface | ACTIVE | governance | docs/pipelines/governance/143--establish-governance-run-analytics-surface.md | docs/pipelines/governance/establish-governance-run-analytics-surface/ |
+| 144 | Verify Governance Run Analytics Accuracy | ACTIVE | governance | docs/pipelines/governance/144--verify-governance-run-analytics-accuracy.md | docs/pipelines/governance/verify-governance-run-analytics-accuracy/ |
+| 145 | Establish Governance Verdict Family Classification Canon | ACTIVE | governance | docs/pipelines/governance/145--establish-governance-verdict-family-classification-canon.md | docs/pipelines/governance/establish-governance-verdict-family-classification-canon/ |
+| 146 | Verify Governance Verdict Family Classification Consistency | ACTIVE | governance | docs/pipelines/governance/146--verify-governance-verdict-family-classification-consistency.md | docs/pipelines/governance/verify-governance-verdict-family-classification-consistency/ |
+| 147 | Normalize Governance Run Analytics Surface Against Verdict Family Canon | ACTIVE | governance | docs/pipelines/governance/147--normalize-governance-run-analytics-surface-against-verdict-family-canon.md | docs/pipelines/governance/normalize-governance-run-analytics-surface-against-verdict-family-canon/ |
+| 148 | Verify Governance Run Analytics Canon Alignment | ACTIVE | governance | docs/pipelines/governance/148--verify-governance-run-analytics-canon-alignment.md | docs/pipelines/governance/verify-governance-run-analytics-canon-alignment/ |
