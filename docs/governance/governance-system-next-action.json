@@ -1,6 +1,7 @@
 {
   "generated_by": "inspect_governance_state.py",
   "selector_version": "1.0",
+  "required_snapshot_input": "docs/governance/governance-state-snapshot.json",
   "snapshot_id": "8f0c678dfb75779f5b2cff1bb55c05fccf9012bb7bede3f0128be99eb0e6c0df",
   "snapshot_drift_detected": false,
   "governance_state_consensus": true,

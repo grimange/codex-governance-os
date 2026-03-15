@@ -1,0 +1,12 @@
+# Determinism Test Matrix
+
+| Check | Command | Expected Result | Observed Result | Status |
+| --- | --- | --- | --- | --- |
+| Baseline authoritative answer generation | `python3 tools/governance/inspect_governance_state.py authoritative-state` | Canonical answer emits successfully | `docs/governance/governance-authoritative-state-answer.json` regenerated | VERIFIED |
+| Authoritative answer repeat run | `python3 tools/governance/inspect_governance_state.py authoritative-state` | Identical payload and hash on unchanged inputs | baseline hash `6f2b9943bab1e2d91f27400e32ecb210ce1174c291a24997e9efef6ea8d490d1`; repeat hash `6f2b9943bab1e2d91f27400e32ecb210ce1174c291a24997e9efef6ea8d490d1`; `cmp` exit `0` | VERIFIED |
+| Standalone selector repeat run | `python3 tools/governance/inspect_governance_state.py next-action` | Identical payload and hash on unchanged inputs | baseline hash `333eefb5f08215591748949bf4d10f54da8e1a03efde2241e823fb65d5a2aabd`; repeat hash `333eefb5f08215591748949bf4d10f54da8e1a03efde2241e823fb65d5a2aabd`; `cmp` exit `0` | VERIFIED |
+| Provenance field presence | read `docs/governance/governance-authoritative-state-answer.json` | Required provenance fields present | `required_snapshot_input=docs/governance/governance-state-snapshot.json`; `snapshot_id=8f0c678dfb75779f5b2cff1bb55c05fccf9012bb7bede3f0128be99eb0e6c0df`; `snapshot_drift_detected=false`; `governance_state_consensus=true` | VERIFIED |
+| Embedded selector consistency | compare `recommended_next_action` to `docs/governance/governance-system-next-action.json` | Identical payload and selector hash | embedded payload equals standalone selector; normalized payload hash `fb520dc048ccf86fe3a8c160d3385171e3cb60b48947cde0b0d27a3bbff93d97` for both | VERIFIED |
+| Mutation sensitivity | mutate `docs/governance/governance-system-state.json` without regenerating snapshot, then run `authoritative-state` | Output changes and drift or mismatch is surfaced | command exited `1` with `GOVERNANCE_STATE_SNAPSHOT_MISMATCH` | VERIFIED |
+| Restoration stability | restore canonical state and rerun authoritative-state and next-action | Baseline hashes restored exactly | authoritative, selector, and snapshot hashes all returned to baseline; all `cmp` exits `0` | VERIFIED |
+| Governance regression suite | `python3 -m unittest discover -s tests/governance -p 'test_*.py'` | Full suite passes | `Ran 135 tests in 7.657s` and `OK` | VERIFIED |

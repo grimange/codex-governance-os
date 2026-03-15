@@ -18,6 +18,7 @@ SYSTEM_GAPS_JSON = DOCS / "governance-system-gaps.json"
 SYSTEM_GAP_REMEDIATION_PLAN_JSON = DOCS / "governance-system-gap-remediation-plan.json"
 SYSTEM_ADVANCEMENT_ROADMAP_JSON = DOCS / "governance-system-advancement-roadmap.json"
 SYSTEM_NEXT_ACTION_JSON = DOCS / "governance-system-next-action.json"
+AUTHORITATIVE_STATE_ANSWER_JSON = DOCS / "governance-authoritative-state-answer.json"
 STATE_SNAPSHOT_JSON = DOCS / "governance-state-snapshot.json"
 REGISTRY_MD = DOCS / "governance-capability-registry.md"
 EXECUTION_MAP_MD = DOCS / "governance-capability-execution-map.md"
@@ -128,6 +129,7 @@ def sha256_text(text: str) -> str:
 
 def allowed_next_action_surfaces() -> list[Path]:
     return [
+        STATE_SNAPSHOT_JSON,
         STATE_JSON,
         SYSTEM_MATURITY_JSON,
         SYSTEM_GAPS_JSON,
@@ -170,6 +172,42 @@ def build_governance_state_snapshot_payload(
         "drift_detected": previous_snapshot_id not in {None, snapshot_id},
         "surfaces": surfaces,
     }
+
+
+def validate_required_governance_snapshot(
+    snapshot_payload: dict[str, object],
+    allowed_surfaces: list[str],
+) -> None:
+    required_fields = {"snapshot_id", "drift_detected", "surfaces"}
+    missing_fields = sorted(field for field in required_fields if field not in snapshot_payload)
+    if missing_fields:
+        raise GovernanceInputError(
+            "INVALID_GOVERNANCE_STATE_SNAPSHOT",
+            f"Governance state snapshot is missing required fields: {', '.join(missing_fields)}",
+            allowed_surfaces,
+        )
+
+    if not isinstance(snapshot_payload["surfaces"], dict) or not snapshot_payload["surfaces"]:
+        raise GovernanceInputError(
+            "INVALID_GOVERNANCE_STATE_SNAPSHOT",
+            "Governance state snapshot surfaces payload is missing or invalid",
+            allowed_surfaces,
+        )
+
+    expected_snapshot = build_governance_state_snapshot_payload(None)
+    if snapshot_payload["surfaces"] != expected_snapshot["surfaces"] or snapshot_payload["snapshot_id"] != expected_snapshot["snapshot_id"]:
+        raise GovernanceInputError(
+            "GOVERNANCE_STATE_SNAPSHOT_MISMATCH",
+            "Governance state snapshot does not match current canonical governance surfaces",
+            allowed_surfaces,
+        )
+
+    if snapshot_payload["drift_detected"]:
+        raise GovernanceInputError(
+            "GOVERNANCE_STATE_SNAPSHOT_DRIFT_DETECTED",
+            "Governance state snapshot is marked drifted and cannot authorize current-state answers",
+            allowed_surfaces,
+        )
 
 
 def detect_ambiguous_governance_surface_candidates() -> list[Path]:
@@ -662,6 +700,7 @@ def build_advancement_roadmap_payload() -> dict[str, object]:
 def build_next_action_payload() -> dict[str, object]:
     validate_canonical_input_authority()
 
+    snapshot_payload = read_json(STATE_SNAPSHOT_JSON)
     roadmap_payload = read_json(SYSTEM_ADVANCEMENT_ROADMAP_JSON)
     remediation_payload = read_json(SYSTEM_GAP_REMEDIATION_PLAN_JSON)
     gap_payload = read_json(SYSTEM_GAPS_JSON)
@@ -703,12 +742,10 @@ def build_next_action_payload() -> dict[str, object]:
     else:
         reason = "first unresolved domain in the ordered remediation plan"
 
-    previous_snapshot = read_json(STATE_SNAPSHOT_JSON) if STATE_SNAPSHOT_JSON.exists() else None
-    snapshot_payload = build_governance_state_snapshot_payload(previous_snapshot)
-
     return {
         "generated_by": "inspect_governance_state.py",
         "selector_version": "1.0",
+        "required_snapshot_input": "docs/governance/governance-state-snapshot.json",
         "snapshot_id": snapshot_payload["snapshot_id"],
         "snapshot_drift_detected": snapshot_payload["drift_detected"],
         "governance_state_consensus": True,
@@ -721,6 +758,51 @@ def build_next_action_payload() -> dict[str, object]:
         "derived_from": "docs/governance/governance-system-advancement-roadmap.json",
         "current_status": remediation_entry["current_status"],
         "suggested_pipeline": remediation_entry["suggested_pipeline"],
+    }
+
+
+def build_authoritative_governance_state_answer_payload() -> dict[str, object]:
+    validate_canonical_input_authority()
+
+    snapshot_payload = read_json(STATE_SNAPSHOT_JSON)
+    state_payload = read_json(STATE_JSON)
+    maturity_payload = read_json(SYSTEM_MATURITY_JSON)
+    gap_payload = read_json(SYSTEM_GAPS_JSON)
+    roadmap_payload = read_json(SYSTEM_ADVANCEMENT_ROADMAP_JSON)
+    next_action_payload = build_next_action_payload()
+
+    active_stage = None
+    advancement_stages = roadmap_payload.get("advancement_stages", [])
+    if advancement_stages:
+        active_stage = advancement_stages[0]
+
+    return {
+        "generated_by": "inspect_governance_state.py",
+        "answer_version": "1.0",
+        "control_plane_version": "1.0",
+        "control_plane_surface_role": "canonical_governance_control_plane",
+        "required_snapshot_input": "docs/governance/governance-state-snapshot.json",
+        "snapshot_id": snapshot_payload["snapshot_id"],
+        "snapshot_drift_detected": snapshot_payload["drift_detected"],
+        "governance_state_consensus": True,
+        "governance_maturity": {
+            "overall_system_maturity": maturity_payload["overall_maturity"],
+            "governance_maturity_reference": maturity_payload["current_governance_maturity_reference"],
+        },
+        "governance_blockers": roadmap_payload["blockers_to_full_maturity"],
+        "governance_progression_stage": active_stage,
+        "governance_gap_state": gap_payload["overall_gap_state"],
+        "governance_trend_classification": state_payload["trend_classification"],
+        "authoritative_next_action": next_action_payload,
+        "recommended_next_action": next_action_payload,
+        "sources": [
+            "docs/governance/governance-state-snapshot.json",
+            "docs/governance/governance-system-state.json",
+            "docs/governance/governance-system-maturity.json",
+            "docs/governance/governance-system-gaps.json",
+            "docs/governance/governance-system-advancement-roadmap.json",
+            "docs/governance/governance-system-next-action.json",
+        ],
     }
 
 
@@ -760,6 +842,9 @@ def validate_canonical_input_authority() -> None:
                 f"Shadow governance surface detected for {path.name}: {shadow_candidates[0].relative_to(REPO_ROOT)}",
                 allowed_surfaces,
             )
+
+    snapshot_payload = read_json(STATE_SNAPSHOT_JSON)
+    validate_required_governance_snapshot(snapshot_payload, allowed_surfaces)
 
     roadmap_payload = read_json(SYSTEM_ADVANCEMENT_ROADMAP_JSON)
     remediation_payload = read_json(SYSTEM_GAP_REMEDIATION_PLAN_JSON)
@@ -833,12 +918,29 @@ def run_next_action_selector() -> int:
         print(json.dumps(error_payload, indent=2), file=sys.stderr)
         return 1
 
-    previous_snapshot = read_json(STATE_SNAPSHOT_JSON) if STATE_SNAPSHOT_JSON.exists() else None
-    snapshot_payload = build_governance_state_snapshot_payload(previous_snapshot)
-    STATE_SNAPSHOT_JSON.write_text(json.dumps(snapshot_payload, indent=2) + "\n", encoding="utf-8")
     SYSTEM_NEXT_ACTION_JSON.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-    print(f"Regenerated {STATE_SNAPSHOT_JSON.relative_to(REPO_ROOT)}")
     print(f"Regenerated {SYSTEM_NEXT_ACTION_JSON.relative_to(REPO_ROOT)}")
+    return 0
+
+
+def run_authoritative_state_answer() -> int:
+    try:
+        payload = build_authoritative_governance_state_answer_payload()
+    except GovernanceInputError as exc:
+        print(json.dumps(exc.to_payload(), indent=2), file=sys.stderr)
+        return 1
+    except ValueError:
+        error_payload = {
+            "status": "error",
+            "error_code": "UNRESOLVED_AUTHORITATIVE_GOVERNANCE_STATE",
+            "message": "authoritative governance state answer could not be resolved from the required snapshot-backed inputs",
+            "allowed_surfaces": allowed_next_action_surface_strings(),
+        }
+        print(json.dumps(error_payload, indent=2), file=sys.stderr)
+        return 1
+
+    AUTHORITATIVE_STATE_ANSWER_JSON.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    print(f"Regenerated {AUTHORITATIVE_STATE_ANSWER_JSON.relative_to(REPO_ROOT)}")
     return 0
 
 
@@ -872,8 +974,11 @@ def main() -> int:
     if len(sys.argv) == 2 and sys.argv[1] == "next-action":
         return run_next_action_selector()
 
+    if len(sys.argv) == 2 and sys.argv[1] == "authoritative-state":
+        return run_authoritative_state_answer()
+
     print(
-        "Usage: python tools/governance/inspect_governance_state.py [maturity|gaps|remediation-plan|advancement-roadmap|snapshot|next-action]",
+        "Usage: python tools/governance/inspect_governance_state.py [maturity|gaps|remediation-plan|advancement-roadmap|snapshot|next-action|authoritative-state]",
         file=sys.stderr,
     )
     return 2
