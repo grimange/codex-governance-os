@@ -1,0 +1,60 @@
+{
+  "overall_gap_state": "GAPS_PRESENT",
+  "detected_gaps": [
+    {
+      "gap_id": "autonomous_governance_loop-unverified",
+      "domain": "autonomous_governance_loop",
+      "classification": "UNVERIFIED",
+      "severity": "medium",
+      "reason": "Domain capability is declared but not yet complete in canonical governance state",
+      "evidence_sources": [
+        "docs/governance/governance-system-maturity.json",
+        "docs/governance/governance-system-state.json",
+        "docs/governance/governance-capability-registry.md"
+      ],
+      "blocking_effect": "prevents full governance-system maturity",
+      "recommended_remediation_type": "autonomous-governance-establishment",
+      "recommended_pipeline_candidates": []
+    },
+    {
+      "gap_id": "multi_agent_governance-invalid-state",
+      "domain": "multi_agent_governance",
+      "classification": "INVALID_STATE",
+      "severity": "high",
+      "reason": "Domain expected by maturity model but absent from capability registry",
+      "evidence_sources": [
+        "docs/governance/governance-system-maturity.json",
+        "docs/governance/governance-system-state.json",
+        "docs/governance/governance-capability-registry.md"
+      ],
+      "blocking_effect": "prevents full governance-system maturity",
+      "recommended_remediation_type": "registry-and-capability-establishment",
+      "recommended_pipeline_candidates": [
+        "establish-role-scoped-codex-sub-agent-specialization"
+      ]
+    },
+    {
+      "gap_id": "architecture_advisor-unverified",
+      "domain": "architecture_advisor",
+      "classification": "UNVERIFIED",
+      "severity": "medium",
+      "reason": "Domain capability is declared but not yet complete in canonical governance state",
+      "evidence_sources": [
+        "docs/governance/governance-system-maturity.json",
+        "docs/governance/governance-system-state.json",
+        "docs/governance/governance-capability-registry.md"
+      ],
+      "blocking_effect": "prevents full governance-system maturity",
+      "recommended_remediation_type": "advisory-capability-establishment",
+      "recommended_pipeline_candidates": []
+    }
+  ],
+  "sources": [
+    "docs/governance/governance-system-state.json",
+    "docs/governance/governance-system-maturity.json",
+    "docs/governance/governance-capability-registry.md",
+    "docs/pipelines/registry/pipeline-registry.md"
+  ],
+  "current_governance_maturity_reference": 84,
+  "overall_system_maturity": 50
+}

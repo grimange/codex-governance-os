@@ -1,0 +1,52 @@
+{
+  "generated_by": "inspect_governance_state.py",
+  "planner_version": "1.0",
+  "remediation_plan": [
+    {
+      "domain": "multi_agent_governance",
+      "current_status": "INVALID_STATE",
+      "remediation_strategy": "state_normalization",
+      "required_evidence": [
+        "capability registry declaration aligned to the maturity domain",
+        "canonical capability tracking evidence"
+      ],
+      "recommended_action": "normalize multi_agent_governance registry and capability state",
+      "suggested_pipeline": "establish-role-scoped-codex-sub-agent-specialization",
+      "priority": "CRITICAL",
+      "dependency_order": 1,
+      "promotion_target": "VERIFIED"
+    },
+    {
+      "domain": "architecture_advisor",
+      "current_status": "UNVERIFIED",
+      "remediation_strategy": "capability_completion",
+      "required_evidence": [
+        "established governance capability surface",
+        "verification evidence proving completed capability coverage"
+      ],
+      "recommended_action": "complete and verify architecture_advisor",
+      "suggested_pipeline": "unknown",
+      "priority": "HIGH",
+      "dependency_order": 2,
+      "promotion_target": "VERIFIED"
+    },
+    {
+      "domain": "autonomous_governance_loop",
+      "current_status": "UNVERIFIED",
+      "remediation_strategy": "capability_completion",
+      "required_evidence": [
+        "established governance capability surface",
+        "verification evidence proving completed capability coverage"
+      ],
+      "recommended_action": "complete and verify autonomous_governance_loop",
+      "suggested_pipeline": "unknown",
+      "priority": "HIGH",
+      "dependency_order": 3,
+      "promotion_target": "VERIFIED"
+    }
+  ],
+  "sources": [
+    "docs/governance/governance-system-gaps.json",
+    "docs/governance/governance-system-maturity.json"
+  ]
+}

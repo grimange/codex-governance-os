@@ -1,0 +1,14 @@
+{
+  "generated_by": "inspect_governance_state.py",
+  "snapshot_version": "1.0",
+  "snapshot_id": "8f0c678dfb75779f5b2cff1bb55c05fccf9012bb7bede3f0128be99eb0e6c0df",
+  "previous_snapshot_id": "8f0c678dfb75779f5b2cff1bb55c05fccf9012bb7bede3f0128be99eb0e6c0df",
+  "drift_detected": false,
+  "surfaces": {
+    "governance-system-state.json": "37c34a7763ea46a281b8b45320420fbab4d0d8da16501ed7ba938a42847ed6d5",
+    "governance-system-advancement-roadmap.json": "1f2fcb34c56e515a8fd8b9569f8f2602af569ee91e17c06d4a31ca74624b66b3",
+    "governance-system-gaps.json": "defaee0474b06f929de5e8481ea1365f6a685c792adbc208fa4dd95690e8c525",
+    "governance-system-maturity.json": "8f5fa8e5035863d32d31549d12710bfde4c6f157b597638dded82217911a4a7d",
+    "governance-system-gap-remediation-plan.json": "6d3facfd82194e770430233a69b6522f570fec4a7bab7bd5697aee9cdf7148e1"
+  }
+}

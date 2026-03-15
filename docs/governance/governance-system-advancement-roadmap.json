@@ -1,0 +1,46 @@
+{
+  "generated_by": "inspect_governance_state.py",
+  "roadmap_version": "1.0",
+  "current_maturity_snapshot": {
+    "verified_domains": [
+      "codex_governance_layer",
+      "passive_observation",
+      "pipeline_governance"
+    ],
+    "unverified_domains": [
+      "architecture_advisor",
+      "autonomous_governance_loop"
+    ],
+    "invalid_domains": [
+      "multi_agent_governance"
+    ]
+  },
+  "advancement_stages": [
+    {
+      "stage": 1,
+      "focus": "state_normalization",
+      "targets": [
+        "multi_agent_governance"
+      ]
+    },
+    {
+      "stage": 2,
+      "focus": "capability_expansion",
+      "targets": [
+        "architecture_advisor",
+        "autonomous_governance_loop"
+      ]
+    }
+  ],
+  "blockers_to_full_maturity": [
+    "multi_agent_governance",
+    "architecture_advisor",
+    "autonomous_governance_loop"
+  ],
+  "recommended_next_target": "multi_agent_governance",
+  "sources": [
+    "docs/governance/governance-system-maturity.json",
+    "docs/governance/governance-system-gaps.json",
+    "docs/governance/governance-system-gap-remediation-plan.json"
+  ]
+}
